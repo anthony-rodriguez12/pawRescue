@@ -1,1 +1,54 @@
 /* You can add global styles to this file, and also import other style files */
+@tailwind base;
+@tailwind components;
+@tailwind utilities;
+
+/*
+font-family: 'Montserrat', sans-serif;        
+font-family: 'Roboto', sans-serif;            
+font-family: 'Source Sans 3', sans-serif;        
+*/
+
+
+
+$color-bg-primary: #250F17;
+$color-bg-secondary: #FCD857;
+
+bg-color-primary{
+  background-color: $color-bg-primary;
+}
+bg-color-secondary{
+  background-color: $color-bg-secondary;
+}
+
+body {
+  box-sizing: border-box;
+  margin: 0;
+}
+*, *:before, *:after {
+  box-sizing: inherit;
+}
+
+.contenedor{   
+  display: flex;
+  flex-wrap: wrap;
+  max-width: 1600px; 
+  align-items: center;
+  margin: 0 auto;
+  margin-top: 20px;  
+  padding-bottom: 30px; 
+  border-radius: 20px;
+}
+
+.item{
+  flex-grow: 1;
+  display: flex;
+  flex-basis: 200;
+  margin-right: 10px;
+  margin-bottom: 30px;
+  justify-content: center;
+  align-items: center;
+}
+
+html, body { height: 100%; }
+body { margin: 0; font-family: Roboto, "Helvetica Neue", sans-serif; }

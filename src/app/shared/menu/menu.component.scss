@@ -1,0 +1,32 @@
+.login {
+    border-radius: 10px;
+    border: 2px black;
+    border: outset;
+    padding: 10px;
+    margin-right: 5px;
+}
+
+.login:hover {
+    border-radius: 10px;
+    border: 1px ridge rgb(145, 145, 145);
+    border: ridge;
+    padding: 10px;
+    margin-right: 5px;
+    background-color: #FACB46;
+    cursor: pointer;
+}
+
+
+.logout {
+    margin-right: 5px;
+    padding: 15px;
+    border-radius: 15px;
+}
+
+.logout:hover {
+    padding: 15px;
+    margin-right: 5px;
+    border-radius: 15px;  
+    background-color: rgb(233, 231, 231);
+    cursor: pointer;
+}

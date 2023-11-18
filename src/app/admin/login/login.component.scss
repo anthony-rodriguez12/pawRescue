@@ -1,0 +1,53 @@
+.contan {
+  display: grid;
+  width: 100vw;
+  height: 100vh;
+  align-content: center;
+}
+.cardTo {
+  display: grid;
+  height: auto;
+  width: calc(100VW - 20px);
+  padding: 5px 15px;
+  box-sizing: border-box;
+  margin: 0 auto;
+  justify-items: center;
+  grid-template-columns: auto;
+  grid-template-rows: auto auto;
+  grid-template-areas:
+    "img"
+    "form";
+}
+
+@media (min-width: 400px) {
+  .cardTo {
+    width: 50vw;
+    padding: 0;
+  }
+}
+
+@media (min-width: 640px) {
+  .cardTo {
+    width: 40vw;
+  }
+}
+
+@media (min-width: 1024px) {
+  .cardTo {
+    width: 30vw;
+  }
+}
+
+.img {
+  grid-area: img;
+  display: grid;
+  margin: 0;
+  align-content: center;
+  justify-content: center;
+}
+
+.login {
+  grid-area: form;
+  display: grid;
+  justify-items: center;
+}
