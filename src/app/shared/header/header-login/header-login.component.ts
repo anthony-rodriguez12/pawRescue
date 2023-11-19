@@ -19,6 +19,5 @@ export class HeaderLoginComponent implements OnInit {
 
   redireccionaInicio() {
     this.router.navigate(['/']);
-
   }
 }
