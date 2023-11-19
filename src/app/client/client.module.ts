@@ -2,6 +2,7 @@ import { NgModule } from '@angular/core';
 
 import { ClientRoutingModule } from './client-routing.module';
 import { HomeComponent } from './home/home.component';
+import { CommonModule } from '@angular/common';
 
 
 @NgModule({
@@ -9,6 +10,7 @@ import { HomeComponent } from './home/home.component';
     HomeComponent
   ],
   imports: [
+    CommonModule,
     ClientRoutingModule
   ],
 })

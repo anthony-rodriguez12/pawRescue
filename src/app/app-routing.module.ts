@@ -13,7 +13,7 @@ const routes: Routes = [
     loadChildren: () => import('./client/client.module').then(m => m.ClientModule)
   },
   {
-    path: '',
+    path: '**',
     pathMatch: 'full',
     redirectTo: 'pawstorescue' 
   },

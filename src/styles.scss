@@ -8,16 +8,15 @@ font-family: 'Montserrat', sans-serif;
 font-family: 'Roboto', sans-serif;            
 font-family: 'Source Sans 3', sans-serif;        
 */
-
-
-
 $color-bg-primary: #250F17;
 $color-bg-secondary: #FCD857;
 
-bg-color-primary{
+
+
+.bg-color-primary{
   background-color: $color-bg-primary;
 }
-bg-color-secondary{
+.bg-color-secondary{
   background-color: $color-bg-secondary;
 }
 

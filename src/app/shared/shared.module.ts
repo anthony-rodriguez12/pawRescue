@@ -4,7 +4,8 @@ import { InitialPageComponent } from './initial-page/initial-page.component';
 import { MenuComponent } from './menu/menu.component';
 import { FooterComponent } from './footer/footer.component';
 import { HeaderLoginComponent } from './header/header-login/header-login.component';
-import { AppRoutingModule } from '../app-routing.module';
+import { ClientRoutingModule } from '../client/client-routing.module';
+import { MaterialModule } from '../material/material.module';
 
 
 
@@ -18,13 +19,14 @@ import { AppRoutingModule } from '../app-routing.module';
   ],
   imports: [
     CommonModule,
-    AppRoutingModule
+    MaterialModule,
+    ClientRoutingModule
   ],
   exports: [
     MenuComponent,
     InitialPageComponent,
     FooterComponent, 
-    HeaderLoginComponent
+    HeaderLoginComponent,
   ]
 })
 export class SharedModule { }

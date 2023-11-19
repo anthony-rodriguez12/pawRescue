@@ -1,3 +1,7 @@
+$color-bg-primary: #250F17;
+$color-bg-secondary: #FCD857;
+$color-bg-thirdy: #E6DFB7;
+
 .login {
     border-radius: 10px;
     border: 2px black;
@@ -12,7 +16,7 @@
     border: ridge;
     padding: 10px;
     margin-right: 5px;
-    background-color: #FACB46;
+    background-color: $color-bg-secondary;
     cursor: pointer;
 }
 
@@ -30,3 +34,39 @@
     background-color: rgb(233, 231, 231);
     cursor: pointer;
 }
+
+@keyframes enteringAnimation {
+    from {
+      opacity: 0;
+      display: none;
+      transform: translateY(3px);
+    }
+    to {
+      opacity: 1;
+      display: block;
+      transform: translateY(0);
+    }
+  }
+  
+  @keyframes leavingAnimation {
+    from {
+      display: block;
+      opacity: 1;
+      transform: translateY(0);
+    }
+    to {
+      opacity: 0;
+      transform: translateY(3px);
+    }
+  }
+
+  .options-menu {
+    &.entering {
+      animation: enteringAnimation 400ms ease-out;
+    }
+  
+    &.leaving {
+      animation: leavingAnimation 150ms ease-in;
+    }
+  }
+

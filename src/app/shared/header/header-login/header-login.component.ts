@@ -1,4 +1,4 @@
-import { Component } from '@angular/core';
+import { Component, OnInit } from '@angular/core';
 import { Router } from '@angular/router';
 
 @Component({
@@ -6,8 +6,12 @@ import { Router } from '@angular/router';
   templateUrl: './header-login.component.html',
   styleUrls: ['./header-login.component.scss']
 })
-export class HeaderLoginComponent {
+export class HeaderLoginComponent implements OnInit {
   constructor(private router: Router){}
+  mode: boolean = false;
+  ngOnInit(): void {
+    this.mode = this.router.url.includes('admin');
+  }
 
   openDialogSalir(){ 
     this.redireccionaInicio();
