@@ -1,7 +1,11 @@
+$color-bg-primary: #250F17;
+$color-bg-secondary: #FCD857;
+$color-bg-thirdy: #E6DFB7;
+
 .contan {
   display: grid;
   width: 100vw;
-  height: 100vh;
+  height: calc(100vh - 5rem);
   align-content: center;
 }
 .cardTo {
@@ -50,4 +54,21 @@
   grid-area: form;
   display: grid;
   justify-items: center;
+}
+
+::ng-deep .mdc-text-field--outlined:not(.mdc-text-field--disabled) .mdc-notched-outline .mdc-notched-outline__leading, .mdc-text-field--outlined:not(.mdc-text-field--disabled) .mdc-notched-outline .mdc-notched-outline__notch, .mdc-text-field--outlined:not(.mdc-text-field--disabled) {
+  //border-width: 0 !important;
+}
+
+::ng-deep .mdc-notched-outline .mdc-notched-outline__notch{
+  
+  border-right: 0 !important;
+}
+
+::ng-deep .mat-mdc-raised-button:not(:disabled) {
+  color: #fff;
+}
+
+::ng-deep .mat-mdc-raised-button:not(:disabled) {
+  background-color: $color-bg-primary !important;
 }

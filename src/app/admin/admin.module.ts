@@ -4,6 +4,7 @@ import { AdminRoutingModule } from './admin-routing.module';
 import { LoginComponent } from './login/login.component';
 import { SharedModule } from '../shared/shared.module';
 import { MaterialModule } from '../material/material.module';
+import { CommonModule } from '@angular/common';
 
 
 
@@ -13,6 +14,7 @@ import { MaterialModule } from '../material/material.module';
     LoginComponent
   ],
   imports: [
+    CommonModule,
     AdminRoutingModule,
     MaterialModule,
     SharedModule

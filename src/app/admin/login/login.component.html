@@ -1,12 +1,28 @@
 <app-header-login></app-header-login>
 <div class="contan">
   <div class="cardTo border-solid border-2 rounded">
-    <img src="assets/imagenes/logo.png" class="img w-full px-2 md:w-1/6 " alt="Logo Patitas al rescate">
+    <img src="assets/imagenes/logo.png" class="img w-full px-2 md:w-60 " alt="Logo Patitas al rescate">
     <form [formGroup]="loginForm" class="login">
       <h1>Iniciar Sesión</h1>
 
-      <button routerLink="../panel">Ingresar</button>
-      <a href="#">Olvide mi contraseña</a>
+      
+      <div class="flex flex-wrap items-center justify-center">
+        <mat-form-field appearance="outline" hintLabel="Max 10 characters">
+          <mat-label>Usuario</mat-label>
+          <input matInput formControlName="username" #input maxlength="10" placeholder="User">
+          
+          <mat-error *ngIf="loginForm.get('username')?.hasError('required')">Usuario es <strong>required</strong></mat-error>
+        </mat-form-field>
+      
+        <mat-form-field appearance="outline">
+          <mat-label>Contraseña</mat-label>
+          <input matInput formControlName="password" type="password" #input maxlength="10" placeholder="Password">
+          <mat-error *ngIf="loginForm.get('password')?.hasError('required')">Contraseña es <strong>required</strong></mat-error>          
+        </mat-form-field>
+      </div>
+      <button class="boton" mat-raised-button color="primary">Ingresar</button>
+
+      <a routerLink="" class="my-3" >Olvide mi contraseña</a>
     </form>
   </div>
 </div>

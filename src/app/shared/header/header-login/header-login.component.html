@@ -2,28 +2,31 @@
   <ng-container *ngIf="!mode; else elseBlock">
     <div class="mx-0 w-full px-3 sm:px-8 lg:ps-20">
       <a routerLink="./home">
-        <img src="assets/imagenes/logo.png" class="w-20 hidden sm:ml-6 sm:block" alt="logo" />
+        <img
+          src="assets/imagenes/logo.png"
+          class="w-20 hidden sm:ml-6 sm:block"
+          alt="logo"
+        />
       </a>
-      
     </div>
-  
+
     <div class="group relative flex mr-8 items-center">
-      <p class="text-base mb-0 mr-2 font-medium text-[#250F17] group-hover:text-[#4d2434] group-hover:underline hover:underline-offset-1 hover:cursor-pointer">Iniciar Sesión</p>
-      <a routerLink="/admin/login">
-        <i class="fa-solid fa-right-to-bracket text-[#250F17] group-hover:text-[#4d2434] group-hover:cursor-pointer text-5xl"></i>
+      <a routerLink="/admin/login" class="flex">
+        <span
+          class="text-base mb-0 mr-2 font-medium text-[#250F17] group-hover:text-[#4d2434] group-hover:underline hover:underline-offset-1 hover:cursor-pointer"
+          >Iniciar Sesión</span
+        >
+        <i
+          class="fa-solid fa-right-to-bracket text-[#250F17] group-hover:text-[#4d2434] group-hover:cursor-pointer text-5xl"
+        ></i>
       </a>
     </div>
   </ng-container>
 
   <ng-template #elseBlock>
-    <div class="flex space-x-7 mx-0 w-full px-3 sm:px-8 lg:ps-20">
-      <i class="fa-solid fa-chevron-left"></i>
-      <p>Regresar</p>
+    <div class="flex h-12 sm:h-20 group items-center mx-0 w-min px-3 sm:px-8 lg:ps-20">
+      <i class="fa-solid fa-chevron-left text-[#250F17] group-hover:text-[#4d2434] group-hover:cursor-pointer text-5xl"></i>
+      <span class="text-base font-medium text-[#250F17] group-hover:text-[#4d2434] group-hover:underline hover:underline-offset-1 hover:cursor-pointer">Regresar</span>
     </div>
-    
   </ng-template>
-  
 </div>
-
-
-
