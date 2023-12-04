@@ -22,6 +22,7 @@ $color-bg-secondary: #FCD857;
 
 body {
   box-sizing: border-box;
+  font-family: 'Roboto', sans-serif;
   margin: 0;
 }
 *, *:before, *:after {
@@ -50,4 +51,7 @@ body {
 }
 
 html, body { height: 100%; }
-body { margin: 0; font-family: Roboto, "Helvetica Neue", sans-serif; }
+
+h1, h2, h3, h4, h5 {
+  font-family: 'Source Sans 3', sans-serif;
+}

@@ -4,6 +4,9 @@
 import { NgModule } from '@angular/core';
 import { RouterModule, Routes } from '@angular/router';
 import { HomeComponent } from './home/home.component';
+import { ContactUsComponent } from './contact-us/contact-us.component';
+import { SponsoringComponent } from './sponsoring/sponsoring.component';
+import { AdoptionComponent } from './adoption/adoption.component';
 
 const routes: Routes = [
   {
@@ -11,11 +14,28 @@ const routes: Routes = [
     component: HomeComponent
   },
   {
+    path: 'adoption',
+    component: AdoptionComponent,
+  },
+  {
+    path: 'programs',
+    children: [
+      {
+        path: 'sponsors',
+        component: SponsoringComponent,
+      },
+    ]
+  },
+  {
+    path: 'contact-us',
+    component: ContactUsComponent
+  },
+  
+  {
     path: '**',
     pathMatch: 'full',
     redirectTo: 'home' 
   },
-  
 ];
 
 @NgModule({
