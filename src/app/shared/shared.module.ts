@@ -6,6 +6,8 @@ import { FooterComponent } from './footer/footer.component';
 import { HeaderLoginComponent } from './header/header-login/header-login.component';
 import { ClientRoutingModule } from '../client/client-routing.module';
 import { MaterialModule } from '../material/material.module';
+import { ButtonComponent } from './button/button.component';
+import { ModalComponent } from './modal/modal.component';
 
 
 
@@ -16,6 +18,8 @@ import { MaterialModule } from '../material/material.module';
     InitialPageComponent,
     FooterComponent,
     HeaderLoginComponent,
+    ButtonComponent,
+    ModalComponent,
   ],
   imports: [
     CommonModule,
@@ -25,8 +29,9 @@ import { MaterialModule } from '../material/material.module';
   exports: [
     MenuComponent,
     InitialPageComponent,
-    FooterComponent, 
+    FooterComponent,
     HeaderLoginComponent,
+    ButtonComponent
   ]
 })
 export class SharedModule { }

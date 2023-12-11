@@ -1,0 +1,11 @@
+<button
+  class="text-sm space-x-1.5 rounded-full transition-all bg-[#250F17] text-white px-4 py-1.5 border-[#3d1c28]  border-b-[3px] {{
+    !Disabled
+      ? 'hover:border-[#501f32] hover:brightness-110 hover:-translate-y-[1px] hover:border-b-[4px] hover:bg-[#490d24] active:border-b-[2px] active:brightness-90 active:translate-y-[2px]'
+      : ''
+  }} duration-100 disabled:opacity-75"
+  (click)="onClick()"
+  [disabled]="Disabled"
+>
+  {{ Label }}
+</button>

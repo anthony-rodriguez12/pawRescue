@@ -17,17 +17,21 @@
   >
     <article
       *ngFor="let pet of pets"
-      class="rounded-xl bg-white shadow-lg hover:shadow-xl hover:transform hover:scale-105 ease-in-out duration-300"
+      class="rounded-xl bg-white shadow-lg hover:shadow-xl {{
+        pet.status ? 'hover:transform hover:scale-105' : ''
+      }} ease-in-out duration-300"
     >
       <div
         class="relative flex items-end overflow-hidden rounded-xl h-40"
         [ngClass]="{ 'animate-pulse': !pet.loadingImg }"
-      > 
+      >
         <img
           [src]="pet.img"
           alt="Imagen-mascota-{{ pet.name }}"
           (error)="errorImg($event, pet)"
-          class="absolute inset-0 transition-opacity duration-500 {{pet.loadingImg ?'opacity-100': 'opacity-0'}} object-cover object-center w-full h-full"
+          class="absolute inset-0 transition-opacity duration-500 {{
+            pet.loadingImg ? 'opacity-100' : 'opacity-0'
+          }} object-cover object-center w-full h-full"
         />
         <div
           class="absolute inset-0 transition-opacity {{
@@ -49,12 +53,11 @@
         <div *ngIf="!pet.loadingImg" class="animate-pulse">
           <div class="h-6 w-12 mb-3 bg-slate-400 rounded"></div>
         </div>
-
-        <button
-          class="text-sm space-x-1.5 rounded-full bg-[#250F17] px-4 py-1.5 text-white duration-100 hover:bg-[#490d24]"
-        >
-          {{ button }}
-        </button>
+        <element-button
+          [Label]="button"
+          (Click)="openModal(pet.id)"
+          [Disabled]="!pet.status"
+        />
       </div>
     </article>
   </div>

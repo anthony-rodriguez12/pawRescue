@@ -4,8 +4,10 @@ import { ClientRoutingModule } from './client-routing.module';
 import { HomeComponent } from './home/home.component';
 import { CommonModule } from '@angular/common';
 import { ContactUsComponent } from './contact-us/contact-us.component';
-import { SponsoringComponent } from './sponsoring/sponsoring.component';
+import { SponsoringComponent } from './sponsoring/page/sponsoring.component';
 import { AdoptionComponent } from './adoption/adoption.component';
+import { SharedModule } from '../shared/shared.module';
+import { FormComponent } from './sponsoring/form/form.component';
 
 
 @NgModule({
@@ -14,10 +16,12 @@ import { AdoptionComponent } from './adoption/adoption.component';
     ContactUsComponent,
     SponsoringComponent,
     AdoptionComponent,
+    FormComponent,
   ],
   imports: [
     CommonModule,
-    ClientRoutingModule
+    ClientRoutingModule,
+    SharedModule
   ],
 })
 export class ClientModule { }

@@ -5,8 +5,9 @@ import { NgModule } from '@angular/core';
 import { RouterModule, Routes } from '@angular/router';
 import { HomeComponent } from './home/home.component';
 import { ContactUsComponent } from './contact-us/contact-us.component';
-import { SponsoringComponent } from './sponsoring/sponsoring.component';
+import { SponsoringComponent } from './sponsoring/page/sponsoring.component';
 import { AdoptionComponent } from './adoption/adoption.component';
+import { FormComponent } from './sponsoring/form/form.component';
 
 const routes: Routes = [
   {
@@ -24,6 +25,10 @@ const routes: Routes = [
         path: 'sponsors',
         component: SponsoringComponent,
       },
+      {
+        path: 'form',
+        component: FormComponent
+      }
     ]
   },
   {
