@@ -7,7 +7,7 @@
   text-align: center;
   align-items: center;
   margin: 0 auto;
-  margin-top: 20px;  
+  margin-top: 20px;
   padding-bottom: 30px;
   background-color: rgba(17, 171, 176, 0.8);
   background-image: url(/assets/imagenes/hueyitas.gif);
@@ -33,21 +33,17 @@ h2 {
   margin: 0;
   padding: 20px 0;
   color: #73bbc8;
-  font-family: 'Gill Sans', 'Gill Sans MT', Calibri, 'Trebuchet MS', sans-serif;
+  font-family: "Gill Sans", "Gill Sans MT", Calibri, "Trebuchet MS", sans-serif;
 }
-
-
 
 @media (max-width: 767px) {
   .seccionPerfil {
     flex-direction: column;
     max-width: 100%;
-
   }
   .perfil {
     max-width: 80%;
     padding-left: 0px;
-
   }
 
   .imagenInformacionPerfil {

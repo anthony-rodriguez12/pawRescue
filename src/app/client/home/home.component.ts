@@ -3,7 +3,7 @@ import { Component } from '@angular/core';
 @Component({
   selector: 'app-home',
   templateUrl: './home.component.html',
-  styleUrls: ['./home.component.scss']
+  styleUrls: ['./home.component.scss'],
 })
 export class HomeComponent {
   images: any[];
@@ -14,8 +14,8 @@ export class HomeComponent {
       { source: 'assets/imagenes/gatitos.png' },
       { source: 'assets/imagenes/refugio.jpg' },
       { source: 'assets/imagenes/perritos1.jpg' },
-  
     ];
+    const k = 0;
 
     this.responsiveOptions = [
       {
