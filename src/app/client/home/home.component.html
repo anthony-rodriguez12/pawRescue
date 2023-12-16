@@ -5,14 +5,14 @@
     <div class="p-galleria-content">
       <ng-container *ngFor="let image of images">
         <div class="p-galleria-item">
-          <img [src]="image.source" class="w-full rounded-t-lg" />
+          <img [src]="image.source" class="w-full rounded-t-lg" alt="imagen-{{image.source}"/>
         </div>
       </ng-container>
     </div>
     <div class="p-galleria-thumbnails">
       <ng-container *ngFor="let image of images">
         <div class="p-galleria-thumbnail">
-          <img [src]="image.source" class="max-w-xs rounded-lg" />
+          <img [src]="image.source" class="max-w-xs rounded-lg" alt="imagen-{{image.source}"/>
         </div>
       </ng-container>
     </div>
