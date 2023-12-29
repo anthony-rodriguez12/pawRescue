@@ -62,8 +62,5 @@ $color-bg-thirdy: #e6dfb7;
 
 ::ng-deep .mat-mdc-raised-button:not(:disabled) {
   color: #fff;
-}
-
-::ng-deep .mat-mdc-raised-button:not(:disabled) {
   background-color: $color-bg-primary !important;
 }

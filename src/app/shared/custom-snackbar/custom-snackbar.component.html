@@ -1,0 +1,24 @@
+<div
+  class="{{ snackBar[data.type].background.color }} {{
+    snackBar[data.type].background.border
+  }} rounded-b px-4 py-3 shadow-md {{ snackBar[data.type].background.text }}"
+  role="alert"
+>
+  <div class="flex items-center justify-between">
+    <div class="flex items-center">
+      <div class="py-1">
+        <i class="{{snackBar[data.type].icon.color}} {{snackBar[data.type].icon.size}} {{snackBar[data.type].icon.name }} mr-4"></i>
+      </div>
+      <div>
+        <p class="font-bold">{{ data.title }}</p>
+        <p class="text-sm">{{ data.message }}</p>
+      </div>
+    </div>
+    <div class="w-auto">
+      <i
+        (click)="snackBar[data.type].close.click()"
+        class="{{snackBar[data.type].close.color}} {{snackBar[data.type].close.icon}} {{snackBar[data.type].close.size}} hover:cursor-pointer transform transition-all duration-300 hover:scale-125"
+      ></i>
+    </div>
+  </div>
+</div>

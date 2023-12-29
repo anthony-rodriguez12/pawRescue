@@ -6,7 +6,7 @@
       class="img w-full px-2 md:w-60"
       alt="Logo Patitas al rescate"
     />
-    <form [formGroup]="loginForm" class="login">
+    <form [formGroup]="loginForm" class="login" (ngSubmit)="onSubmit()">
       <h1>Iniciar Sesión</h1>
 
       <div class="flex flex-wrap items-center justify-center">
@@ -40,7 +40,7 @@
           >
         </mat-form-field>
       </div>
-      <button class="boton" mat-raised-button color="primary">Ingresar</button>
+      <button class="boton" type="submit" mat-raised-button color="primary">Ingresar</button>
 
       <a routerLink="" class="my-3">Olvide mi contraseña</a>
     </form>

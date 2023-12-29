@@ -9,7 +9,7 @@ import { FormComponent } from './sponsoring/form/form.component';
 const routes: Routes = [
   {
     path: 'home',
-    component: HomeComponent
+    component: HomeComponent,
   },
   {
     path: 'adoption',
@@ -24,24 +24,24 @@ const routes: Routes = [
       },
       {
         path: 'form',
-        component: FormComponent
-      }
-    ]
+        component: FormComponent,
+      },
+    ],
   },
   {
     path: 'contact-us',
-    component: ContactUsComponent
+    component: ContactUsComponent,
   },
-  
+
   {
     path: '**',
     pathMatch: 'full',
-    redirectTo: 'home' 
+    redirectTo: 'home',
   },
 ];
 
 @NgModule({
   imports: [RouterModule.forChild(routes)],
-  exports: [RouterModule]
+  exports: [RouterModule],
 })
-export class ClientRoutingModule { }
+export class ClientRoutingModule {}

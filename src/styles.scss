@@ -4,43 +4,45 @@
 @tailwind utilities;
 
 /*
-font-family: 'Montserrat', sans-serif;        
-font-family: 'Roboto', sans-serif;            
-font-family: 'Source Sans 3', sans-serif;        
+font-family: 'Montserrat', sans-serif;
+font-family: 'Roboto', sans-serif;
+font-family: 'Source Sans 3', sans-serif;
 */
-$color-bg-primary: #250F17;
-$color-bg-secondary: #FCD857;
+$color-bg-primary: #250f17;
+$color-bg-secondary: #fcd857;
 
+@import "~bootstrap-icons/font/bootstrap-icons.css";
 
-
-.bg-color-primary{
+.bg-color-primary {
   background-color: $color-bg-primary;
 }
-.bg-color-secondary{
+.bg-color-secondary {
   background-color: $color-bg-secondary;
 }
 
 body {
   box-sizing: border-box;
-  font-family: 'Roboto', sans-serif;
+  font-family: "Roboto", sans-serif;
   margin: 0;
 }
-*, *:before, *:after {
+*,
+*:before,
+*:after {
   box-sizing: inherit;
 }
 
-.contenedor{   
+.contenedor {
   display: flex;
   flex-wrap: wrap;
-  max-width: 1600px; 
+  max-width: 1600px;
   align-items: center;
   margin: 0 auto;
-  margin-top: 20px;  
-  padding-bottom: 30px; 
+  margin-top: 20px;
+  padding-bottom: 30px;
   border-radius: 20px;
 }
 
-.item{
+.item {
   flex-grow: 1;
   display: flex;
   flex-basis: 200;
@@ -50,8 +52,15 @@ body {
   align-items: center;
 }
 
-html, body { height: 100%; }
+html,
+body {
+  height: 100%;
+}
 
-h1, h2, h3, h4, h5 {
-  font-family: 'Source Sans 3', sans-serif;
+h1,
+h2,
+h3,
+h4,
+h5 {
+  font-family: "Source Sans 3", sans-serif;
 }

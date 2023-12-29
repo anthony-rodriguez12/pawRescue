@@ -8,6 +8,7 @@ import { ClientRoutingModule } from '../client/client-routing.module';
 import { MaterialModule } from '../material/material.module';
 import { ButtonComponent } from './button/button.component';
 import { ModalComponent } from './modal/modal.component';
+import { CustomSnackbarComponent } from './custom-snackbar/custom-snackbar.component';
 
 
 
@@ -20,6 +21,7 @@ import { ModalComponent } from './modal/modal.component';
     HeaderLoginComponent,
     ButtonComponent,
     ModalComponent,
+    CustomSnackbarComponent,
   ],
   imports: [
     CommonModule,

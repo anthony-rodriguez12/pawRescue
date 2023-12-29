@@ -5,22 +5,24 @@ import { InitialPageComponent } from './shared/initial-page/initial-page.compone
 const routes: Routes = [
   {
     path: 'admin',
-    loadChildren: () => import('./admin/admin.module').then(m => m.AdminModule)
+    loadChildren: () =>
+      import('./admin/admin.module').then((m) => m.AdminModule),
   },
   {
     path: 'pawstorescue',
     component: InitialPageComponent,
-    loadChildren: () => import('./client/client.module').then(m => m.ClientModule)
+    loadChildren: () =>
+      import('./client/client.module').then((m) => m.ClientModule),
   },
   {
     path: '**',
     pathMatch: 'full',
-    redirectTo: 'pawstorescue' 
+    redirectTo: 'pawstorescue',
   },
 ];
 
 @NgModule({
   imports: [RouterModule.forRoot(routes)],
-  exports: [RouterModule]
+  exports: [RouterModule],
 })
-export class AppRoutingModule { }
+export class AppRoutingModule {}

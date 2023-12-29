@@ -45,3 +45,6 @@ desktop.ini
 # SonnarQuebe
 .scannerwork/
 sonar-project.properties
+
+# Environments
+.env
