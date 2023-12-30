@@ -1,5 +1,5 @@
 import { Injectable } from '@angular/core';
-import { MatSnackBar, MatSnackBarRef } from '@angular/material/snack-bar';
+import { MatSnackBar } from '@angular/material/snack-bar';
 import { CustomSnackbarComponent } from '../custom-snackbar/custom-snackbar.component';
 
 @Injectable({
@@ -12,7 +12,7 @@ export class SnackbarService {
 
   sucess(title: string, message: string) {
     this._snackBar.openFromComponent(CustomSnackbarComponent, {
-      //duration: 4000,
+      duration: 4000,
       panelClass: ['custom-snackbar'],
       data: { title, message, type: 'sucess' },
       horizontalPosition: 'end',
@@ -32,14 +32,11 @@ export class SnackbarService {
 
   danger(title: string, message: string) {
     this._snackBar.openFromComponent(CustomSnackbarComponent, {
-      duration: 4000,
+      //duration: 4000,
       panelClass: ['custom-snackbar'],
-      data: { title, message, type: 'danger', close:this.dismissSnackbar },
+      data: { title, message, type: 'danger' },
       horizontalPosition: 'end',
       verticalPosition: 'top',
     });
-  }
-
-  dismissSnackbar = ():void => {
   }
 }

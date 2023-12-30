@@ -1,7 +1,8 @@
 <div
   class="{{ snackBar[data.type].background.color }} {{
     snackBar[data.type].background.border
-  }} rounded-b px-4 py-3 shadow-md {{ snackBar[data.type].background.text }}"
+  }} rounded-b px-4 py-3 shadow-md {{ snackBar[data.type].background.text }}
+  "
   role="alert"
 >
   <div class="flex items-center justify-between">
@@ -14,7 +15,7 @@
         <p class="text-sm">{{ data.message }}</p>
       </div>
     </div>
-    <div class="w-auto">
+    <div class="ps-1 w-auto">
       <i
         (click)="snackBar[data.type].close.click()"
         class="{{snackBar[data.type].close.color}} {{snackBar[data.type].close.icon}} {{snackBar[data.type].close.size}} hover:cursor-pointer transform transition-all duration-300 hover:scale-125"

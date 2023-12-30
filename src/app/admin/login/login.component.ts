@@ -35,15 +35,12 @@ export class LoginComponent implements OnInit {
   onSubmit() {
     console.log('loginForm:', this.loginForm.valid);
     if (this.loginForm.valid) {
-      /*this.loginService.login(
+      this.loginService.login(
         this.loginForm.get('username')?.value,
         this.loginForm.get('password')?.value
-      );*/
-      this.loginService.animals();
+      );
     } else {
-      this._snackBar.sucess('Aviso', 'Data')
-      
-
+      this._snackBar.warning('Aviso', 'Por favor completa el formulario')
     }
   }
 }

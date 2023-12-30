@@ -22,7 +22,7 @@ import { LoggingInterceptor } from './interceptor/auth.service';
     SharedModule,
   ],
   providers: [
-    { provide: HTTP_INTERCEPTORS, useClass: LoggingInterceptor, multi: true }
+    //{ provide: HTTP_INTERCEPTORS, useClass: LoggingInterceptor, multi: true }
   ],
   schemas :[ CUSTOM_ELEMENTS_SCHEMA ],
   bootstrap: [AppComponent],
