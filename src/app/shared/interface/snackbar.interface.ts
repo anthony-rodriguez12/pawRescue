@@ -1,7 +1,6 @@
 
-export interface SnackBarData {
+export interface SnackBarConfig {
   title: string;
-  message: string;
   type: SnackBarType;
 }
 
@@ -26,7 +25,6 @@ export interface SnackIcon {
 }
 
 export interface SnackClose {
-  click: () => any,
   icon: string,
   size: string,
   color: string

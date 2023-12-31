@@ -9,6 +9,8 @@ import { CommonModule } from '@angular/common';
 import { SharedModule } from './shared/shared.module';
 import { HTTP_INTERCEPTORS, HttpClientModule } from '@angular/common/http';
 import { LoggingInterceptor } from './interceptor/auth.service';
+import { ToastrModule } from 'ngx-toastr';
+
 
 @NgModule({
   declarations: [AppComponent],
@@ -20,9 +22,16 @@ import { LoggingInterceptor } from './interceptor/auth.service';
     AppRoutingModule,
     MaterialModule,
     SharedModule,
+    ToastrModule.forRoot({
+      timeOut: 4000,
+      positionClass: 'toast-top-right',
+      progressBar: true,
+      closeButton: true,
+      //disableTimeOut: true
+    }),
   ],
   providers: [
-    //{ provide: HTTP_INTERCEPTORS, useClass: LoggingInterceptor, multi: true }
+    { provide: HTTP_INTERCEPTORS, useClass: LoggingInterceptor, multi: true }
   ],
   schemas :[ CUSTOM_ELEMENTS_SCHEMA ],
   bootstrap: [AppComponent],

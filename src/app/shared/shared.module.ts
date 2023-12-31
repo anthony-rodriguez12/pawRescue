@@ -8,8 +8,9 @@ import { ClientRoutingModule } from '../client/client-routing.module';
 import { MaterialModule } from '../material/material.module';
 import { ButtonComponent } from './button/button.component';
 import { ModalComponent } from './modal/modal.component';
-import { CustomSnackbarComponent } from './custom-snackbar/custom-snackbar.component';
-
+import { ToastDangerComponent } from './customs/toast-danger.component';
+import { ToastSucessComponent } from './customs/toast-sucess.component';
+import { ToastWarningComponent } from './customs/toast-warning.component';
 
 
 
@@ -21,19 +22,24 @@ import { CustomSnackbarComponent } from './custom-snackbar/custom-snackbar.compo
     HeaderLoginComponent,
     ButtonComponent,
     ModalComponent,
-    CustomSnackbarComponent,
+    ToastDangerComponent,
+    ToastSucessComponent,
+    ToastWarningComponent
   ],
   imports: [
     CommonModule,
     MaterialModule,
-    ClientRoutingModule
+    ClientRoutingModule,
   ],
   exports: [
     MenuComponent,
     InitialPageComponent,
     FooterComponent,
     HeaderLoginComponent,
-    ButtonComponent
+    ButtonComponent,
+    ToastDangerComponent,
+    ToastSucessComponent,
+    ToastWarningComponent
   ]
 })
 export class SharedModule { }

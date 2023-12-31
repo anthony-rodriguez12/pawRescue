@@ -1,42 +1,44 @@
 import { Injectable } from '@angular/core';
-import { MatSnackBar } from '@angular/material/snack-bar';
-import { CustomSnackbarComponent } from '../custom-snackbar/custom-snackbar.component';
+import { ToastrService } from 'ngx-toastr';
+import { ToastDangerComponent } from '../customs/toast-danger.component';
+import { ToastSucessComponent } from '../customs/toast-sucess.component';
+import { ToastWarningComponent } from '../customs/toast-warning.component';
+
 
 @Injectable({
   providedIn: 'root',
 })
 export class SnackbarService {
-  constructor(
-    private _snackBar: MatSnackBar,
-  ) {}
+  constructor(private toast: ToastrService) {}
+
+  showSuccess() {
+    this.toast.show('sssssss', 'Toastr fun!', {
+      toastComponent: ToastSucessComponent,
+      progressBar: true,
+    });
+  }
 
   sucess(title: string, message: string) {
-    this._snackBar.openFromComponent(CustomSnackbarComponent, {
-      duration: 4000,
-      panelClass: ['custom-snackbar'],
-      data: { title, message, type: 'sucess' },
-      horizontalPosition: 'end',
-      verticalPosition: 'top',
+    this.toast.show(message, title, {
+      timeOut: 50000,
+      toastComponent: ToastSucessComponent,
+      progressBar: true,
     });
   }
 
   warning(title: string, message: string) {
-    this._snackBar.openFromComponent(CustomSnackbarComponent, {
-      duration: 4000,
-      panelClass: ['custom-snackbar'],
-      data: { title, message, type: 'warning' },
-      horizontalPosition: 'end',
-      verticalPosition: 'top',
+    this.toast.show(message, title, {
+      timeOut: 50000,
+      toastComponent: ToastWarningComponent,
+      progressBar: true,
     });
   }
 
   danger(title: string, message: string) {
-    this._snackBar.openFromComponent(CustomSnackbarComponent, {
-      //duration: 4000,
-      panelClass: ['custom-snackbar'],
-      data: { title, message, type: 'danger' },
-      horizontalPosition: 'end',
-      verticalPosition: 'top',
+    this.toast.show(message, title, {
+      timeOut: 50000,
+      toastComponent: ToastDangerComponent,
+      progressBar: true,
     });
   }
 }

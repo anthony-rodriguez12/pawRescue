@@ -1,0 +1,37 @@
+:host {
+  background-color: transparent;
+  overflow: hidden;
+  margin: 0 0 6px;
+  padding: 0px !important;
+  width: auto !important;
+  border-radius: 3px 3px 3px 3px;
+  color: #ffffff;
+  pointer-events: all;
+  display: grid;
+}
+
+::ng-deep {
+  &.mat-mdc-snack-bar-label {
+    padding: 0 !important;
+  }
+
+  &.mat-typography p {
+    margin: 0 !important;
+  }
+  &.mat-mdc-snack-bar-container .mdc-snackbar__surface {
+    padding: 0 !important;
+  }
+}
+
+@media only screen and (min-width: 769px) {
+  p {
+    max-width: 25vw;
+  }
+}
+
+.fs-text {
+  font-size: 25px;
+}
+.vw-30 {
+  width: 30vw;
+}

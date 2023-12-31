@@ -19,6 +19,7 @@ export class LoginService {
       .subscribe({
         next: (auth) => {
           console.log(auth);
+          this._snackBar.sucess('¡Inicio de sesión exitoso!','Has iniciado sesión correctamente en tu cuenta.')
           localStorage.setItem('token', auth.token);
         },
         error: () => {

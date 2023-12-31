@@ -1,0 +1,27 @@
+<div
+  class="{{ snackBar[type].background.color }} {{
+    snackBar[type].background.border
+  }} rounded-b px-4 py-3 shadow-md {{ snackBar[type].background.text }}
+  "
+  role="alert"
+>
+  <div class="flex items-center justify-between">
+    <div class="flex items-center">
+      <div class="py-1">
+        <i class="{{snackBar[type].icon.color}} {{snackBar[type].icon.size}} {{snackBar[type].icon.name }} mr-4"></i>
+      </div>
+      <div>
+        <p class="font-bold">{{ this.title }}</p>
+        <p class="text-sm">{{ this.message }}</p>
+      </div>
+    </div>
+    <div class="ps-1 w-auto">
+      <i
+        class="{{snackBar[type].close.color}} {{snackBar[type].close.icon}} {{snackBar[type].close.size}} hover:cursor-pointer transform transition-all duration-300 hover:scale-125"
+      ></i>
+    </div>
+  </div>
+  <div *ngIf="options.progressBar">
+    <div class="toast-progress" [style.width]="width + '%'"></div>
+  </div>
+</div>

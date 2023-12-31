@@ -1,8 +1,6 @@
 import { Component, OnInit } from '@angular/core';
 import { FormBuilder, FormGroup, Validators } from '@angular/forms';
-import { MatSnackBar } from '@angular/material/snack-bar';
 import { LoginService } from 'src/app/client/services/login.service';
-import { CustomSnackbarComponent } from 'src/app/shared/custom-snackbar/custom-snackbar.component';
 import { SnackbarService } from '../../shared/services/snackbar.service';
 
 @Component({
@@ -40,7 +38,8 @@ export class LoginComponent implements OnInit {
         this.loginForm.get('password')?.value
       );
     } else {
-      this._snackBar.warning('Aviso', 'Por favor completa el formulario')
+      console.log("go")
+      this._snackBar.showSuccess()
     }
   }
 }

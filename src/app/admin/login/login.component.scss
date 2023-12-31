@@ -5,9 +5,10 @@ $color-bg-thirdy: #e6dfb7;
 .contan {
   display: grid;
   width: 100%;
-  height: calc(100vh - 5rem);
+  height: 100vh;
   align-content: center;
 }
+
 .cardTo {
   display: grid;
   height: auto;
@@ -22,7 +23,13 @@ $color-bg-thirdy: #e6dfb7;
     "img"
     "form";
 }
-
+@media (max-width: 400px) {
+  .contan {
+    align-content:start;
+    padding: 10px 0;
+    height: auto;
+  }
+}
 @media (min-width: 400px) {
   .cardTo {
     width: 50vw;
