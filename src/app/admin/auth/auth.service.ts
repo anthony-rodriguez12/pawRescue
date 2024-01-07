@@ -11,14 +11,13 @@ import { Observable } from 'rxjs';
 export class LoggingInterceptor implements HttpInterceptor {
   intercept(
     req: HttpRequest<any>,
-    next: HttpHandler
+    next: HttpHandler,
   ): Observable<HttpEvent<any>> {
     const authToken =
       localStorage.getItem('currentUser') &&
       localStorage.getItem('currentUser') != null
         ? localStorage.getItem('currentUser')
         : '';
-    console.log('Outgoing HTTP request', req);
 
     if (authToken && authToken !== '') {
       const authReq = req.clone({
@@ -26,7 +25,7 @@ export class LoggingInterceptor implements HttpInterceptor {
           Authorization: `Bearer ${authToken}`,
         },
       });
-      console.log(authReq);
+
       return next.handle(authReq);
     }
 

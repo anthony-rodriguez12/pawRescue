@@ -1,6 +1,6 @@
 import { Component, OnInit } from '@angular/core';
 import { FormBuilder, FormGroup, Validators } from '@angular/forms';
-import { LoginService } from 'src/app/client/services/login.service';
+import { LoginService } from 'src/app/shared/services/login.service';
 import { SnackbarService } from '../../shared/services/snackbar.service';
 
 @Component({
@@ -13,7 +13,7 @@ export class LoginComponent implements OnInit {
   constructor(
     private fb: FormBuilder,
     private loginService: LoginService,
-    private _snackBar: SnackbarService
+    private _snackBar: SnackbarService,
   ) {}
 
   ngOnInit() {
@@ -31,15 +31,13 @@ export class LoginComponent implements OnInit {
   }
 
   onSubmit() {
-    console.log('loginForm:', this.loginForm.valid);
     if (this.loginForm.valid) {
       this.loginService.login(
         this.loginForm.get('username')?.value,
-        this.loginForm.get('password')?.value
+        this.loginForm.get('password')?.value,
       );
     } else {
-      console.log("go")
-      this._snackBar.showSuccess()
+      this._snackBar.danger('Error', 'Completa el formulario');
     }
   }
 }

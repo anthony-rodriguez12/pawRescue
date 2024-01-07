@@ -3,10 +3,9 @@ import { Animal, AnimalI } from '../interface/client.interfaces';
 import { Observable, of } from 'rxjs';
 
 @Injectable({
-  providedIn: 'root'
+  providedIn: 'root',
 })
 export class MascotasService {
-
   petsService: Animal[] = [
     {
       id: 1,
@@ -96,25 +95,25 @@ export class MascotasService {
   pets: AnimalI[];
 
   constructor() {
-    this.pets = this.petsService.map(pet => {
+    this.pets = this.petsService.map((pet) => {
       return {
         ...pet,
         loadingImg: false,
         errorImg: false,
-      }
-    })
+      };
+    });
   }
 
-  getMascotas(): Observable<AnimalI[]>{
+  getMascotas(): Observable<AnimalI[]> {
     return of(this.pets);
   }
 
-  loadingPet(petId: number){
+  loadingPet(petId: number) {
     this.pets = this.pets.map((x) => {
-      if(petId === x.id){
+      if (petId === x.id) {
         x.loadingImg = true;
       }
       return x;
-    })
+    });
   }
 }

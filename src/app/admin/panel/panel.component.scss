@@ -1,0 +1,24 @@
+.name-app {
+  font-family: "Sorts Mill Goudy", serif;
+  font-weight: 600;
+}
+
+.user-text {
+  font-family: "Comfortaa", sans-serif;
+  font-weight: 600;
+}
+::ng-deep .mat-mdc-menu-content {
+  padding: 8px !important;
+}
+::ng-deep .mat-mdc-menu-item:hover {
+  border-radius: 10px;
+}
+::ng-deep .mat-mdc-menu-item-text {
+  display: flex;
+  & span {
+    padding-right: 5px;
+  }
+}
+::ng-deep .bg-black {
+  background-color: #1e293b !important;
+}
