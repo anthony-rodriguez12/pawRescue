@@ -8,17 +8,6 @@ import { PetService } from 'src/app/client/services/pet.service';
 import { PetAddComponent } from '../pet-add/pet-add.component';
 import { PetEditComponent } from '../pet-edit/pet-edit.component';
 import { TooltipPosition } from '@angular/material/tooltip';
-interface TuModeloDeDatos {
-  // Definir las propiedades de tu modelo de datos
-  acction: string;
-  nombre: string;
-  saludType: string;
-  saludDesc: string;
-  type: string;
-  sexo: string;
-  foto: string;
-  idEstado: number;
-}
 
 @Component({
   selector: 'app-pet-list',
@@ -35,11 +24,11 @@ export class PetListComponent implements AfterViewInit {
   dataSource: MatTableDataSource<any> = new MatTableDataSource<any>([]);
   @ViewChild(MatPaginator) paginator!: MatPaginator;
 
-  nombreFilter: string | undefined;
-  idEstadoSaludFilter: string | undefined;
-  idTipoFilter: number | undefined;
-  idEstadoFilter: number | undefined;
-  sexoFilter: string | undefined;
+  nombreFilter: string = "";
+  idEstadoSaludFilter: string = "";
+  idTipoFilter: number | string = "";
+  idEstadoFilter: number | string = "";
+  sexoFilter: string = "";
 
   animals: any[] = [];
   stateanimal: any[] = [];
@@ -82,23 +71,23 @@ export class PetListComponent implements AfterViewInit {
     const filters = {
       nombre: this.nombreFilter,
       idEstadoSalud: this.idEstadoSaludFilter,
-      idTipo: this.idTipoFilter,      
+      idTipo: this.idTipoFilter,
       idEstado: this.idEstadoFilter,
       sexo: this.sexoFilter
     };
-    console.log("Object.entries(filters)",Object.entries(filters));
-    
+    console.log("Object.entries(filters)", Object.entries(filters));
+
     const validFilters = Object.entries(filters)
       .filter(([key, value]) => value !== undefined && value !== null && value !== '')
       .reduce((acc, [key, value]) => ({ ...acc, [key]: value }), {});
 
     return JSON.stringify(validFilters);
   }
-  
+
   getAnimals(): void {
     this.animalService.getAnimals().subscribe((res) => {
-      console.log("res.data",res.data);
-      
+      console.log("res.data", res.data);
+
       this.dataSource.data = res.data;
       this.dataSource.paginator = this.paginator;
     });
@@ -112,7 +101,7 @@ export class PetListComponent implements AfterViewInit {
     const estado = this.typeanimal.find((estado) => estado.idTipo === idtypeanimal);
     return estado ? estado.descripcion : 'Desconocido';
   }
-  getEstadoSalud(idEstadoSalud: number): string {    
+  getEstadoSalud(idEstadoSalud: number): string {
     const estado = this.StateSalud.find((estado) => estado.idEstadoSalud === idEstadoSalud);
     return estado ? estado.descripcion : 'Desconocido';
   }
