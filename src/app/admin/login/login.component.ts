@@ -32,14 +32,14 @@ export class LoginComponent implements OnInit {
 
   onSubmit() {
     console.log('loginForm:', this.loginForm.valid);
-    if (this.loginForm.valid) {
-      this.loginService.login(
-        this.loginForm.get('username')?.value,
-        this.loginForm.get('password')?.value
-      );
-    } else {
-      console.log("go")
-      this._snackBar.showSuccess()
-    }
+    // if (this.loginForm.valid) {
+    //   this.loginService.login(
+    //     this.loginForm.get('username')?.value,
+    //     this.loginForm.get('password')?.value
+    //   );
+    // } else {
+    //   console.log("go")
+    //   this._snackBar.showSuccess()
+    // }
   }
 }

@@ -11,13 +11,14 @@ import { CommonModule } from '@angular/common';
 @NgModule({
   declarations: [
     PanelComponent,
-    LoginComponent
+    LoginComponent,   
   ],
   imports: [
     CommonModule,
     AdminRoutingModule,
     MaterialModule,
-    SharedModule
+    SharedModule,
+    
   ]
 })
 export class AdminModule { }

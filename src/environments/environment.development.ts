@@ -1,4 +1,4 @@
 export const environment = {
   production: false,
-  apiUrl: import.meta.env.NG_APP_API
+  apiUrl: 'https://par-vo7i.onrender.com/api', // Agrega el prefijo 'https://'
 };

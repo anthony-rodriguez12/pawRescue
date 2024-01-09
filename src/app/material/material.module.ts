@@ -9,6 +9,12 @@ import { MatButtonModule } from '@angular/material/button';
 import { MatNativeDateModule } from '@angular/material/core';
 import { MatDialogModule } from '@angular/material/dialog';
 import { MatSnackBarModule } from '@angular/material/snack-bar';
+import {MatTableModule} from '@angular/material/table';
+import {MatSelectModule} from '@angular/material/select';
+import { MatPaginatorModule } from '@angular/material/paginator';
+import {MatTooltipModule} from '@angular/material/tooltip';
+
+
 
 @NgModule({
   exports: [
@@ -22,7 +28,11 @@ import { MatSnackBarModule } from '@angular/material/snack-bar';
     MatButtonModule,
     MatNativeDateModule,
     MatDialogModule,
-    MatSnackBarModule
+    MatSnackBarModule,
+    MatTableModule,
+    MatSelectModule,
+    MatPaginatorModule,
+    MatTooltipModule
   ],
 })
 export class MaterialModule {}

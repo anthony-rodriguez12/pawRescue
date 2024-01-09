@@ -19,13 +19,13 @@
   flex-direction: column;
   max-width: 700px;
   padding-left: 50px;
-  margin: 0 auto;
   margin-top: 20px;
 }
 
 .imagenInformacionPerfil {
   max-width: 80%;
   height: auto;
+  margin-left: 110px;
 }
 
 h1,
@@ -48,5 +48,6 @@ h2 {
 
   .imagenInformacionPerfil {
     max-width: 80%;
+
   }
 }

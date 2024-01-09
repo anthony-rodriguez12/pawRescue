@@ -1,0 +1,80 @@
+<div class="container mt-4">
+    <h1 style="color: black;">
+        <b>{{ state ? 'Editar' : 'Registrar' }} Animal Rescatado</b>
+    </h1>
+    <div class="d-flex flex-wrap justify-content-between">
+        <div class="cardTo rounded col-12 col-md-6 ">
+            <form [formGroup]="myForm" class="m-2">
+                <div class="row">
+                    <form [formGroup]="myForm" class="mt-1">
+                        <div class="row">
+                            <!--Nombre-->
+                            <div class="form-group col-12 col-md-12 my-2">
+                                <label class="my-1" for="nombre"><b>Nombre</b></label>
+                                <input type="text" class="form-control" id="nombre" formControlName="Nombre"
+                                    placeholder="Ingresa el nombre">
+                            </div>
+                            <!--Sexo  -->
+                            <div class="form-group col-12 col-md-{{state ? '6' : '6'}} my-2">
+                                <label class="my-1" for="sexo"><b>Sexo</b></label>
+                                <select class="form-control select cursor-pointer" id="sexo" formControlName="Sexo">
+                                    <option value="Masculino">Masculino</option>
+                                    <option value="Femenino">Femenino</option>
+                                </select>
+                            </div>
+                            <!--Tipo -->
+                            <div class="form-group col-12 col-md-{{state ? '6' : '6'}} my-2">
+                                <label class="my-1" for="sexo"><b>Tipo</b></label>
+                                <select class="form-control select cursor-pointer" id="sexo" formControlName="idTipo">
+                                    <option *ngFor="let opcion of typeanimal" [value]="opcion.idTipo">{{
+                                        opcion.descripcion }}
+                                    </option>
+                                </select>
+                            </div>
+                            <!--Estado -->
+                            <div *ngIf="state" class="form-group col-12 col-md-6 my-2">
+                                <label class="my-1" for="sexo"><b>Estado</b></label>
+                                <select class="form-control select cursor-pointer" id="sexo" formControlName="IdEstado">
+                                    <option *ngFor="let opcion of stateanimal" [value]="opcion.idEstado">{{
+                                        opcion.estadoDesc }}
+                                    </option>
+                                </select>
+                            </div>
+                            <!--Estado Salud-->
+                            <div  class="form-group col-12 col-md-{{state ? '6' : '12'}} my-2">
+                                <label class="my-1" for="sexo"><b>Estado</b></label>
+                                <select class="form-control select cursor-pointer" id="sexo"
+                                    formControlName="IdEstadoSalud">
+                                    <option *ngFor="let opcion of StateSalud" [value]="opcion.idEstadoSalud">{{
+                                        opcion.descripcion }}
+                                    </option>
+                                </select>
+                            </div>
+
+                            <!-- Descripción -->
+                            <div class="form-group my-2">
+                                <label class="my-1" for="saludDesc"><b>Descripción</b></label>
+                                <textarea type="text" class="form-control" id="saludDesc" formControlName="SaludDesc"
+                                    placeholder="Ingresa la descripción de salud"></textarea>
+                            </div>
+
+                            <!-- Foto -->
+                            <div class="form-group my-2">
+                                <label class="my-1" for="foto"><b>Foto</b></label>
+                                <div class="col-md-12">
+                                    <input type="file" class="form-control" id="foto" (change)="handleFileInput($event)"
+                                        accept=".jpg, .jpeg, .png">
+                                    <small class="form-text text-muted">Selecciona un archivo jpg, jpeg o png.</small>
+                                </div>
+
+                            </div>
+                        </div>
+                    </form>
+                </div>
+            </form>
+        </div>
+        <div *ngIf="showimage" class="col-12 col-md-6 centered-container">
+            <img id="miImagen" src="{{showImg}}" class="img-fluid" style="min-height: 10%;" alt="Imagen de la mascota">
+        </div>
+    </div>
+</div>

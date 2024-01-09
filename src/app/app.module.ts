@@ -31,9 +31,8 @@ import { ToastrModule } from 'ngx-toastr';
     }),
   ],
   providers: [
-    { provide: HTTP_INTERCEPTORS, useClass: LoggingInterceptor, multi: true }
+
   ],
-  schemas :[ CUSTOM_ELEMENTS_SCHEMA ],
   bootstrap: [AppComponent],
 })
 export class AppModule {}
