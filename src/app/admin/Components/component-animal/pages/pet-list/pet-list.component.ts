@@ -8,6 +8,7 @@ import { PetService } from 'src/app/client/services/pet.service';
 import { PetAddComponent } from '../pet-add/pet-add.component';
 import { PetEditComponent } from '../pet-edit/pet-edit.component';
 import { TooltipPosition } from '@angular/material/tooltip';
+import { SnackbarService } from 'src/app/shared/services/snackbar.service';
 
 @Component({
   selector: 'app-pet-list',
@@ -34,8 +35,8 @@ export class PetListComponent implements AfterViewInit {
   stateanimal: any[] = [];
   constructor(private animalService: PetService,
     public dialog: MatDialog,
-    private fb: FormBuilder,
-    private router: Router) {
+    private _snackBar: SnackbarService,
+  ) {
 
   }
 
@@ -75,7 +76,6 @@ export class PetListComponent implements AfterViewInit {
       idEstado: this.idEstadoFilter,
       sexo: this.sexoFilter
     };
-    console.log("Object.entries(filters)", Object.entries(filters));
 
     const validFilters = Object.entries(filters)
       .filter(([key, value]) => value !== undefined && value !== null && value !== '')
@@ -86,8 +86,6 @@ export class PetListComponent implements AfterViewInit {
 
   getAnimals(): void {
     this.animalService.getAnimals().subscribe((res) => {
-      console.log("res.data", res.data);
-
       this.dataSource.data = res.data;
       this.dataSource.paginator = this.paginator;
     });
@@ -123,10 +121,10 @@ export class PetListComponent implements AfterViewInit {
 
     dialogRef.afterClosed().subscribe(result => {
       if (result === '200') {
-        console.log("hecho");
+        this._snackBar.sucess('Aviso', 'Registro editado correctamente.');
         this.getAnimals();
-      } else {
-        console.log("no hecho");
+      } else if (result === '500') {
+        this._snackBar.danger('Error', 'Oops! Algo salió mal al intentar editar el registro. Por favor, inténtalo de nuevo.');
       }
     });
   }
@@ -138,10 +136,10 @@ export class PetListComponent implements AfterViewInit {
     });
     dialogRef.afterClosed().subscribe(result => {
       if (result === '201') {
-        console.log("hecho");
+        this._snackBar.sucess('Aviso', 'Registro guardado correctamente.');
         this.getAnimals();
       } else {
-        console.log("no hecho");
+        this._snackBar.danger('Error', 'Oops! Algo salió mal al intentar agregar el registro. Por favor, inténtalo de nuevo.');
       }
     });
   }
