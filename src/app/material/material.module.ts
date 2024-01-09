@@ -13,11 +13,13 @@ import {MatTableModule} from '@angular/material/table';
 import {MatSelectModule} from '@angular/material/select';
 import { MatPaginatorModule } from '@angular/material/paginator';
 import {MatTooltipModule} from '@angular/material/tooltip';
+import {MatMenuModule} from '@angular/material/menu';
 
 
 
 @NgModule({
   exports: [
+    MatMenuModule,
     FormsModule,
     MatInputModule,
     ReactiveFormsModule,
