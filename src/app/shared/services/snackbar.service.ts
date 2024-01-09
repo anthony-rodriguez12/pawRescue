@@ -4,11 +4,11 @@ import { ToastDangerComponent } from '../customs/toast-danger.component';
 import { ToastSucessComponent } from '../customs/toast-sucess.component';
 import { ToastWarningComponent } from '../customs/toast-warning.component';
 
-
 @Injectable({
   providedIn: 'root',
 })
 export class SnackbarService {
+  private timeOut: number = 4000;
   constructor(private toast: ToastrService) {}
 
   showSuccess() {
@@ -20,7 +20,7 @@ export class SnackbarService {
 
   sucess(title: string, message: string) {
     this.toast.show(message, title, {
-      timeOut: 50000,
+      timeOut: this.timeOut,
       toastComponent: ToastSucessComponent,
       progressBar: true,
     });
@@ -28,7 +28,7 @@ export class SnackbarService {
 
   warning(title: string, message: string) {
     this.toast.show(message, title, {
-      timeOut: 50000,
+      timeOut: this.timeOut,
       toastComponent: ToastWarningComponent,
       progressBar: true,
     });
@@ -36,7 +36,7 @@ export class SnackbarService {
 
   danger(title: string, message: string) {
     this.toast.show(message, title, {
-      timeOut: 50000,
+      timeOut: this.timeOut,
       toastComponent: ToastDangerComponent,
       progressBar: true,
     });

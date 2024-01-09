@@ -21,7 +21,7 @@
           />
 
           <mat-error *ngIf="loginForm.get('username')?.hasError('required')"
-            >Usuario es <strong>required</strong></mat-error
+            >Usuario es <strong>requerido</strong></mat-error
           >
         </mat-form-field>
 
@@ -36,11 +36,13 @@
             placeholder="Password"
           />
           <mat-error *ngIf="loginForm.get('password')?.hasError('required')"
-            >Contraseña es <strong>required</strong></mat-error
+            >La Contraseña es <strong>requerida</strong></mat-error
           >
         </mat-form-field>
       </div>
-      <button class="boton" type="submit" mat-raised-button color="primary">Ingresar</button>
+      <button class="boton" type="submit" mat-raised-button color="primary">
+        Ingresar
+      </button>
 
       <a routerLink="" class="my-3">Olvide mi contraseña</a>
     </form>

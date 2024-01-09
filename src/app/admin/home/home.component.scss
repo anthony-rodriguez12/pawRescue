@@ -1,0 +1,7 @@
+.custom-gradient {
+  @apply bg-gradient-to-r dark:from-cyan-500 dark:to-blue-500  from-[#A07A68] to-[#72493a];
+}
+
+.custom-text {
+  @apply text-[#72493a] dark:text-white;
+}

@@ -7,11 +7,17 @@
 font-family: 'Montserrat', sans-serif;
 font-family: 'Roboto', sans-serif;
 font-family: 'Source Sans 3', sans-serif;
+
+font-family: 'Comfortaa', sans-serif;
+font-family: 'Montserrat', sans-serif;
+font-family: 'Roboto', sans-serif;
+font-family: 'Sorts Mill Goudy', serif;
+font-family: 'Source Sans 3', sans-serif;
 */
 $color-bg-primary: #250f17;
 $color-bg-secondary: #fcd857;
 
-@import 'ngx-toastr/toastr';
+@import "ngx-toastr/toastr";
 @import "~bootstrap-icons/font/bootstrap-icons.css";
 
 .bg-color-primary {
