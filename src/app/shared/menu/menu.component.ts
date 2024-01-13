@@ -1,4 +1,6 @@
-import { Component, OnInit } from '@angular/core';
+import { Component, OnInit, ViewChildren, QueryList } from '@angular/core';
+import { MatMenuTrigger } from '@angular/material/menu';
+
 import { Router, NavigationEnd } from '@angular/router';
 import { filter } from 'rxjs/operators';
 import { Nav } from '../interfaces';
@@ -10,17 +12,32 @@ import { RoutesNav } from '../utils/routes';
   styleUrls: ['./menu.component.scss'],
 })
 export class MenuComponent implements OnInit {
+  @ViewChildren(MatMenuTrigger) menuTriggers!: QueryList<MatMenuTrigger>;
+
+  objetos = [
+    { nombre: 'Objeto 1', tieneMenu: true },
+    { nombre: 'Objeto 2', tieneMenu: false },
+    { nombre: 'Objeto 3', tieneMenu: true },
+  ];
   constructor(private router: Router) {}
 
   items: Nav[] = [];
   activeLink = 'bg-[#E6DFB7] text-[#250F17]';
   inactiveLink =
     'text-[#E6DFB7] focus:bg-[#E6DFB7] hover:bg-[#E6DFB7] focus:text-[#250F17] hover:text-[#250F17]';
-  openMenu: boolean = true;
+  sopenMenu: boolean = true;
   path: string | undefined = '';
 
   changeMenu() {
-    this.openMenu = !this.openMenu;
+    this.sopenMenu = !this.sopenMenu;
+  }
+
+  openMenu(objeto: any) {
+    const menuIndex = this.objetos.indexOf(objeto);
+    const menuTrigger = this.menuTriggers.toArray()[menuIndex];
+    if (menuTrigger) {
+      menuTrigger.openMenu();
+    }
   }
 
   ngOnInit() {

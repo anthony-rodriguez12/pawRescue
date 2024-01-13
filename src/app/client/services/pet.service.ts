@@ -1,17 +1,19 @@
 import { HttpClient } from '@angular/common/http';
 import { Injectable } from '@angular/core';
 import { Observable } from 'rxjs';
+import { GeneralResponse, Pets } from 'src/app/shared/interfaces';
+import { environment } from 'src/environments/environment.development';
 
 @Injectable({
-  providedIn: 'root'
+  providedIn: 'root',
 })
 export class PetService {
-  private apiUrl = 'https://par-vo7i.onrender.com/api';
+  private apiUrl = environment.apiUrl;
 
-  constructor(private http: HttpClient) { }
+  constructor(private http: HttpClient) {}
 
-  getAnimals(): Observable<any> {
-    return this.http.get<any>(`${this.apiUrl}/animal`);
+  getAnimals(): Observable<GeneralResponse<Pets[]>> {
+    return this.http.get<GeneralResponse<Pets[]>>(`${this.apiUrl}/animal`);
   }
 
   AddAnimal(animalData: FormData): Observable<any> {
@@ -74,6 +76,8 @@ export class PetService {
   //Imagen Local
 
   getImageLocal(): Promise<Blob> {
-    return fetch('../../../assets/imagenes/fotodefault.png').then(response => response.blob());
+    return fetch('../../../assets/imagenes/fotodefault.png').then((response) =>
+      response.blob(),
+    );
   }
 }

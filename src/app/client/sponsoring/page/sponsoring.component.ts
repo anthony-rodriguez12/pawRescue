@@ -1,8 +1,9 @@
 import { Component, OnInit } from '@angular/core';
-import { MascotasService } from '../../services/mascotas.service';
 import { ModalComponent } from 'src/app/shared/modal/modal.component';
 import { MatDialog } from '@angular/material/dialog';
 import { AnimalI } from 'src/app/shared/interfaces';
+import { healthStatusPets } from '../../../shared/enums/enums';
+import { PetService } from '../../services/pet.service';
 
 @Component({
   selector: 'app-sponsoring',
@@ -11,11 +12,13 @@ import { AnimalI } from 'src/app/shared/interfaces';
 })
 export class SponsoringComponent implements OnInit {
   button = 'Apadrinar';
-
+  statusHealthy = 0;
   constructor(
-    private mascotasService: MascotasService,
+    private petService: PetService,
     public dialog: MatDialog,
-  ) {}
+  ) {
+    this.statusHealthy = healthStatusPets.Deceased;
+  }
 
   pets: AnimalI[] = [];
 
@@ -24,16 +27,28 @@ export class SponsoringComponent implements OnInit {
   }
 
   getMascotas() {
-    this.mascotasService.getMascotas().subscribe({
-      next: (pets) => {
-        this.pets = pets;
+    this.petService.getAnimals().subscribe({
+      next: (element) => {
+        this.pets = element.data.map((pet) => {
+          return {
+            ...pet,
+            loadingImg: false,
+            errorImg: false,
+          };
+        });
+        console.log('Logs:', this.pets);
       },
     });
   }
 
-  loadingImg(loading: number) {
+  loadingImg(loadingId: number) {
     setTimeout(() => {
-      this.mascotasService.loadingPet(loading);
+      this.pets = this.pets.map((x) => {
+        if (loadingId === x.idAnimal) {
+          x.loadingImg = true;
+        }
+        return x;
+      });
     }, 1000);
   }
 
@@ -42,8 +57,8 @@ export class SponsoringComponent implements OnInit {
     err.target.src = '../../../assets/imagenes/placeholders.jpeg';
   }
 
-  openModal(id: number): void {
-    console.log('Modal!', id);
+  openModal(petData: AnimalI): void {
+    console.log('Modal!', petData);
     const dialogRef = this.dialog.open(ModalComponent, {
       maxWidth: '40vw',
       data: {

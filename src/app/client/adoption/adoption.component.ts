@@ -1,8 +1,8 @@
 import { Component, OnInit } from '@angular/core';
-
-import { MascotasService } from '../services/mascotas.service';
 import { environment } from 'src/environments/environment';
 import { AnimalI } from 'src/app/shared/interfaces';
+import { healthStatusPets } from 'src/app/shared/enums/enums';
+import { PetService } from '../services/pet.service';
 
 @Component({
   selector: 'app-adoption',
@@ -12,24 +12,38 @@ import { AnimalI } from 'src/app/shared/interfaces';
 export class AdoptionComponent implements OnInit {
   button = 'Adoptar';
   pets: AnimalI[] = [];
-  constructor(private mascotasService: MascotasService) {}
+  healthStatus = 0;
+  constructor(private petService: PetService) {
+    this.healthStatus = healthStatusPets.Deceased;
+  }
 
   ngOnInit(): void {
     this.getMascotas();
-    console.log(environment.apiUrl);
   }
 
   getMascotas() {
-    this.mascotasService.getMascotas().subscribe({
-      next: (pets) => {
-        this.pets = pets;
+    this.petService.getAnimals().subscribe({
+      next: (element) => {
+        this.pets = element.data.map((pet) => {
+          return {
+            ...pet,
+            loadingImg: false,
+            errorImg: false,
+          };
+        });
+        console.log('Logs', this.pets);
       },
     });
   }
 
-  loadingImg(loading: number) {
+  loadingImg(loadingId: number) {
     setTimeout(() => {
-      this.mascotasService.loadingPet(loading);
+      this.pets = this.pets.map((x) => {
+        if (loadingId === x.idAnimal) {
+          x.loadingImg = true;
+        }
+        return x;
+      });
     }, 1000);
   }
 

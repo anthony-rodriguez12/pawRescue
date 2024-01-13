@@ -6,7 +6,22 @@ export interface Animal {
   age: number;
 }
 
-export interface AnimalI extends Animal {
+export interface AnimalI extends Pets {
   loadingImg: boolean;
   errorImg: boolean;
+}
+
+export interface Pets {
+  idAnimal: number;
+  nombre: string;
+  saludDesc: string;
+  sexo: string;
+  foto: string;
+  idTipo: number;
+  idEstado: number;
+  idEstadoSalud: number;
+}
+
+export interface GeneralResponse<T> {
+  data: T;
 }
