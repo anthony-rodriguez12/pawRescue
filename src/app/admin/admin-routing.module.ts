@@ -15,6 +15,11 @@ const routes: Routes = [
     loadChildren: () =>
       import('./Components/component-animal/pet.module').then((m) => m.PetModule),
   },
+  {
+    path: 'Adopciones',
+    loadChildren: () =>
+      import('./Components/componente-adopcion/adopcion.module').then((m) => m.AdopcionModule),
+  },
 
   {
     path: 'panel',

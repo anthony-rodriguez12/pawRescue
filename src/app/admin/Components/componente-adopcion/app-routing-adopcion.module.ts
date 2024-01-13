@@ -1,14 +1,12 @@
 import { NgModule } from '@angular/core';
 import { CommonModule } from '@angular/common';
 import { RouterModule, Routes } from '@angular/router';
-import { PetListComponent } from './pages/pet-list/pet-list.component';
-
-
+import { AdopcionListComponent } from './pages/adopcion-list/adopcion-list.component';
 
 const routes: Routes = [
   {
     path: 'list',
-    component: PetListComponent
+    component: AdopcionListComponent
   },
   {
     path: '',
@@ -17,12 +15,10 @@ const routes: Routes = [
   },
 ];
 
-
 @NgModule({
   declarations: [],
   imports: [
     CommonModule, RouterModule.forChild(routes)],
   exports: [RouterModule],
-
 })
-export class AppRoutingPetModule { }
+export class AppRoutingAdopcionModule { }
