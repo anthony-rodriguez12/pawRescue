@@ -8,6 +8,9 @@ import { TooltipPosition } from '@angular/material/tooltip';
 import { SnackbarService } from 'src/app/shared/services/snackbar.service';
 import { PetEditComponent } from '../../../component-animal/pages/pet-edit/pet-edit.component';
 import { PetAddComponent } from '../../../component-animal/pages/pet-add/pet-add.component';
+import { AdopcionesService } from 'src/app/client/services/adopciones.service';
+import { AdopcionAddComponent } from '../adopcion-add/adopcion-add.component';
+import { AdopcionEditComponent } from '../adopcion-edit/adopcion-edit.component';
 
 @Component({
   selector: 'app-adopcion-list',
@@ -15,7 +18,7 @@ import { PetAddComponent } from '../../../component-animal/pages/pet-add/pet-add
   styleUrls: ['./adopcion-list.component.scss']
 })
 export class AdopcionListComponent implements AfterViewInit {
-  displayedColumns: string[] = ['acction', 'nombre', 'saludType', 'saludDesc', 'type', 'sexo', 'foto', 'idEstado'];
+  displayedColumns: string[] = ['acction', 'nombre', 'nombreAnimal', 'correo', 'direccion', 'idEstado'];
   positionOptions: TooltipPosition[] = ['after', 'before', 'above', 'below', 'left', 'right'];
   position = new FormControl(this.positionOptions[0]);
   typeanimal: any[] = []
@@ -25,14 +28,13 @@ export class AdopcionListComponent implements AfterViewInit {
   @ViewChild(MatPaginator) paginator!: MatPaginator;
 
   nombreFilter: string = "";
-  idEstadoSaludFilter: string = "";
-  idTipoFilter: number | string = "";
-  idEstadoFilter: number | string = "";
-  sexoFilter: string = "";
+  AdoptadoFilter: string = "";
+  estadoFilter: number | string = "";
 
   animals: any[] = [];
   stateanimal: any[] = [];
   constructor(private animalService: PetService,
+    private adopcionService: AdopcionesService,
     public dialog: MatDialog,
     private _snackBar: SnackbarService,
   ) {
@@ -40,11 +42,12 @@ export class AdopcionListComponent implements AfterViewInit {
   }
 
   ngOnInit(): void {
-    this.getAnimals();
+    this.getListAdopciones();
     this.getEstados();
     this.getTypeAnimal();
     this.getEstadosSalud();
   }
+  //Filtros
   ngAfterViewInit() {
     this.dataSource.paginator = this.paginator;
   }
@@ -70,10 +73,8 @@ export class AdopcionListComponent implements AfterViewInit {
 
     const filters = {
       nombre: this.nombreFilter,
-      idEstadoSalud: this.idEstadoSaludFilter,
-      idTipo: this.idTipoFilter,
-      idEstado: this.idEstadoFilter,
-      sexo: this.sexoFilter
+      nombreAnimal: this.AdoptadoFilter,
+      estadoAdopcion: this.estadoFilter,
     };
 
     const validFilters = Object.entries(filters)
@@ -83,12 +84,16 @@ export class AdopcionListComponent implements AfterViewInit {
     return JSON.stringify(validFilters);
   }
 
-  getAnimals(): void {
-    this.animalService.getAnimals().subscribe((res) => {
+  //Servicios
+
+  getListAdopciones(): void {
+    this.adopcionService.getAllAdopciones().subscribe((res) => {
       this.dataSource.data = res.data;
       this.dataSource.paginator = this.paginator;
     });
   }
+
+
   getEstadoDesc(idEstado: number): string {
     const estado = this.stateanimal.find((estado) => estado.idEstado === idEstado);
     return estado ? estado.estadoDesc : 'Desconocido';
@@ -108,41 +113,6 @@ export class AdopcionListComponent implements AfterViewInit {
       this.stateanimal = res.data;
     });
   }
-
-  // Editar Animal
-  editAnimal(element: any): void {
-
-    const dialogRef: MatDialogRef<PetEditComponent> = this.dialog.open(PetEditComponent, {
-      data: element.idAnimal,
-      width: '800px',
-      maxHeight: '750px',
-    });
-
-    dialogRef.afterClosed().subscribe(result => {
-      if (result === '200') {
-        this._snackBar.sucess('Aviso', 'Registro editado correctamente.');
-        this.getAnimals();
-      } else if (result === '500') {
-        this._snackBar.danger('Error', 'Oops! Algo salió mal al intentar editar el registro. Por favor, inténtalo de nuevo.');
-      }
-    });
-  }
-  // Agregar Animal
-  addAnimal(): void {
-    const dialogRef: MatDialogRef<PetAddComponent> = this.dialog.open(PetAddComponent, {
-      width: '800px',
-      maxHeight: '700px',
-    });
-    dialogRef.afterClosed().subscribe(result => {
-      if (result === '201') {
-        this._snackBar.sucess('Aviso', 'Registro guardado correctamente.');
-        this.getAnimals();
-      } else {
-        this._snackBar.danger('Error', 'Oops! Algo salió mal al intentar agregar el registro. Por favor, inténtalo de nuevo.');
-      }
-    });
-  }
-
   getTypeAnimal(): void {
     this.animalService.GetTypeAnimal().subscribe((res) => {
       this.typeanimal = res.data;
@@ -154,6 +124,41 @@ export class AdopcionListComponent implements AfterViewInit {
       this.StateSalud = res.data;
     });
   }
+
+  // Editar Animal
+  editAdopcion(element: any): void {
+    console.log("element",element);   
+
+    const dialogRef: MatDialogRef<AdopcionEditComponent> = this.dialog.open(AdopcionEditComponent, {
+      data: element.idAdopcion,
+      width: '800px',
+      maxHeight: '750px',
+    });
+
+    dialogRef.afterClosed().subscribe(result => {
+      if (result === '200') {
+        this._snackBar.sucess('Aviso', 'Registro editado correctamente.');
+      } else if (result === '500') {
+        this._snackBar.danger('Error', 'Oops! Algo salió mal al intentar editar el registro. Por favor, inténtalo de nuevo.');
+      }
+    });
+  }
+  // Agregar Animal
+  addAdopcion(): void {
+    const dialogRef: MatDialogRef<AdopcionAddComponent> = this.dialog.open(AdopcionAddComponent, {
+      width: '800px',
+      maxHeight: '700px',
+    });
+    dialogRef.afterClosed().subscribe(result => {
+      if (result === '201') {
+        this._snackBar.sucess('Aviso', 'Registro guardado correctamente.');
+      } else {
+        this._snackBar.danger('Error', 'Oops! Algo salió mal al intentar agregar el registro. Por favor, inténtalo de nuevo.');
+      }
+    });
+  }
+
+
 }
 
 

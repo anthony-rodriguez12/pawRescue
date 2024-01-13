@@ -38,13 +38,6 @@ export class PetService {
     return this.http.get<any>(`${this.apiUrl}/estadosalud`);
   }
 
-  // convertImageToBase64(imageUrl: string): Promise<string> {
-  //   return this.http.get(imageUrl, { responseType: 'blob' })
-  //     .toPromise()
-  //     .then((blob: any) => {
-  //       return this.blobToBase64(blob);
-  //     });
-  // }
   // Tipo de animal
   GetTypeAnmalById(idState: number): Observable<any> {
     return this.http.get<any>(`${this.apiUrl}/tipoanimalcontoller/${idState}`);

@@ -5,6 +5,7 @@ import { AdopcionAddComponent } from './pages/adopcion-add/adopcion-add.componen
 import { AdopcionListComponent } from './pages/adopcion-list/adopcion-list.component';
 import { MaterialModule } from 'src/app/material/material.module';
 import { AppRoutingAdopcionModule } from './app-routing-adopcion.module';
+import { AdopcionFormComponent } from './adopcion-form/adopcion-form.component';
 
 
 
@@ -12,7 +13,8 @@ import { AppRoutingAdopcionModule } from './app-routing-adopcion.module';
   declarations: [
     AdopcionListComponent,
     AdopcionEditComponent,
-    AdopcionAddComponent
+    AdopcionAddComponent,
+    AdopcionFormComponent
   ],
   imports: [
     CommonModule,

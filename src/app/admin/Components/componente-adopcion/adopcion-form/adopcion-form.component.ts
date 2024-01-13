@@ -1,6 +1,7 @@
 // pet-form.component.ts
 import { Component, Input, OnChanges, SimpleChanges, OnInit, EventEmitter, Output } from '@angular/core';
 import { FormBuilder, FormGroup, Validators } from '@angular/forms';
+import { AdopcionesService } from 'src/app/client/services/adopciones.service';
 import { PetService } from 'src/app/client/services/pet.service';
 export interface State {
   idEstado: number
@@ -24,6 +25,9 @@ export class AdopcionFormComponent implements OnInit, OnChanges {
 
 
   myForm!: FormGroup;
+  estudios: any[] = []
+
+
   showimage!: boolean;
   dataPet!: any;
   base64String!: string
@@ -33,13 +37,16 @@ export class AdopcionFormComponent implements OnInit, OnChanges {
   typeanimal: any[] = []
   StateSalud: any[] = []
 
+
+
   constructor(private fb: FormBuilder,
-    private animalService: PetService) { }
+    private animalService: PetService,
+    private ServiceAdopciones: AdopcionesService) { }
 
   ngOnInit(): void {
     this.createform();
-    this.getEstados();
-    this.loadImage();
+    this.getEstudios();
+
     this.getTypeAnimal();
     this.getEstadosSalud();
     this.myForm.valueChanges.subscribe(() => {
@@ -53,28 +60,33 @@ export class AdopcionFormComponent implements OnInit, OnChanges {
       this.state = true
       this.dataPet = changes['formData'].currentValue;
       this.setdata(this.dataPet);
-
     }
   }
 
   createform() {
     this.myForm = this.fb.group({
-      Nombre: ['', Validators.required],
-      SaludDesc: ['', Validators.required],
-      Sexo: ['', Validators.required],
-      Foto: [null, Validators.required],
-      idTipo: [null, Validators.required],
-      IdEstado: ['', Validators.required],
-      IdEstadoSalud: ['', Validators.required]
-
+      nombre: ['', Validators.required],
+      apellido: ['', Validators.required],
+      direccion: ['', Validators.required],
+      fechaNac: ['', Validators.required],
+      telefono: ['', Validators.required],
+      correo: ['', Validators.required],
+      idEstudios: ['', Validators.required],
+      motivo: ['', Validators.required],
+      idAnimal: ['', Validators.required],
+      idEstado: ['', Validators.required],
+      fechaVisita: ['', Validators.required],
+      estadoSeguimiento: ['', Validators.required],
+      detallesSeguimiento: ['', Validators.required],
     });
   }
 
-  setdata(data: any) {
-    
-    if (data) {
-      console.log("data",data);
 
+
+
+  setdata(data: any) {
+    if (data) {
+      console.log("data", data);
       const estadoEncontrado = this.StateSalud.find(estado => estado.status === data.estadoSalud);
       this.myForm.get('Nombre')?.setValue(data.nombre);
       this.myForm.get('SaludDesc')?.setValue(data.saludDesc);
@@ -87,18 +99,20 @@ export class AdopcionFormComponent implements OnInit, OnChanges {
       this.myForm.get('IdEstadoSalud')?.setValue(data.idEstadoSalud);
     }
   }
-
-  handleFileInput(event: any) {
-    const file = event.target.files[0];
-    this.myForm.get('Foto')?.setValue(file);
-    this.handleFileInputChange(file);
-  }
+  
 
   getEstados(): void {
     this.animalService.GetEstados().subscribe((res) => {
       this.stateanimal = res.data;
     });
   }
+
+  getEstudios(): void {
+    this.ServiceAdopciones.GetEstudios().subscribe((res) => {
+      this.estudios = res.data;
+    });
+  }
+
   //Estado de Salud
   getEstadosSalud(): void {
     this.animalService.GetEstadosSalud().subscribe((res) => {
@@ -113,27 +127,5 @@ export class AdopcionFormComponent implements OnInit, OnChanges {
     });
   }
 
-  // Otras funciones
-  async handleFileInputChange(file: any) {
-    if (file) {
-      try {
-        const base64String = await this.animalService.convertImageToBase64(file);
-        this.base64String = base64String;
-        this.showImg = this.base64String
-        this.showimage = this.base64String ? true : false
-      } catch (error) {
-        console.error(error);
-      }
-    }
-  }
-
-
-  async loadImage(): Promise<void> {
-    const imageBlob = await this.animalService.getImageLocal();
-    const fakeImageFile = new File([imageBlob], 'fotodefault.png', { type: 'image/png  ' });
-    this.myForm.get('Foto')?.setValue(fakeImageFile);
-    this.handleFileInputChange(fakeImageFile);
-
-  }
 
 }

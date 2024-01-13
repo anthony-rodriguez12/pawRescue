@@ -18,7 +18,6 @@ export class LoggingInterceptor implements HttpInterceptor {
       localStorage.getItem('currentUser') != null
         ? localStorage.getItem('currentUser')
         : '';
-    console.log('Outgoing HTTP request', req);
 
     if (authToken && authToken !== '') {
       const authReq = req.clone({

@@ -8,3 +8,12 @@
     color: #250F17;
 
 }
+.sticky-buttons-container {
+    position: sticky;
+    bottom: 0;
+    background-color: white; /* Ajusta el color de fondo según tus necesidades */
+    padding: 10px; /* Ajusta el relleno según sea necesario */
+    border-top: 1px solid #ddd; /* Agrega un borde superior opcional */
+    z-index: 1; /* Ajusta el índice z según sea necesario para que esté por encima del contenido del modal */
+}
+
