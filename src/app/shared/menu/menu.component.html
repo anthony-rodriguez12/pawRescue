@@ -13,7 +13,7 @@
           <span class="sr-only">Open main menu</span>
 
           <svg
-            class="{{ openMenu ? 'block' : 'hidden' }} h-6 w-6"
+            class="{{ sopenMenu ? 'block' : 'hidden' }} h-6 w-6"
             fill="none"
             viewBox="0 0 24 24"
             stroke-width="1.5"
@@ -28,7 +28,7 @@
           </svg>
 
           <svg
-            class="{{ !openMenu ? 'block' : 'hidden' }} h-6 w-6"
+            class="{{ !sopenMenu ? 'block' : 'hidden' }} h-6 w-6"
             fill="none"
             viewBox="0 0 24 24"
             stroke-width="1.5"
@@ -46,75 +46,80 @@
       <div
         class="flex flex-1 items-center justify-center sm:items-stretch sm:justify-start"
       >
-        <div class="hidden sm:ml-6 sm:block">
+        <div class="hidden bg-red-500 sm:ml-6 sm:block">
           <div class="">
             <div class="flex space-x-4">
-              <div
-                *ngFor="let item of items"
-                class="relative {{ item.items ? 'group' : '' }} {{
-                  item.active ? activeLink : inactiveLink
-                }} px-3 py-2 rounded-md transition-all duration-200"
-                (click)="showMenu(item)"
-              >
-                <div>
-                  <i
-                    *ngIf="item.preIcon"
-                    class="{{
-                      item.preIcon
-                    }} pr-1 transition-all duration-500 group-focus:-rotate-180"
-                  ></i>
-                  <a
-                    *ngIf="!item?.items"
-                    [routerLink]="item.link"
-                    class="text-sm font-medium cursor-pointer"
-                    >{{ item.label }}
-                  </a>
-
-                  <a
-                    *ngIf="item?.items"
-                    class="text-sm font-medium cursor-pointer"
-                    >{{ item.label }}
-                  </a>
-
-                  <i class="ms-1 hidden md:inline-flex {{ item.icon }}"></i>
-                </div>
+              <ng-container *ngFor="let item of items">
+                <mat-menu #menu="matMenu">
+                  <button mat-menu-item class="group">ss</button>
+                </mat-menu>
                 <div
-                  *ngIf="item.items"
-                  class="{{
-                    item.showMenu ? 'block entering' : 'hidden leaving'
-                  }} options-menu absolute left-1/2 z-10 mt-5 flex w-screen max-w-max -translate-x-1/2 px-4"
+                  class="relative {{ item.items ? 'group' : '' }} {{
+                    item.active ? activeLink : inactiveLink
+                  }} px-3 py-2 rounded-md transition-all duration-200"
+                  (click)="showMenu(item)"
                 >
+                  <div *ngIf="" [matMenuTriggerFor]="menu"></div>
+                  <div>
+                    <i
+                      *ngIf="item.preIcon"
+                      class="{{
+                        item.preIcon
+                      }} pr-1 transition-all duration-500 group-focus:-rotate-180"
+                    ></i>
+                    <a
+                      *ngIf="!item?.items"
+                      [routerLink]="item.link"
+                      class="text-sm font-medium cursor-pointer"
+                      >{{ item.label }}
+                    </a>
+
+                    <a
+                      *ngIf="item?.items"
+                      class="text-sm font-medium cursor-pointer"
+                      >{{ item.label }}
+                    </a>
+
+                    <i class="ms-1 hidden md:inline-flex {{ item.icon }}"></i>
+                  </div>
                   <div
-                    class="max-w-md flex-auto overflow-hidden rounded-3xl bg-white text-sm leading-6 shadow-lg ring-1 ring-gray-900/5"
+                    *ngIf="item.items"
+                    class="{{
+                      item.showMenu ? 'block entering' : 'hidden leaving'
+                    }} options-menu absolute left-1/2 z-10 mt-5 flex w-screen max-w-max -translate-x-1/2 px-4"
                   >
-                    <div class="p-4">
-                      <div
-                        *ngFor="let options of item.items"
-                        class="group relative transition-all duration-500 flex gap-x-3 items-center rounded-lg p-1 hover:bg-gray-50"
-                      >
+                    <div
+                      class="max-w-md flex-auto overflow-hidden rounded-3xl bg-white text-sm leading-6 shadow-lg ring-1 ring-gray-900/5"
+                    >
+                      <div class="p-4">
                         <div
-                          class="mt-1 flex transition-all duration-500 h-11 w-11 flex-none items-center justify-center rounded-lg bg-gray-50 group-hover:bg-white"
+                          *ngFor="let options of item.items"
+                          class="group relative transition-all duration-500 flex gap-x-3 items-center rounded-lg p-1 hover:bg-gray-50"
                         >
-                          <i
-                            class="{{
-                              options.icon
-                            }} text-base transition-all duration-500 text-gray-600 group-hover:text-[#250F17]"
-                          ></i>
-                        </div>
-                        <div>
-                          <a
-                            [routerLink]="options.link"
-                            class="font-semibold text-gray-900"
+                          <div
+                            class="mt-1 flex transition-all duration-500 h-11 w-11 flex-none items-center justify-center rounded-lg bg-gray-50 group-hover:bg-white"
                           >
-                            {{ options.label }}
-                            <span class="absolute inset-0"></span>
-                          </a>
+                            <i
+                              class="{{
+                                options.icon
+                              }} text-base transition-all duration-500 text-gray-600 group-hover:text-[#250F17]"
+                            ></i>
+                          </div>
+                          <div>
+                            <a
+                              [routerLink]="options.link"
+                              class="font-semibold text-gray-900"
+                            >
+                              {{ options.label }}
+                              <span class="absolute inset-0"></span>
+                            </a>
+                          </div>
                         </div>
                       </div>
                     </div>
                   </div>
                 </div>
-              </div>
+              </ng-container>
             </div>
           </div>
         </div>
@@ -194,7 +199,7 @@
   <!-- Mobile menu, show/hide based on menu state. -->
   <div
     class="{{
-      openMenu
+      sopenMenu
         ? 'block visible max-h-screen opacity-100'
         : 'invisible max-h-0 opacity-0'
     }} transition-all duration-500 h-auto sm:hidden"

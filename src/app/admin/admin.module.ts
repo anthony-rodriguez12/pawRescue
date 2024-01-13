@@ -8,10 +8,11 @@ import { CommonModule } from '@angular/common';
 import { HomeComponent } from './home/home.component';
 import { AuthGuard } from './guards/auth.guard';
 import { LoginService } from '../shared/services/login.service';
+import { LoginGuard } from './guards/login.guard';
 
 @NgModule({
   declarations: [PanelComponent, LoginComponent, HomeComponent],
-  providers: [AuthGuard, LoginService],
+  providers: [AuthGuard, LoginGuard, LoginService],
   imports: [CommonModule, AdminRoutingModule, MaterialModule, SharedModule],
 })
 export class AdminModule {}

@@ -1,5 +1,5 @@
 import { Component, Inject } from '@angular/core';
-import { Sponsors } from '../../client/interface/index';
+import { Sponsors } from '../interfaces/index';
 import { MAT_DIALOG_DATA, MatDialogRef } from '@angular/material/dialog';
 
 @Component({
@@ -10,7 +10,7 @@ import { MAT_DIALOG_DATA, MatDialogRef } from '@angular/material/dialog';
 export class ModalComponent {
   constructor(
     public dialogRef: MatDialogRef<ModalComponent>,
-    @Inject(MAT_DIALOG_DATA) public data: Sponsors
+    @Inject(MAT_DIALOG_DATA) public data: Sponsors,
   ) {}
 
   onNoClick(): void {

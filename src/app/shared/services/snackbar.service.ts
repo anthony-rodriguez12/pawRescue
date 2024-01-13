@@ -11,13 +11,6 @@ export class SnackbarService {
   private timeOut: number = 4000;
   constructor(private toast: ToastrService) {}
 
-  showSuccess() {
-    this.toast.show('sssssss', 'Toastr fun!', {
-      toastComponent: ToastSucessComponent,
-      progressBar: true,
-    });
-  }
-
   sucess(title: string, message: string) {
     this.toast.show(message, title, {
       timeOut: this.timeOut,

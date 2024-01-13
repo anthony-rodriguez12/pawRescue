@@ -1,6 +1,10 @@
 import { Component, OnInit } from '@angular/core';
 import { Router } from '@angular/router';
+import { Nav } from 'src/app/shared/interfaces';
+import { Session } from 'src/app/shared/interfaces/session.interface';
 import { LoginService } from 'src/app/shared/services/login.service';
+import { SecureStorageService } from 'src/app/shared/services/secure-storage.service';
+import { RoutesNav } from 'src/app/shared/utils/routes';
 
 @Component({
   selector: 'app-panel',
@@ -15,37 +19,19 @@ export class PanelComponent implements OnInit {
   };
   themeDark: boolean = false;
   statusSideNav: boolean = true;
+  routesNav: Nav[] = [];
+  activeLink = '';
+  inactiveLink = '';
 
   constructor(
     private router: Router,
     private loginService: LoginService,
+    private storageService: SecureStorageService,
   ) {}
 
   ngOnInit(): void {
-    const theme = localStorage.getItem('theme');
-    if (theme === 'dark') {
-      this.setDark();
-    } else {
-      this.themeDark = false;
-      this.setLight();
-    }
-    this.user.name = sessionStorage.getItem('username')!;
-    console.log('first', sessionStorage.getItem('username'));
-  }
-
-  setDark() {
-    this.themeDark = !this.themeDark;
-    if (this.themeDark) {
-      document.documentElement.classList.add('dark');
-      localStorage.setItem('theme', 'dark');
-    } else {
-      this.setLight();
-    }
-  }
-
-  setLight() {
-    document.documentElement.classList.remove('dark');
-    localStorage.setItem('theme', 'light');
+    this.user.name = this.storageService.getItem<Session>('session')?.username!;
+    this.routesNav = RoutesNav;
   }
 
   openNav() {

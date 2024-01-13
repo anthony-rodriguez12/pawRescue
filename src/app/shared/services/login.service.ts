@@ -2,8 +2,11 @@ import { Injectable } from '@angular/core';
 import { HttpClient } from '@angular/common/http';
 import { environment } from 'src/environments/environment.development';
 import { Router } from '@angular/router';
-import { Auth } from '../../client/interface';
+import { Auth } from '../interfaces';
 import { SnackbarService } from 'src/app/shared/services/snackbar.service';
+import { SecureStorageService } from './secure-storage.service';
+import { Session } from '../interfaces/session.interface';
+import { MomentService } from './moment.service';
 
 @Injectable({
   providedIn: 'root',
@@ -12,17 +15,18 @@ export class LoginService {
   constructor(
     private router: Router,
     private http: HttpClient,
+    private storageService: SecureStorageService,
+    private momentService: MomentService,
     private _snackBar: SnackbarService,
   ) {}
 
   loggout() {
-    localStorage.removeItem('token');
+    this.storageService.removeItem('session');
     this._snackBar.sucess(
       '¡Cerraste de sesión!',
       'Has Cerrado sesión exisosamente',
     );
     this.router.navigate(['/pawstorescue/home']);
-    sessionStorage.removeItem('username');
   }
 
   login(user: string, password: string) {
@@ -33,14 +37,16 @@ export class LoginService {
       })
       .subscribe({
         next: (auth) => {
-          console.log(auth);
           this._snackBar.sucess(
             '¡Inicio de sesión exitoso!',
             'Has iniciado sesión correctamente en tu cuenta.',
           );
-          localStorage.setItem('token', auth.token);
+          this.storageService.setItem<Session>('session', {
+            token: auth.token,
+            username: user,
+            expedition: this.momentService.getCurrentDate(),
+          });
           this.router.navigate(['/admin/panel']);
-          sessionStorage.setItem('username', user);
         },
         error: () => {
           this._snackBar.danger(
@@ -51,25 +57,20 @@ export class LoginService {
       });
   }
 
-  isLoggedIn() {
-    const isLoggedIn = localStorage.getItem('token');
-    const user = sessionStorage.getItem('username');
+  isLoggedIn(): boolean {
+    const isLoggedIn = this.storageService.getItem<Session>('session');
     console.log('isLoggedIn?', isLoggedIn);
-    console.log('user?', user);
-    if (!isLoggedIn || !user) {
+
+    if (!isLoggedIn) return false;
+    if (!isLoggedIn.username && !isLoggedIn.token && !isLoggedIn.expedition)
+      return false;
+
+    const interval = this.momentService.getDiffWithCurrentDate(
+      isLoggedIn.expedition,
+    );
+    if (interval >= 3) {
       return false;
     }
     return true;
-  }
-
-  animals() {
-    return this.http.get(`${environment.apiUrl}/animal`).subscribe({
-      next: (d) => {
-        console.log(d);
-      },
-      error: (err) => {
-        throw new Error(err);
-      },
-    });
   }
 }

@@ -5,11 +5,12 @@ import {
   state,
   style,
   transition,
-  trigger
+  trigger,
 } from '@angular/animations';
-import { SnackBarDesign, SnackBarType } from '../interface';
+
 import { snackBar as config } from './theme.config';
 import { Toast } from 'ngx-toastr';
+import { SnackBarDesign, SnackBarType } from '../interfaces';
 
 @Component({
   selector: 'custom-sucess-toast',
@@ -21,7 +22,7 @@ import { Toast } from 'ngx-toastr';
         'inactive',
         style({
           opacity: 0,
-        })
+        }),
       ),
       transition(
         'inactive => active',
@@ -44,8 +45,8 @@ import { Toast } from 'ngx-toastr';
               transform: 'none',
               opacity: 1,
             }),
-          ])
-        )
+          ]),
+        ),
       ),
       transition(
         'active => removed',
@@ -59,15 +60,15 @@ import { Toast } from 'ngx-toastr';
               transform: 'translate3d(100%, 0, 0) skewX(30deg)',
               opacity: 0,
             }),
-          ])
-        )
+          ]),
+        ),
       ),
     ]),
   ],
   preserveWhitespaces: false,
 })
 export class ToastSucessComponent extends Toast {
-  type: SnackBarType = 'sucess'
+  type: SnackBarType = 'sucess';
 
   snackBar: Record<SnackBarType, SnackBarDesign> = config;
 

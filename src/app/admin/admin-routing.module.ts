@@ -4,16 +4,20 @@ import { PanelComponent } from './panel/panel.component';
 import { LoginComponent } from './login/login.component';
 import { HomeComponent } from './home/home.component';
 import { AuthGuard } from './guards/auth.guard';
+import { LoginGuard } from './guards/login.guard';
 
 const routes: Routes = [
   {
     path: 'login',
+    canActivate: [LoginGuard],
     component: LoginComponent,
   },
   {
     path: 'PetModule',
     loadChildren: () =>
-      import('./Components/component-animal/pet.module').then((m) => m.PetModule),
+      import('./Components/component-animal/pet.module').then(
+        (m) => m.PetModule,
+      ),
   },
   {
     path: 'Adopciones',
@@ -43,4 +47,4 @@ const routes: Routes = [
   imports: [RouterModule.forChild(routes)],
   exports: [RouterModule],
 })
-export class AdminRoutingModule { }
+export class AdminRoutingModule {}
