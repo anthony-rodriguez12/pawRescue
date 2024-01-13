@@ -12,8 +12,6 @@ import { ToastDangerComponent } from './customs/toast-danger.component';
 import { ToastSucessComponent } from './customs/toast-sucess.component';
 import { ToastWarningComponent } from './customs/toast-warning.component';
 
-
-
 @NgModule({
   declarations: [
     MenuComponent,
@@ -24,13 +22,9 @@ import { ToastWarningComponent } from './customs/toast-warning.component';
     ModalComponent,
     ToastDangerComponent,
     ToastSucessComponent,
-    ToastWarningComponent
+    ToastWarningComponent,
   ],
-  imports: [
-    CommonModule,
-    MaterialModule,
-    ClientRoutingModule,
-  ],
+  imports: [CommonModule, MaterialModule, ClientRoutingModule],
   exports: [
     MenuComponent,
     InitialPageComponent,
@@ -39,7 +33,7 @@ import { ToastWarningComponent } from './customs/toast-warning.component';
     ButtonComponent,
     ToastDangerComponent,
     ToastSucessComponent,
-    ToastWarningComponent
-  ]
+    ToastWarningComponent,
+  ],
 })
-export class SharedModule { }
+export class SharedModule {}

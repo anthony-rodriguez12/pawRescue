@@ -1,4 +1,4 @@
-import { SnackBarDesign, SnackBarType } from "../interface";
+import { SnackBarDesign, SnackBarType } from '../interfaces';
 
 export const snackBar: Record<SnackBarType, SnackBarDesign> = {
   sucess: {

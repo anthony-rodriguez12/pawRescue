@@ -5,11 +5,12 @@ import {
   state,
   style,
   transition,
-  trigger
+  trigger,
 } from '@angular/animations';
-import { SnackBarDesign, SnackBarType } from '../interface';
+
 import { Toast } from 'ngx-toastr';
 import { snackBar as config } from './theme.config';
+import { SnackBarDesign, SnackBarType } from '../interfaces';
 
 @Component({
   selector: 'custom-warning-toast',
@@ -21,7 +22,7 @@ import { snackBar as config } from './theme.config';
         'inactive',
         style({
           opacity: 0,
-        })
+        }),
       ),
       transition(
         'inactive => active',
@@ -44,8 +45,8 @@ import { snackBar as config } from './theme.config';
               transform: 'none',
               opacity: 1,
             }),
-          ])
-        )
+          ]),
+        ),
       ),
       transition(
         'active => removed',
@@ -59,15 +60,15 @@ import { snackBar as config } from './theme.config';
               transform: 'translate3d(100%, 0, 0) skewX(30deg)',
               opacity: 0,
             }),
-          ])
-        )
+          ]),
+        ),
       ),
     ]),
   ],
   preserveWhitespaces: false,
 })
 export class ToastWarningComponent extends Toast {
-  type: SnackBarType = 'warning'
+  type: SnackBarType = 'warning';
   snackBar: Record<SnackBarType, SnackBarDesign> = config;
 
   undoString = 'undo';

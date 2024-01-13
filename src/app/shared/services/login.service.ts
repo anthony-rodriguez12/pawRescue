@@ -2,9 +2,11 @@ import { Injectable } from '@angular/core';
 import { HttpClient } from '@angular/common/http';
 import { environment } from 'src/environments/environment.development';
 import { Router } from '@angular/router';
-import { Auth } from '../../client/interface';
+import { Auth } from '../interfaces';
 import { SnackbarService } from 'src/app/shared/services/snackbar.service';
 import { SecureStorageService } from './secure-storage.service';
+import { Session } from '../interfaces/session.interface';
+import { MomentService } from './moment.service';
 
 @Injectable({
   providedIn: 'root',
@@ -14,6 +16,7 @@ export class LoginService {
     private router: Router,
     private http: HttpClient,
     private storageService: SecureStorageService,
+    private momentService: MomentService,
     private _snackBar: SnackbarService,
   ) {}
 
@@ -38,9 +41,10 @@ export class LoginService {
             '¡Inicio de sesión exitoso!',
             'Has iniciado sesión correctamente en tu cuenta.',
           );
-          this.storageService.setItem('session', {
+          this.storageService.setItem<Session>('session', {
             token: auth.token,
             username: user,
+            expedition: this.momentService.getCurrentDate(),
           });
           this.router.navigate(['/admin/panel']);
         },
@@ -53,24 +57,20 @@ export class LoginService {
       });
   }
 
-  isLoggedIn() {
-    const isLoggedIn = this.storageService.getItem('session');
+  isLoggedIn(): boolean {
+    const isLoggedIn = this.storageService.getItem<Session>('session');
     console.log('isLoggedIn?', isLoggedIn);
 
-    if (!isLoggedIn) {
+    if (!isLoggedIn) return false;
+    if (!isLoggedIn.username && !isLoggedIn.token && !isLoggedIn.expedition)
+      return false;
+
+    const interval = this.momentService.getDiffWithCurrentDate(
+      isLoggedIn.expedition,
+    );
+    if (interval >= 3) {
       return false;
     }
     return true;
-  }
-
-  animals() {
-    return this.http.get(`${environment.apiUrl}/animal`).subscribe({
-      next: (d) => {
-        console.log(d);
-      },
-      error: (err) => {
-        throw new Error(err);
-      },
-    });
   }
 }

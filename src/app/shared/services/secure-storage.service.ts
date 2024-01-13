@@ -1,4 +1,5 @@
 import { Injectable } from '@angular/core';
+import { LocalStorageService } from 'ngx-localstorage';
 
 import { environment } from 'src/environments/environment';
 
@@ -6,11 +7,17 @@ import { environment } from 'src/environments/environment';
   providedIn: 'root',
 })
 export class SecureStorageService {
-  getItem(item: string): any {
-    return item;
+  constructor(private localStorageService: LocalStorageService) {}
+
+  getItem<T>(key: string) {
+    return this.localStorageService.get<T>(key);
   }
 
-  setItem(key: string, data: any): void {}
+  setItem<T>(key: string, data: any): void {
+    this.localStorageService.set<T>(key, data);
+  }
 
-  removeItem(item: string) {}
+  removeItem(key: string) {
+    this.localStorageService.remove(key);
+  }
 }

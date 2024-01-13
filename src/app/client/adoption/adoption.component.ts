@@ -1,7 +1,8 @@
 import { Component, OnInit } from '@angular/core';
-import { AnimalI } from '../interface/client.interfaces';
+
 import { MascotasService } from '../services/mascotas.service';
 import { environment } from 'src/environments/environment';
+import { AnimalI } from 'src/app/shared/interfaces';
 
 @Component({
   selector: 'app-adoption',
@@ -15,7 +16,7 @@ export class AdoptionComponent implements OnInit {
 
   ngOnInit(): void {
     this.getMascotas();
-    console.log(environment.apiUrl)
+    console.log(environment.apiUrl);
   }
 
   getMascotas() {

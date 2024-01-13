@@ -1,4 +1,4 @@
-import { HTTPCodes } from "../enums/enums";
+import { HTTPCodes } from '../../client/enums/enums';
 
 export interface Auth {
   token: string;

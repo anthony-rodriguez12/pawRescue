@@ -1,6 +1,8 @@
 import { Component, OnInit } from '@angular/core';
 import { Router } from '@angular/router';
+import { Session } from 'src/app/shared/interfaces/session.interface';
 import { LoginService } from 'src/app/shared/services/login.service';
+import { SecureStorageService } from 'src/app/shared/services/secure-storage.service';
 
 @Component({
   selector: 'app-panel',
@@ -19,10 +21,11 @@ export class PanelComponent implements OnInit {
   constructor(
     private router: Router,
     private loginService: LoginService,
+    private storageService: SecureStorageService,
   ) {}
 
   ngOnInit(): void {
-    this.user.name = sessionStorage.getItem('username')!;
+    this.user.name = this.storageService.getItem<Session>('session')?.username!;
   }
 
   openNav() {

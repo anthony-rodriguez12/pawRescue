@@ -1,8 +1,8 @@
 import { Component, OnInit } from '@angular/core';
 import { MascotasService } from '../../services/mascotas.service';
-import { AnimalI } from '../../interface/client.interfaces';
 import { ModalComponent } from 'src/app/shared/modal/modal.component';
 import { MatDialog } from '@angular/material/dialog';
+import { AnimalI } from 'src/app/shared/interfaces';
 
 @Component({
   selector: 'app-sponsoring',
@@ -14,7 +14,7 @@ export class SponsoringComponent implements OnInit {
 
   constructor(
     private mascotasService: MascotasService,
-    public dialog: MatDialog
+    public dialog: MatDialog,
   ) {}
 
   pets: AnimalI[] = [];

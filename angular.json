@@ -17,6 +17,9 @@
         "build": {
           "builder": "@ngx-env/builder:browser",
           "options": {
+            "allowedCommonJsDependencies": [
+              "moment"
+            ],
             "outputPath": "dist/paws-rescue",
             "index": "src/index.html",
             "main": "src/main.ts",
