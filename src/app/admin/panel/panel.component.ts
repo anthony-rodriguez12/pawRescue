@@ -22,30 +22,7 @@ export class PanelComponent implements OnInit {
   ) {}
 
   ngOnInit(): void {
-    const theme = localStorage.getItem('theme');
-    if (theme === 'dark') {
-      this.setDark();
-    } else {
-      this.themeDark = false;
-      this.setLight();
-    }
     this.user.name = sessionStorage.getItem('username')!;
-    console.log('first', sessionStorage.getItem('username'));
-  }
-
-  setDark() {
-    this.themeDark = !this.themeDark;
-    if (this.themeDark) {
-      document.documentElement.classList.add('dark');
-      localStorage.setItem('theme', 'dark');
-    } else {
-      this.setLight();
-    }
-  }
-
-  setLight() {
-    document.documentElement.classList.remove('dark');
-    localStorage.setItem('theme', 'light');
   }
 
   openNav() {
