@@ -110,7 +110,6 @@ export class AdopcionFormComponent implements OnInit, OnChanges {
       this.myForm.get('idAnimal')?.setValue(data.idAnimal);
       this.myForm.get('nameAnimal')?.setValue(FindAnimal.nombre);
     }
-
   }
 
   setdata(data: any) {
@@ -136,7 +135,6 @@ export class AdopcionFormComponent implements OnInit, OnChanges {
         this.myForm.get('sateseguimiento.estadoSeguimiento')?.setValue(data.sateseguimiento?.estadoSeguimiento ?? false);
         this.myForm.get('sateseguimiento.detallesSeguimiento')?.setValue(data.sateseguimiento?.detallesSeguimiento ?? "");
       }
-
     } else {
       this.edit = false;
     }
