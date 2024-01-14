@@ -67,7 +67,9 @@ export class LoginService {
     const interval = this.momentService.getDiffWithCurrentDate(
       isLoggedIn.expedition,
     );
-    if (interval >= 3) {
+    if (interval <= -3) {
+      this.storageService.removeItem('session');
+      this._snackBar.danger('Sesión caducada', 'Se cerro tu Sesión');
       return false;
     }
     return true;
