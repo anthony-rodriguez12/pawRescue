@@ -21,7 +21,7 @@ export class AdopcionListComponent implements AfterViewInit {
   displayedColumns: string[] = ['acction', 'nombre', 'nombreAnimal', 'correo', 'direccion', 'idEstado'];
   positionOptions: TooltipPosition[] = ['after', 'before', 'above', 'below', 'left', 'right'];
   position = new FormControl(this.positionOptions[0]);
-  typeanimal: any[] = []
+  animaladoptado: any[] = []
   StateSalud: any[] = []
 
   dataSource: MatTableDataSource<any> = new MatTableDataSource<any>([]);
@@ -44,8 +44,7 @@ export class AdopcionListComponent implements AfterViewInit {
   ngOnInit(): void {
     this.getListAdopciones();
     this.getEstados();
-    this.getTypeAnimal();
-    this.getEstadosSalud();
+    this.getAnimals();
   }
   //Filtros
   ngAfterViewInit() {
@@ -84,6 +83,18 @@ export class AdopcionListComponent implements AfterViewInit {
     return JSON.stringify(validFilters);
   }
 
+  valdiateIcon(value: number): any {
+    const FindEstudio = this.stateanimal.find(stateanimal => stateanimal.idEstado === value)
+    let validEstado = FindEstudio?.estadoDesc;
+    if (validEstado === "Aprobado") {
+      return { value: false, icon: "edit_square", style: "color: #767474" };
+
+    } else if (validEstado === "Rechazado") {
+      return { value: true, icon: "visibility", style: "color: #b2b1b1" }
+    }
+
+    return { value: false, icon: "visibility", style: "color: #767474" };
+  }
   //Servicios
 
   getListAdopciones(): void {
@@ -93,42 +104,31 @@ export class AdopcionListComponent implements AfterViewInit {
     });
   }
 
-
   getEstadoDesc(idEstado: number): string {
     const estado = this.stateanimal.find((estado) => estado.idEstado === idEstado);
-    return estado ? estado.estadoDesc : 'Desconocido';
+    return estado?.estadoDesc != "Creado" ? estado?.estadoDesc : 'Pendiente';
   }
 
-  getType(idtypeanimal: number): string {
-    const estado = this.typeanimal.find((estado) => estado.idTipo === idtypeanimal);
-    return estado ? estado.descripcion : 'Desconocido';
-  }
-  getEstadoSalud(idEstadoSalud: number): string {
-    const estado = this.StateSalud.find((estado) => estado.idEstadoSalud === idEstadoSalud);
-    return estado ? estado.descripcion : 'Desconocido';
+  getAnimal(idtypeanimal: number): string {
+    const estado = this.animaladoptado.find((mascota) => mascota.idAnimal === idtypeanimal);
+    return estado ? estado.nombre : 'Desconocido';
   }
 
+
+  //Listado de Mascota
+  getAnimals(): void {
+    this.animalService.getAnimals().subscribe((res) => {
+      this.animaladoptado = res.data;
+    });
+  }
   getEstados(): void {
     this.animalService.GetEstados().subscribe((res) => {
       this.stateanimal = res.data;
     });
   }
-  getTypeAnimal(): void {
-    this.animalService.GetTypeAnimal().subscribe((res) => {
-      this.typeanimal = res.data;
-    });
-  }
-  //Estado de Salud
-  getEstadosSalud(): void {
-    this.animalService.GetEstadosSalud().subscribe((res) => {
-      this.StateSalud = res.data;
-    });
-  }
 
   // Editar Animal
   editAdopcion(element: any): void {
-    console.log("element",element);   
-
     const dialogRef: MatDialogRef<AdopcionEditComponent> = this.dialog.open(AdopcionEditComponent, {
       data: element.idAdopcion,
       width: '800px',
@@ -158,10 +158,7 @@ export class AdopcionListComponent implements AfterViewInit {
     });
   }
 
-
 }
-
-
 
 export class CustomMatPaginatorIntl extends MatPaginatorIntl {
   override itemsPerPageLabel = 'Elementos por página';

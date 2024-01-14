@@ -20,9 +20,9 @@ export class AdopcionesService {
   AddAdopcion(adopcionData: any): Observable<any> {
     return this.http.post<any>(`${this.apiUrl}/adopcion`, adopcionData);
   }
- 
-  updateAdopción(idAdopcion: number, adopcionData: FormData): Observable<any> {
-    return this.http.put<any>(`${this.apiUrl}/adopcion/${adopcionData}`, idAdopcion);
+
+  updateAdopción(adopcionData: any, idAdopcion: number): Observable<any> {
+    return this.http.put<any>(`${this.apiUrl}/adopcion/${idAdopcion}`,adopcionData );
   }
   getAdopcionById(idAdopcion: number): Observable<any> {
     return this.http.get<any>(`${this.apiUrl}/adopcion/${idAdopcion}`);

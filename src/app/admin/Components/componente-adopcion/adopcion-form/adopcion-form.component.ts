@@ -1,6 +1,7 @@
 // pet-form.component.ts
 import { Component, Input, OnChanges, SimpleChanges, OnInit, EventEmitter, Output } from '@angular/core';
 import { FormBuilder, FormGroup, Validators } from '@angular/forms';
+import * as moment from 'moment';
 import { AdopcionesService } from 'src/app/client/services/adopciones.service';
 import { PetService } from 'src/app/client/services/pet.service';
 export interface State {
@@ -26,13 +27,18 @@ export class AdopcionFormComponent implements OnInit, OnChanges {
 
   myForm!: FormGroup;
   estudios: any[] = []
+  animaldata: any[] = []
+  showseguimiento: boolean = false;
+  stateseguimiento = [
+    { idEstado: true, estadoDesc: 'Realizado' },
+    { idEstado: false, estadoDesc: 'Pendiente' }
+  ];
+  edit: boolean = false
 
 
   showimage!: boolean;
-  dataPet!: any;
   base64String!: string
   stateanimal: State[] = []
-  showImg!: string;
   state: boolean = false
   typeanimal: any[] = []
   StateSalud: any[] = []
@@ -44,8 +50,9 @@ export class AdopcionFormComponent implements OnInit, OnChanges {
     private ServiceAdopciones: AdopcionesService) { }
 
   ngOnInit(): void {
-    this.createform();
+    this.getEstados()
     this.getEstudios();
+    this.createform();
 
     this.getTypeAnimal();
     this.getEstadosSalud();
@@ -56,10 +63,9 @@ export class AdopcionFormComponent implements OnInit, OnChanges {
   }
 
   ngOnChanges(changes: SimpleChanges): void {
-    if (changes['formData']) {
-      this.state = true
-      this.dataPet = changes['formData'].currentValue;
-      this.setdata(this.dataPet);
+    if (changes['formData'].currentValue) {
+      let dataadopcion = changes['formData'].currentValue;
+      this.getAnimals(dataadopcion)
     }
   }
 
@@ -74,42 +80,73 @@ export class AdopcionFormComponent implements OnInit, OnChanges {
       idEstudios: ['', Validators.required],
       motivo: ['', Validators.required],
       idAnimal: ['', Validators.required],
+      nameAnimal: ['', Validators.required],
       idEstado: ['', Validators.required],
-      fechaVisita: ['', Validators.required],
-      estadoSeguimiento: ['', Validators.required],
-      detallesSeguimiento: ['', Validators.required],
+      sateseguimiento: this.fb.group({
+        fechaVisita: ['', Validators.required],
+        estadoSeguimiento: ['', Validators.required],
+        detallesSeguimiento: ['', Validators.required]
+      })
     });
   }
+  valdiateIcon(value: number): boolean {
+    const FindEstudio = this.stateanimal.find(state => state.idEstado === value)
+    let validEstado = FindEstudio?.estadoDesc;
+    if (validEstado === "Aprobado") {
+      return true;
+    } else {
+      return false;
+    }
 
-
-
+  }
 
   setdata(data: any) {
     if (data) {
-      console.log("data", data);
-      const estadoEncontrado = this.StateSalud.find(estado => estado.status === data.estadoSalud);
-      this.myForm.get('Nombre')?.setValue(data.nombre);
-      this.myForm.get('SaludDesc')?.setValue(data.saludDesc);
-      this.myForm.get('Sexo')?.setValue(data.sexo);
-      this.showimage = data.foto ? true : false
-      this.showImg = data.foto;
-      this.myForm.get('Foto')?.setValue(data.foto);
-      this.myForm.get('idTipo')?.setValue(data.idTipo);
-      this.myForm.get('IdEstado')?.setValue(data.idEstado);
-      this.myForm.get('IdEstadoSalud')?.setValue(data.idEstadoSalud);
+      this.showseguimiento = this.valdiateIcon(data.estadoAdopcion);
+      this.edit = true;     
+      const FindAnimal = this.animaldata.find(animal => animal.idAnimal === 5);
+      const fechaSolo = data.fechaNac.slice(0, 10);
+      const fechaDosSemanasDespues = moment().add(2, 'weeks');
+      this.myForm.get('nombre')?.setValue(data.nombre);
+      this.myForm.get('apellido')?.setValue(data.apellido);
+      this.myForm.get('direccion')?.setValue(data.direccion);
+      this.myForm.get('fechaNac')?.setValue(fechaSolo);
+      this.myForm.get('telefono')?.setValue(data.telefono);
+      this.myForm.get('correo')?.setValue(data.correo);
+      this.myForm.get('idEstudios')?.setValue(data.idEstudios ?? 1);
+      this.myForm.get('motivo')?.setValue(data.motivo);
+      this.myForm.get('idAnimal')?.setValue(data.idAnimal);
+      this.myForm.get('nameAnimal')?.setValue(FindAnimal.nombre);
+      this.myForm.get('idEstado')?.setValue(data.idEstado);
+      if (this.showseguimiento) {
+        this.myForm.get('sateseguimiento.fechaVisita')?.setValue(data.sateseguimiento?.fechaVisita ?? fechaDosSemanasDespues.format('YYYY-MM-DD'));
+        this.myForm.get('sateseguimiento.estadoSeguimiento')?.setValue(data.sateseguimiento?.estadoSeguimiento ?? false);
+        this.myForm.get('sateseguimiento.detallesSeguimiento')?.setValue(data.sateseguimiento?.detallesSeguimiento ?? "");
+      }
+      
+    } else {
+      this.edit = false;
     }
-  }
   
+  }
 
-  getEstados(): void {
-    this.animalService.GetEstados().subscribe((res) => {
-      this.stateanimal = res.data;
+  getAnimals(dataadopcion?: any): void {
+    this.animalService.getAnimals().subscribe((res) => {
+      this.animaldata = res.data;
+      this.setdata(dataadopcion);
+
     });
   }
 
   getEstudios(): void {
     this.ServiceAdopciones.GetEstudios().subscribe((res) => {
       this.estudios = res.data;
+    });
+  }
+
+  getEstados(): void {
+    this.animalService.GetEstados().subscribe((res) => {
+      this.stateanimal = res.data;
     });
   }
 

@@ -3,51 +3,51 @@
         <b style="margin-top: 20mm;">{{ state ? 'Editar' : 'Registrar' }} de Adopción</b>
     </h1>
     <div class="d-flex flex-wrap justify-content-between">
-        <form [formGroup]="myForm" >
+        <form [formGroup]="myForm">
             <div class="row">
-                <form [formGroup]="myForm" >
+                <form [formGroup]="myForm">
                     <div class="row">
                         <!--Nombre-->
                         <div class="form-group col-12 col-md-6 ">
                         </div>
                         <div class="form-group col-12 col-md-6">
                             <label class="my-1" for="Estudios"><b>Estudios</b></label>
-                            <select class="form-control select cursor-pointer" id="Estudios" formControlName="idEstudios">
-                                <option *ngFor="let opcion of estudios" [value]="opcion.idEstudios">{{
+                            <select class="form-control select cursor-pointer" id="Estudios" [ngStyle]="{'background-color': edit ? 'lightgray' : ''}"
+                             formControlName="idEstudios">
+                                <option *ngFor="let opcion of estudios" [value]="opcion.idEstudios" [disabled]="true">{{
                                     opcion.descripcion }}
                                 </option>
                             </select>
                         </div>
-                    
 
                         <div class="form-group col-12 col-md-6 ">
                             <label class="my-1" for="nombre"><b>Nombre:</b></label>
-                            <input type="text" class="form-control" id="nombre" formControlName="nombre"
+                            <input type="text" class="form-control" [ngStyle]="{'background-color': edit ? 'lightgray' : ''}" id="nombre" formControlName="nombre" [readonly]="edit"
                                 placeholder="Ingresa el nombre">
                         </div>
                         <div class="form-group col-12 col-md-6">
-                            <label class="my-1" for="nombre"><b>Dirección:</b></label>
-                            <input type="text" class="form-control" id="nombre" formControlName="direccion"
+                            <label class="my-1" for="direccion"><b>Dirección:</b></label>
+                            <input type="text" class="form-control" [ngStyle]="{'background-color': edit ? 'lightgray' : ''}"  id="direccion" formControlName="direccion" [readonly]="edit"
                                 placeholder="Ingresa el nombre">
                         </div>
                         <div class="form-group col-12 col-md-6 my-2">
-                            <label class="my-1" for="nombre"><b>Apellidos:</b></label>
-                            <input type="text" class="form-control" id="nombre" formControlName="apellido"
+                            <label class="my-1" for="apellido"><b>Apellidos:</b></label>
+                            <input type="text" class="form-control" [ngStyle]="{'background-color': edit ? 'lightgray' : ''}" id="apellido" formControlName="apellido" [readonly]="edit"
                                 placeholder="Ingresa el nombre">
                         </div>
                         <div class="form-group col-12 col-md-6 my-2">
-                            <label class="my-1" for="nombre"><b>Teléfono:</b></label>
-                            <input type="text" class="form-control" id="nombre" formControlName="telefono"
+                            <label class="my-1" for="telefono"><b>Teléfono:</b></label>
+                            <input type="text" class="form-control" [ngStyle]="{'background-color': edit ? 'lightgray' : ''}" id="telefono" formControlName="telefono" [readonly]="edit"
                                 placeholder="Ingresa el nombre">
                         </div>
                         <div class="form-group col-12 col-md-6 my-2">
-                            <label class="my-1" for="nombre"><b>Fecha de Nacimiento:</b></label>
-                            <input type="date" class="form-control" id="nombre" formControlName="fechaNac"
+                            <label class="my-1" for="fechaNac"><b>Fecha de Nacimiento:</b></label>
+                            <input type="date" class="form-control cursor-pointer" [ngStyle]="{'background-color': edit ? 'lightgray' : ''}" id="fechaNac" formControlName="fechaNac" [readonly]="edit"
                                 placeholder="Ingresa el nombre">
                         </div>
                         <div class="form-group col-12 col-md-6 my-2">
-                            <label class="my-1" for="nombre"><b>Correo:</b></label>
-                            <input type="text" class="form-control" id="nombre" formControlName="correo"
+                            <label class="my-1" for="correo"><b>Correo:</b></label>
+                            <input type="text" class="form-control" [ngStyle]="{'background-color': edit ? 'lightgray' : ''}" id="correo" formControlName="correo" [readonly]="edit"
                                 placeholder="Ingresa el nombre">
                         </div>
 
@@ -55,22 +55,53 @@
                             <b>Datos del Animal</b>
                         </h2>
                         <div class="form-group col-12 col-md-6">
-                            <label class="my-1" for="nombre"><b>Codigo:</b></label>
-                            <input type="text" class="form-control" id="nombre" formControlName="idAnimal"
+                            <label class="my-1" for="idAnimal"><b>Codigo:</b></label>
+                            <input type="text" class="form-control" [ngStyle]="{'background-color': edit ? 'lightgray' : ''}" id="idAnimal" formControlName="idAnimal" [readonly]="edit"
                                 placeholder="Ingresa el nombre">
                         </div>
                         <div class="form-group col-12 col-md-6">
-                            <label class="my-1" for="nombre"><b>Nombres:</b></label>
-                            <input type="text" class="form-control" id="nombre" 
+                            <label class="my-1" for="nameAnimal"><b>Nombres:</b></label>
+                            <input type="text" class="form-control" [ngStyle]="{'background-color': edit ? 'lightgray' : ''}" id="nameAnimal" formControlName="nameAnimal" [readonly]="edit"
                                 placeholder="Ingresa el nombre">
                         </div>
 
                         <!-- Motivo -->
                         <div class="form-group mb-3 ">
-                            <label class="my-1" for="saludDesc"><b>Motivo</b></label>
-                            <textarea type="text" class="form-control" id="saludDesc" formControlName="motivo"
+                            <label class="my-1" for="motivo"><b>Motivo</b></label>
+                            <textarea type="text" class="form-control" [ngStyle]="{'background-color': edit ? 'lightgray' : ''}" id="motivo" formControlName="motivo" [readonly]="edit"
                                 placeholder="Ingresa la descripción de salud"></textarea>
                         </div>
+
+                        <ng-container *ngIf="showseguimiento" formGroupName="sateseguimiento">
+
+                            <h2 class="mt-4" style="color: black;">
+                                <b>Datos de Seguimiento</b>
+                            </h2>
+                            <div class="form-group col-12 col-md-6 ">
+                                <label class="my-1" for="fechaNac"><b>Fecha de Visita:</b></label>
+                                <input type="date" class="form-control cursor-pointer" id="fechaNac" formControlName="fechaVisita"
+                                    placeholder="Ingresa el nombre">
+                            </div>
+
+                            <div class="form-group col-12 col-md-6">
+                                <label class="my-1"><b>Estado</b></label>
+                                <select class="form-control select cursor-pointer" formControlName="estadoSeguimiento">
+                                    <option *ngFor="let opcion of stateseguimiento" [value]="opcion.idEstado">{{
+                                        opcion.estadoDesc }}
+                                    </option>
+                                </select>
+                            </div>
+
+
+                            <div class="form-group mb-3 ">
+                                <label class="my-1" for="motivo"><b>Motivo</b></label>
+                                <textarea type="text" class="form-control" id="motivo"
+                                    formControlName="detallesSeguimiento"
+                                    placeholder="Ingresa la descripción de salud"></textarea>
+                            </div>
+
+                        </ng-container>
+
                     </div>
                 </form>
             </div>

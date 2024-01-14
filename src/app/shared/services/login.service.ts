@@ -59,7 +59,6 @@ export class LoginService {
 
   isLoggedIn(): boolean {
     const isLoggedIn = this.storageService.getItem<Session>('session');
-    console.log('isLoggedIn?', isLoggedIn);
 
     if (!isLoggedIn) return false;
     if (!isLoggedIn.username && !isLoggedIn.token && !isLoggedIn.expedition)

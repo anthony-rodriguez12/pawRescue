@@ -11,32 +11,39 @@ import { PetService } from 'src/app/client/services/pet.service';
 })
 export class AdopcionEditComponent implements OnInit {
   adopcionData!: any;
-
   editadopcion!: any;
+  state: any[] = []
+
   idAnimal!: number
 
   constructor(private route: ActivatedRoute,
     private ServiceAdopcion: AdopcionesService,
+    private animalService: PetService,
     private dialogRef: MatDialogRef<AdopcionEditComponent>,
     @Inject(MAT_DIALOG_DATA) public data: any,
   ) { }
 
   ngOnInit(): void {
-    console.log("data", this.data);
-    
-    this.getAnimal(this.data);
+    this.getEstados();
+    this.getAdopcion(this.data);
 
   }
 
-  getAnimal(idAnimal: number) {
-    this.ServiceAdopcion.getAdopcionById(idAnimal).subscribe((res) => {      
+  getAdopcion(idAnimal: number) {
+    this.ServiceAdopcion.getAdopcionById(idAnimal).subscribe((res) => {
       this.adopcionData = res.data;
     });
   }
+  getEstados(): void {
+    this.animalService.GetEstados().subscribe((res) => {
+      this.state = res.data;
+    });
+  }
 
-  saveAnimal() {
-    const formData = new FormData();  
-    console.log("adsa",this.editadopcion);
+  save(state: boolean) {
+    const value = state ? "Aprobado" : "Rechazado"
+    const FindEstudio = this.state.find(state => state.estadoDesc === value)
+    console.log(this.editadopcion.sateseguimiento);
 
     const data = {
       nombre: this.editadopcion.nombre,
@@ -48,14 +55,13 @@ export class AdopcionEditComponent implements OnInit {
       idEstudios: this.editadopcion.idEstudios,
       motivo: this.editadopcion.motivo,
       idAnimal: this.editadopcion.idAnimal,
-      idEstado: this.editadopcion.idEstado,
-      fechaVisita: this.editadopcion.fechaVisita, 
-      estadoSeguimiento: this.editadopcion.estadoSeguimiento,
-      detallesSeguimiento: this.editadopcion.detallesSeguimiento,
-    }
+      idEstado: FindEstudio.idEstado,
+      fechaVisita: this.editadopcion.sateseguimiento.fechaVisita,
+      estadoSeguimiento: this.editadopcion.sateseguimiento.estadoSeguimiento,
+      detallesSeguimiento: this.editadopcion.sateseguimiento.detallesSeguimiento,
+    }    
 
-    
-    this.ServiceAdopcion.updateAdopción(this.data, formData).subscribe((res) => {
+    this.ServiceAdopcion.updateAdopción(data, this.data).subscribe((res) => {
       if (res) {
         this.CloseModal(res.statusCode);
       } else {
@@ -69,7 +75,7 @@ export class AdopcionEditComponent implements OnInit {
   }
 
   getData(event: any) {
-    console.log("event",event);    
+    console.log("event", event);
     this.editadopcion = event
   }
 }
