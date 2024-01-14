@@ -1,7 +1,7 @@
-import { Component } from '@angular/core';
+import { Component, Inject } from '@angular/core';
 import { PetAddComponent } from '../../../component-animal/pages/pet-add/pet-add.component';
 import { PetService } from 'src/app/client/services/pet.service';
-import { MatDialogRef } from '@angular/material/dialog';
+import { MAT_DIALOG_DATA, MatDialogRef } from '@angular/material/dialog';
 import { AdopcionesService } from 'src/app/client/services/adopciones.service';
 
 @Component({
@@ -14,6 +14,7 @@ export class AdopcionAddComponent {
   constructor(private animalService: PetService,
     private ServiceAdopcion: AdopcionesService,
     private dialogRef: MatDialogRef<PetAddComponent>,
+    @Inject(MAT_DIALOG_DATA) public data: any,
   ) {
 
   }
@@ -32,7 +33,6 @@ export class AdopcionAddComponent {
     }
 
     this.ServiceAdopcion.AddAdopcion(data).subscribe((res) => {
-      console.log(res);
       if (res) {
         this.CloseModal(res.statusCode);
       } else {
@@ -42,7 +42,6 @@ export class AdopcionAddComponent {
   }
 
   getData(event: any) {
-    console.log("event", event);
     this.addDataAdopcion = event
   }
 

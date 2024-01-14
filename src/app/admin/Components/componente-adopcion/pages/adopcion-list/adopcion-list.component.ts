@@ -137,9 +137,10 @@ export class AdopcionListComponent implements AfterViewInit {
 
     dialogRef.afterClosed().subscribe(result => {
       if (result === '200') {
-        this._snackBar.sucess('Aviso', 'Registro editado correctamente.');
+        this._snackBar.sucess('Aviso', 'Proceso realizado correctamente.');
+        this.getListAdopciones()
       } else if (result === '500') {
-        this._snackBar.danger('Error', 'Oops! Algo salió mal al intentar editar el registro. Por favor, inténtalo de nuevo.');
+        this._snackBar.danger('Error', 'Oops! Algo salió mal al intentar darle seguimiento. Por favor, inténtalo de nuevo.');
       }
     });
   }
@@ -150,6 +151,8 @@ export class AdopcionListComponent implements AfterViewInit {
       maxHeight: '700px',
     });
     dialogRef.afterClosed().subscribe(result => {
+      console.log("result",result);
+      
       if (result === '201') {
         this._snackBar.sucess('Aviso', 'Registro guardado correctamente.');
       } else {

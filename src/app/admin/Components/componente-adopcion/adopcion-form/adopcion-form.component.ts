@@ -22,6 +22,8 @@ export interface State {
 })
 export class AdopcionFormComponent implements OnInit, OnChanges {
   @Input() formData: any;
+  @Input() IdData: any;
+
   @Output() editedDataEmitter = new EventEmitter<any>(); // To emit edited data
 
 
@@ -63,9 +65,12 @@ export class AdopcionFormComponent implements OnInit, OnChanges {
   }
 
   ngOnChanges(changes: SimpleChanges): void {
-    if (changes['formData'].currentValue) {
+    if (changes['formData']) {
       let dataadopcion = changes['formData'].currentValue;
       this.getAnimals(dataadopcion)
+    } else if (changes['IdData']) {
+      this.IdData = changes['IdData'].currentValue;
+      this.getAnimals()
     }
   }
 
@@ -99,11 +104,23 @@ export class AdopcionFormComponent implements OnInit, OnChanges {
     }
 
   }
+  setRegiste(data: any) {
+    if (data) {
+      console.log(" this.animaldata", this.animaldata);
+
+      const FindAnimal = this.animaldata.find(animal => animal.idAnimal === data.idAnimal);
+      console.log("FindAnimal", FindAnimal);
+
+      this.myForm.get('idAnimal')?.setValue(data.idAnimal);
+      this.myForm.get('nameAnimal')?.setValue(FindAnimal.nombre);
+    }
+
+  }
 
   setdata(data: any) {
     if (data) {
       this.showseguimiento = this.valdiateIcon(data.estadoAdopcion);
-      this.edit = true;     
+      this.edit = true;
       const FindAnimal = this.animaldata.find(animal => animal.idAnimal === 5);
       const fechaSolo = data.fechaNac.slice(0, 10);
       const fechaDosSemanasDespues = moment().add(2, 'weeks');
@@ -123,17 +140,23 @@ export class AdopcionFormComponent implements OnInit, OnChanges {
         this.myForm.get('sateseguimiento.estadoSeguimiento')?.setValue(data.sateseguimiento?.estadoSeguimiento ?? false);
         this.myForm.get('sateseguimiento.detallesSeguimiento')?.setValue(data.sateseguimiento?.detallesSeguimiento ?? "");
       }
-      
+
     } else {
       this.edit = false;
     }
-  
+
   }
 
   getAnimals(dataadopcion?: any): void {
     this.animalService.getAnimals().subscribe((res) => {
       this.animaldata = res.data;
-      this.setdata(dataadopcion);
+
+      if (this.IdData) {
+        this.setRegiste(this.IdData)
+
+      } else if (dataadopcion) {
+        this.setdata(dataadopcion);
+      }
 
     });
   }

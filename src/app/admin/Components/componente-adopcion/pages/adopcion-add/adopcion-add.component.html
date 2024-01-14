@@ -1,6 +1,6 @@
 <div class="container">    
     <div class="cardTo border-solid border-2 rounded my-3">
-        <app-adopcion-form (editedDataEmitter)="getData($event)"></app-adopcion-form>
+        <app-adopcion-form  [IdData]="this.data" (editedDataEmitter)="getData($event)"></app-adopcion-form>
     </div>
     <div class="sticky-buttons-container">
         <div style="text-align: right;" class="my-2">
