@@ -31,7 +31,6 @@ export class AdoptionComponent implements OnInit {
             errorImg: false,
           };
         });
-        console.log('Logs', this.pets);
       },
     });
   }

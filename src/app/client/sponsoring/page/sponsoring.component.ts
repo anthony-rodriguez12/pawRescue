@@ -36,7 +36,6 @@ export class SponsoringComponent implements OnInit {
             errorImg: false,
           };
         });
-        console.log('Logs:', this.pets);
       },
     });
   }

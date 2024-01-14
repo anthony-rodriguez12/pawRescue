@@ -59,7 +59,6 @@ export class LoginService {
 
   isLoggedIn(): boolean {
     const isLoggedIn = this.storageService.getItem<Session>('session');
-    console.log('isLoggedIn?', isLoggedIn);
 
     if (!isLoggedIn) return false;
     if (!isLoggedIn.username && !isLoggedIn.token && !isLoggedIn.expedition)
@@ -68,7 +67,9 @@ export class LoginService {
     const interval = this.momentService.getDiffWithCurrentDate(
       isLoggedIn.expedition,
     );
-    if (interval >= 3) {
+    if (interval <= -3) {
+      this.storageService.removeItem('session');
+      this._snackBar.danger('Sesión caducada', 'Se cerro tu Sesión');
       return false;
     }
     return true;

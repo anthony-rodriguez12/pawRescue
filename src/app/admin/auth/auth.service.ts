@@ -28,7 +28,6 @@ export class LoggingInterceptor implements HttpInterceptor {
           Authorization: `Bearer ${authToken!.token}`,
         },
       });
-      console.log(authReq);
       return next.handle(authReq);
     }
 
