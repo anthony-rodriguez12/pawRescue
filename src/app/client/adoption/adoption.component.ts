@@ -18,6 +18,7 @@ export class AdoptionComponent implements OnInit {
   pets: AnimalI[] = [];
   healthStatus = 0;
   stateanimal: State[] = []
+  petsActivo: AnimalI[] = [];
   constructor(private petService: PetService,
     public dialog: MatDialog,
     private _snackBar: SnackbarService) {
@@ -25,7 +26,6 @@ export class AdoptionComponent implements OnInit {
   }
 
   ngOnInit(): void {
-    this.getEstados();
     this.getMascotas();
   }
 
@@ -39,6 +39,7 @@ export class AdoptionComponent implements OnInit {
             errorImg: false,
           };
         });
+        this.getEstados();
       },
     });
   }
@@ -75,19 +76,15 @@ export class AdoptionComponent implements OnInit {
   getEstados(): void {
     this.petService.GetEstados().subscribe((res) => {
       this.stateanimal = res.data;
+      this.valdiate();
     });
   }
 
 
-  valdiate(value: any): boolean {
-    const FindEstudio = this.stateanimal.find(state => state.idEstado === value.idEstado)
-    let data = FindEstudio?.estadoDesc;
-
-    if (data === "Activo") {
-      console.log(value);      
-      return true;
-    }
-    return false
-
+  valdiate(): any {
+    const estado = "Activo"
+    const estate = [...this.stateanimal].find(state => state.estadoDesc === estado)
+    let value2 = estate?.idEstado;
+    this.petsActivo = this.pets?.filter(pet => pet.idEstado === value2)
   }
 }

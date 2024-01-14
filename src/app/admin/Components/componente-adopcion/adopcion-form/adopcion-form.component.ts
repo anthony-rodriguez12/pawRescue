@@ -106,11 +106,7 @@ export class AdopcionFormComponent implements OnInit, OnChanges {
   }
   setRegiste(data: any) {
     if (data) {
-      console.log(" this.animaldata", this.animaldata);
-
       const FindAnimal = this.animaldata.find(animal => animal.idAnimal === data.idAnimal);
-      console.log("FindAnimal", FindAnimal);
-
       this.myForm.get('idAnimal')?.setValue(data.idAnimal);
       this.myForm.get('nameAnimal')?.setValue(FindAnimal.nombre);
     }
@@ -122,12 +118,12 @@ export class AdopcionFormComponent implements OnInit, OnChanges {
       this.showseguimiento = this.valdiateIcon(data.estadoAdopcion);
       this.edit = true;
       const FindAnimal = this.animaldata.find(animal => animal.idAnimal === 5);
-      const fechaSolo = data.fechaNac.slice(0, 10);
+      const fechaSolo = data.fechaNac?.slice(0, 10);
       const fechaDosSemanasDespues = moment().add(2, 'weeks');
       this.myForm.get('nombre')?.setValue(data.nombre);
       this.myForm.get('apellido')?.setValue(data.apellido);
       this.myForm.get('direccion')?.setValue(data.direccion);
-      this.myForm.get('fechaNac')?.setValue(fechaSolo);
+      this.myForm.get('fechaNac')?.setValue(fechaSolo ?? "");
       this.myForm.get('telefono')?.setValue(data.telefono);
       this.myForm.get('correo')?.setValue(data.correo);
       this.myForm.get('idEstudios')?.setValue(data.idEstudios ?? 1);

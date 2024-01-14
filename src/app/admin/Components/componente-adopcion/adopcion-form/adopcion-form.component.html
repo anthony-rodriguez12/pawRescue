@@ -68,7 +68,7 @@
                         <!-- Motivo -->
                         <div class="form-group mb-3 ">
                             <label class="my-1" for="motivo"><b>Motivo</b></label>
-                            <textarea type="text" class="form-control"  id="motivo" formControlName="motivo" [readonly]="edit"
+                            <textarea type="text" class="form-control"  id="motivo" [ngStyle]="{'background-color': edit ? 'lightgray' : ''}" formControlName="motivo" [readonly]="edit"
                                 placeholder="Ingresa la descripción de salud"></textarea>
                         </div>
 

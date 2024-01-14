@@ -13,9 +13,9 @@
 </section>
 <section class="py-10 xs:px-14 sm:px-0 bg-gray-100">
   <div class="mx-auto grid max-w-6xl grid-cols-1 gap-6 p-6 sm:grid-cols-2 md:grid-cols-3 lg:grid-cols-4">
-    <article *ngFor="let pet of pets"
+    <article *ngFor="let pet of petsActivo"
       class="rounded-xl bg-white shadow-lg hover:shadow-xl hover:transform hover:scale-105 ease-in-out duration-300">
-      <ng-container *ngIf="valdiate(pet)">
+    
         <div class="relative flex items-end overflow-hidden rounded-xl h-40"
           [ngClass]="{ 'animate-pulse': !pet.loadingImg }">
           <img [src]="pet.foto" alt="Imagen-mascota-{{ pet.nombre }}" (error)="errorImg($event, pet)" class="absolute inset-0 transition-opacity duration-500 {{
@@ -37,7 +37,7 @@
 
           <element-button [Label]="button" [Disabled]="pet.idEstadoSalud === healthStatus" (click)="Adoptar(pet)" />
         </div>
-      </ng-container>
+   
 
 
     </article>

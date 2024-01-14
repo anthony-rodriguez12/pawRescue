@@ -26,7 +26,6 @@ export class PetAddComponent {
     formData.append('idEstadoSalud', this.addDataanimal.IdEstadoSalud);
 
     this.animalService.AddAnimal(formData).subscribe((res) => {
-      console.log(res);      
       if (res) {
         this.CloseModal(res.statusCode);
       } else {
@@ -36,7 +35,6 @@ export class PetAddComponent {
   }
 
   getData(event: any) {
-    console.log("event",event);    
     this.addDataanimal = event
   }
 

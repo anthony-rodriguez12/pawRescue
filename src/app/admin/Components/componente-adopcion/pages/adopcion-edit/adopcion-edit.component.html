@@ -3,10 +3,21 @@
         <app-adopcion-form [formData]="adopcionData" (editedDataEmitter)="getData($event)"></app-adopcion-form>
     </div>
     <div class="sticky-buttons-container">
-        <div style="text-align: right;" class="my-2">
+        <div *ngIf="aceptarseguimiento; else elseBlock" style="text-align: right;" class="my-2">
             <button style="border-radius: 10px;" class="btn btn-outline-primary" (click)="CloseModal()">Volver</button>
-            <button style="border-radius: 10px;" class="btn btn-light backgroundbtn mx-4" (click)="save(true)">Aprobar</button>
+            <button style="border-radius: 10px;" class="btn btn-light backgroundbtn mx-4"
+                (click)="save(true)">Aprobar</button>
             <button style="border-radius: 10px;" class="btn btn-outline-danger " (click)="save(false)">Rechazar</button>
         </div>
     </div>
+
+    <ng-template #elseBlock>
+        <div style="text-align: center;" class="my-2">
+            <button style="border-radius: 10px;" class="btn btn-light backgroundbtn mx-4"
+                (click)="save(true)">Aceptar</button>
+        </div>
+
+    </ng-template>
+
+
 </div>

@@ -26,15 +26,13 @@ export class PetEditComponent implements OnInit {
   }
 
   getAnimal(idAnimal: number) {
-    this.animalService.getAnimalById(idAnimal).subscribe((res) => {      
+    this.animalService.getAnimalById(idAnimal).subscribe((res) => {
       this.animalData = res.data;
     });
   }
 
   saveAnimal() {
-    const formData = new FormData();  
-    console.log("adsa",this.editaDataanimal);
-     
+    const formData = new FormData();
     formData.append('Nombre', this.editaDataanimal.Nombre);
     formData.append('SaludDesc', this.editaDataanimal.SaludDesc);
     formData.append('Sexo', this.editaDataanimal.Sexo);
@@ -42,7 +40,7 @@ export class PetEditComponent implements OnInit {
     formData.append('idTipo', this.editaDataanimal.idTipo);
     formData.append('IdEstado', this.editaDataanimal.IdEstado);
     formData.append('idEstadoSalud', this.editaDataanimal.IdEstadoSalud);
-    
+
     this.animalService.updateAnimal(this.data, formData).subscribe((res) => {
       if (res) {
         this.CloseModal(res.statusCode);
@@ -57,8 +55,6 @@ export class PetEditComponent implements OnInit {
   }
 
   getData(event: any) {
-    console.log("event",event);
-    
     this.editaDataanimal = event
   }
 }

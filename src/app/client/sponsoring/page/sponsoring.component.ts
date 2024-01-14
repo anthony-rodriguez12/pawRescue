@@ -57,7 +57,6 @@ export class SponsoringComponent implements OnInit {
   }
 
   openModal(petData: AnimalI): void {
-    console.log('Modal!', petData);
     const dialogRef = this.dialog.open(ModalComponent, {
       maxWidth: '40vw',
       data: {

@@ -74,8 +74,6 @@ export class PetFormComponent implements OnInit, OnChanges {
   setdata(data: any) {
     
     if (data) {
-      console.log("data",data);
-
       const estadoEncontrado = this.StateSalud.find(estado => estado.status === data.estadoSalud);
       this.myForm.get('Nombre')?.setValue(data.nombre);
       this.myForm.get('SaludDesc')?.setValue(data.saludDesc);

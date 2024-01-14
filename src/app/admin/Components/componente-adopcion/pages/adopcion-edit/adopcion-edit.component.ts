@@ -13,7 +13,7 @@ export class AdopcionEditComponent implements OnInit {
   adopcionData!: any;
   editadopcion!: any;
   state: any[] = []
-
+  aceptarseguimiento: boolean = true
   idAnimal!: number
 
   constructor(private route: ActivatedRoute,
@@ -32,19 +32,22 @@ export class AdopcionEditComponent implements OnInit {
   getAdopcion(idAnimal: number) {
     this.ServiceAdopcion.getAdopcionById(idAnimal).subscribe((res) => {
       this.adopcionData = res.data;
+
     });
   }
   getEstados(): void {
     this.animalService.GetEstados().subscribe((res) => {
       this.state = res.data;
+      const FindEstudio = this.state.find(state => state.idEstado === this.adopcionData?.estadoAdopcion)
+      if (FindEstudio?.estadoDesc === "Aprobado") {       
+        this.aceptarseguimiento = false;
+      }
     });
   }
 
   save(state: boolean) {
     const value = state ? "Aprobado" : "Rechazado"
     const FindEstudio = this.state.find(state => state.estadoDesc === value)
-    console.log(this.editadopcion.sateseguimiento);
-
     const data = {
       nombre: this.editadopcion.nombre,
       apellido: this.editadopcion.apellido,
@@ -59,7 +62,7 @@ export class AdopcionEditComponent implements OnInit {
       fechaVisita: this.editadopcion.sateseguimiento.fechaVisita,
       estadoSeguimiento: this.editadopcion.sateseguimiento.estadoSeguimiento,
       detallesSeguimiento: this.editadopcion.sateseguimiento.detallesSeguimiento,
-    }    
+    }
 
     this.ServiceAdopcion.updateAdopción(data, this.data).subscribe((res) => {
       if (res) {
@@ -75,7 +78,6 @@ export class AdopcionEditComponent implements OnInit {
   }
 
   getData(event: any) {
-    console.log("event", event);
     this.editadopcion = event
   }
 }
