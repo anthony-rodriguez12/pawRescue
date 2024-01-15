@@ -24,6 +24,11 @@ const routes: Routes = [
     loadChildren: () =>
       import('./Components/componente-adopcion/adopcion.module').then((m) => m.AdopcionModule),
   },
+  {
+    path: 'Apadribanuebti',
+    loadChildren: () =>
+      import('./Components/component-apadrinamiento/apadrinamiento.module').then((m) => m.ApadrinamientoModule),
+  },
 
   {
     path: 'panel',
@@ -47,4 +52,4 @@ const routes: Routes = [
   imports: [RouterModule.forChild(routes)],
   exports: [RouterModule],
 })
-export class AdminRoutingModule {}
+export class AdminRoutingModule { }

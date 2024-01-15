@@ -51,7 +51,6 @@ export class AdopcionEditComponent implements OnInit {
   
   showsection() {  
     const FindEstudio = this.state.find(state => state.idEstado === this.adopcionData.estadoAdopcion);
-    console.log(FindEstudio);
     if (FindEstudio?.estadoDesc === "Aprobado") {
       this.aceptarseguimiento = false;
     }
@@ -60,14 +59,8 @@ export class AdopcionEditComponent implements OnInit {
 
 
   save(state: boolean) {
-    const value = state ? "Aprobado" : "Rechazado"
-    console.log("value",value);
-    console.log("this.state",this.state);
-    
-    
-    const FindEstudio = this.state.find(state => state.estadoDesc === value)
-    console.log("FindEstudio",FindEstudio);
-    
+    const value = state ? "Aprobado" : "Rechazado"     
+    const FindEstudio = this.state.find(state => state.estadoDesc === value)    
     const data = {
       nombre: this.editadopcion.nombre,
       apellido: this.editadopcion.apellido,
