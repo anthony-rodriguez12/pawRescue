@@ -25,7 +25,7 @@ const routes: Routes = [
       import('./Components/componente-adopcion/adopcion.module').then((m) => m.AdopcionModule),
   },
   {
-    path: 'Apadribanuebti',
+    path: 'Apadrinamiento',
     loadChildren: () =>
       import('./Components/component-apadrinamiento/apadrinamiento.module').then((m) => m.ApadrinamientoModule),
   },
