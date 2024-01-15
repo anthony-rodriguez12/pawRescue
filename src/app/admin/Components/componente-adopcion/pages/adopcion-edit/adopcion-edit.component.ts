@@ -2,6 +2,7 @@
 import { Component, Inject, OnInit } from '@angular/core';
 import { MAT_DIALOG_DATA, MatDialog, MatDialogRef } from '@angular/material/dialog';
 import { ActivatedRoute, Router } from '@angular/router';
+import { finalize } from 'rxjs/operators';
 import { AdopcionesService } from 'src/app/client/services/adopciones.service';
 import { PetService } from 'src/app/client/services/pet.service';
 @Component({
@@ -24,30 +25,49 @@ export class AdopcionEditComponent implements OnInit {
   ) { }
 
   ngOnInit(): void {
-    this.getEstados();
     this.getAdopcion(this.data);
-
   }
 
-  getAdopcion(idAnimal: number) {
-    this.ServiceAdopcion.getAdopcionById(idAnimal).subscribe((res) => {
+
+  getAdopcion(idAnimal: number) {  
+    this.ServiceAdopcion.getAdopcionById(idAnimal).pipe(
+      finalize(() => {
+        this.getEstados(); 
+      })
+    ).subscribe((res) => {
       this.adopcionData = res.data;
-
     });
   }
-  getEstados(): void {
-    this.animalService.GetEstados().subscribe((res) => {
+  
+  getEstados(): void {    
+    this.animalService.GetEstados().pipe(
+      finalize(() => {     
+        this.showsection(); 
+      })
+    ).subscribe((res) => {
       this.state = res.data;
-      const FindEstudio = this.state.find(state => state.idEstado === this.adopcionData?.estadoAdopcion)
-      if (FindEstudio?.estadoDesc === "Aprobado") {       
-        this.aceptarseguimiento = false;
-      }
     });
   }
+  
+  showsection() {  
+    const FindEstudio = this.state.find(state => state.idEstado === this.adopcionData.estadoAdopcion);
+    console.log(FindEstudio);
+    if (FindEstudio?.estadoDesc === "Aprobado") {
+      this.aceptarseguimiento = false;
+    }
+  }
+  
+
 
   save(state: boolean) {
     const value = state ? "Aprobado" : "Rechazado"
+    console.log("value",value);
+    console.log("this.state",this.state);
+    
+    
     const FindEstudio = this.state.find(state => state.estadoDesc === value)
+    console.log("FindEstudio",FindEstudio);
+    
     const data = {
       nombre: this.editadopcion.nombre,
       apellido: this.editadopcion.apellido,
@@ -58,10 +78,11 @@ export class AdopcionEditComponent implements OnInit {
       idEstudios: this.editadopcion.idEstudios,
       motivo: this.editadopcion.motivo,
       idAnimal: this.editadopcion.idAnimal,
-      idEstado: FindEstudio.idEstado,
+      idEstado: FindEstudio?.idEstado,
       fechaVisita: this.editadopcion.sateseguimiento.fechaVisita,
-      estadoSeguimiento: this.editadopcion.sateseguimiento.estadoSeguimiento,
+      estadoSeguimiento: this.editadopcion.sateseguimiento.estadoSeguimiento ?? false,
       detallesSeguimiento: this.editadopcion.sateseguimiento.detallesSeguimiento,
+      idUsuario: 1
     }
 
     this.ServiceAdopcion.updateAdopción(data, this.data).subscribe((res) => {
