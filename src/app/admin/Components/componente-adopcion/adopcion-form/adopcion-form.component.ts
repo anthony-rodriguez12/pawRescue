@@ -113,7 +113,7 @@ export class AdopcionFormComponent implements OnInit, OnChanges {
     if (data) {
       this.showseguimiento = this.valdiateIcon(data.estadoAdopcion);     
       this.edit = true;
-      const FindAnimal = this.animaldata.find(animal => animal.idAnimal === 5);
+      const FindAnimal = this.animaldata.find(animal => animal.idAnimal === data.idAnimal);
       const fechaSolo = data.fechaNac?.slice(0, 10);
       const fechaVisita = data.fechaVisita?.slice(0, 10);
 
