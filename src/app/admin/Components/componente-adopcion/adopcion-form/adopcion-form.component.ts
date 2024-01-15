@@ -2,6 +2,7 @@
 import { Component, Input, OnChanges, SimpleChanges, OnInit, EventEmitter, Output } from '@angular/core';
 import { FormBuilder, FormGroup, Validators } from '@angular/forms';
 import * as moment from 'moment';
+import { finalize } from 'rxjs/operators';
 import { AdopcionesService } from 'src/app/client/services/adopciones.service';
 import { PetService } from 'src/app/client/services/pet.service';
 export interface State {
@@ -68,6 +69,7 @@ export class AdopcionFormComponent implements OnInit, OnChanges {
     if (changes['formData']) {
       let dataadopcion = changes['formData'].currentValue;
       this.getAnimals(dataadopcion)
+
     } else if (changes['IdData']) {
       this.IdData = changes['IdData'].currentValue;
       this.getAnimals()
@@ -95,15 +97,10 @@ export class AdopcionFormComponent implements OnInit, OnChanges {
     });
   }
   valdiateIcon(value: number): boolean {
-    const FindEstudio = this.stateanimal.find(state => state.idEstado === value)
-    let validEstado = FindEstudio?.estadoDesc;
-    if (validEstado === "Aprobado") {
-      return true;
-    } else {
-      return false;
-    }
-
+    const FindEstudio = this.stateanimal.find(state => state.idEstado === value);
+    return FindEstudio?.estadoDesc === "Aprobado" ? true : false;
   }
+  
   setRegiste(data: any) {
     if (data) {
       const FindAnimal = this.animaldata.find(animal => animal.idAnimal === data.idAnimal);
@@ -114,10 +111,12 @@ export class AdopcionFormComponent implements OnInit, OnChanges {
 
   setdata(data: any) {
     if (data) {
-      this.showseguimiento = this.valdiateIcon(data.estadoAdopcion);
+      this.showseguimiento = this.valdiateIcon(data.estadoAdopcion);     
       this.edit = true;
-      const FindAnimal = this.animaldata.find(animal => animal.idAnimal === 5);
+      const FindAnimal = this.animaldata.find(animal => animal.idAnimal === data.idAnimal);
       const fechaSolo = data.fechaNac?.slice(0, 10);
+      const fechaVisita = data.fechaVisita?.slice(0, 10);
+
       const fechaDosSemanasDespues = moment().add(2, 'weeks');
       this.myForm.get('nombre')?.setValue(data.nombre);
       this.myForm.get('apellido')?.setValue(data.apellido);
@@ -131,9 +130,9 @@ export class AdopcionFormComponent implements OnInit, OnChanges {
       this.myForm.get('nameAnimal')?.setValue(FindAnimal.nombre);
       this.myForm.get('idEstado')?.setValue(data.idEstado);
       if (this.showseguimiento) {
-        this.myForm.get('sateseguimiento.fechaVisita')?.setValue(data.sateseguimiento?.fechaVisita ?? fechaDosSemanasDespues.format('YYYY-MM-DD'));
-        this.myForm.get('sateseguimiento.estadoSeguimiento')?.setValue(data.sateseguimiento?.estadoSeguimiento ?? false);
-        this.myForm.get('sateseguimiento.detallesSeguimiento')?.setValue(data.sateseguimiento?.detallesSeguimiento ?? "");
+        this.myForm.get('sateseguimiento.fechaVisita')?.setValue(fechaVisita ?? fechaDosSemanasDespues.format('YYYY-MM-DD'));
+        this.myForm.get('sateseguimiento.estadoSeguimiento')?.setValue(data.estadoSeguimiento ?? false);
+        this.myForm.get('sateseguimiento.detallesSeguimiento')?.setValue(data.detallesSeguimiento ?? "");
       }
     } else {
       this.edit = false;
@@ -142,16 +141,16 @@ export class AdopcionFormComponent implements OnInit, OnChanges {
   }
 
   getAnimals(dataadopcion?: any): void {
-    this.animalService.getAnimals().subscribe((res) => {
+    this.animalService.getAnimals().pipe(
+      finalize(() => {
+        if (this.IdData) {
+          this.setRegiste(this.IdData)
+        } else if (dataadopcion) {
+          this.setdata(dataadopcion);
+        }
+      })
+    ).subscribe((res) => {
       this.animaldata = res.data;
-
-      if (this.IdData) {
-        this.setRegiste(this.IdData)
-
-      } else if (dataadopcion) {
-        this.setdata(dataadopcion);
-      }
-
     });
   }
 

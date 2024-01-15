@@ -150,9 +150,7 @@ export class AdopcionListComponent implements AfterViewInit {
       width: '800px',
       maxHeight: '700px',
     });
-    dialogRef.afterClosed().subscribe(result => {
-      console.log("result",result);
-      
+    dialogRef.afterClosed().subscribe(result => {      
       if (result === '201') {
         this._snackBar.sucess('Aviso', 'Registro guardado correctamente.');
       } else {

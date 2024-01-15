@@ -9,14 +9,12 @@
                 (click)="save(true)">Aprobar</button>
             <button style="border-radius: 10px;" class="btn btn-outline-danger " (click)="save(false)">Rechazar</button>
         </div>
+
+        <ng-template #elseBlock>
+            <div style="text-align: center;" class="my-2">
+                <button style="border-radius: 10px;" class="btn btn-light backgroundbtn mx-4"
+                    (click)="save(true)">Aceptar</button>
+            </div>
+        </ng-template>
     </div>
-
-    <ng-template #elseBlock>
-        <div style="text-align: center;" class="my-2">
-            <button style="border-radius: 10px;" class="btn btn-light backgroundbtn mx-4"
-                (click)="save(true)">Aceptar</button>
-        </div>
-    </ng-template>
 </div>
-
-
