@@ -31,7 +31,18 @@ export class PanelComponent implements OnInit {
 
   ngOnInit(): void {
     this.user.name = this.storageService.getItem<Session>('session')?.username!;
-    this.routesNav = RoutesNav;
+    this.routesNav = RoutesNav.filter((route) => {
+      const filtered = this.filterRoutes(route);
+      return filtered;
+    });
+  }
+
+  private filterRoutes(nav: Nav): boolean {
+    const exclude = ['Contáctanos', 'Inicio'];
+    if (!exclude.includes(nav.label)) {
+      return true;
+    }
+    return false;
   }
 
   openNav() {
