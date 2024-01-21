@@ -13,24 +13,6 @@ const routes: Routes = [
     component: LoginComponent,
   },
   {
-    path: 'PetModule',
-    loadChildren: () =>
-      import('./Components/component-animal/pet.module').then(
-        (m) => m.PetModule,
-      ),
-  },
-  {
-    path: 'Adopciones',
-    loadChildren: () =>
-      import('./Components/componente-adopcion/adopcion.module').then((m) => m.AdopcionModule),
-  },
-  {
-    path: 'Apadrinamiento',
-    loadChildren: () =>
-      import('./Components/component-apadrinamiento/apadrinamiento.module').then((m) => m.ApadrinamientoModule),
-  },
-
-  {
     path: 'panel',
     component: PanelComponent,
     canActivate: [AuthGuard],
@@ -38,6 +20,27 @@ const routes: Routes = [
       {
         path: '',
         component: HomeComponent,
+      },
+      {
+        path: 'PetModule',
+        loadChildren: () =>
+          import('./Components/component-animal/pet.module').then(
+            (m) => m.PetModule,
+          ),
+      },
+      {
+        path: 'Adopciones',
+        loadChildren: () =>
+          import('./Components/componente-adopcion/adopcion.module').then(
+            (m) => m.AdopcionModule,
+          ),
+      },
+      {
+        path: 'Apadrinamiento',
+        loadChildren: () =>
+          import(
+            './Components/component-apadrinamiento/apadrinamiento.module'
+          ).then((m) => m.ApadrinamientoModule),
       },
     ],
   },
@@ -52,4 +55,6 @@ const routes: Routes = [
   imports: [RouterModule.forChild(routes)],
   exports: [RouterModule],
 })
-export class AdminRoutingModule { }
+export class AdminRoutingModule {
+  panelOpenState = false;
+}
