@@ -3,3 +3,5 @@ export interface Breadcrumbs {
   label: string;
   separator?: boolean;
 }
+
+export type RoutesAdminI = 'pet-module' | 'adopciones' | 'apadrinamiento';

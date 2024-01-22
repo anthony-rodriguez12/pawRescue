@@ -29,14 +29,14 @@ const routes: Routes = [
           ),
       },
       {
-        path: 'adopciones',
+        path: 'adoption',
         loadChildren: () =>
           import('./Components/componente-adopcion/adopcion.module').then(
             (m) => m.AdopcionModule,
           ),
       },
       {
-        path: 'apadrinamiento',
+        path: 'programs/sponsors',
         loadChildren: () =>
           import(
             './Components/component-apadrinamiento/apadrinamiento.module'
