@@ -45,8 +45,11 @@ export class ApadrinamientoFormComponent implements OnInit, OnChanges {
 
   ngOnChanges(changes: SimpleChanges): void {
     if (changes['formData']) {
-      let dataadopcion : EditApadrinamiento = changes['formData'].currentValue;
+      let dataadopcion: EditApadrinamiento = changes['formData'].currentValue;
       this.getApadrinamiento(dataadopcion)
+    } else if (changes['IdData']) {
+      this.IdData = changes['IdData'].currentValue;
+      this.getApadrinamiento()
     }
   }
 
@@ -103,7 +106,11 @@ export class ApadrinamientoFormComponent implements OnInit, OnChanges {
   getApadrinamiento(dataadopcion?: any): void {
     this.animalService.getAnimals().pipe(
       finalize(() => {
-        this.setdata(dataadopcion);
+        if (this.IdData) {
+          this.setRegiste(this.IdData)
+        } else if (dataadopcion) {
+          this.setdata(dataadopcion);
+        }
       })
     ).subscribe((res) => {
       this.animaldata = res.data;

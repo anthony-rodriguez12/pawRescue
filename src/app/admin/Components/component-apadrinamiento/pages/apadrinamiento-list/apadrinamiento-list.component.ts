@@ -5,10 +5,9 @@ import { MatTableDataSource } from '@angular/material/table';
 import { PetService } from 'src/app/client/services/pet.service';
 import { TooltipPosition } from '@angular/material/tooltip';
 import { SnackbarService } from 'src/app/shared/services/snackbar.service';
-import { PetAddComponent } from '../../../component-animal/pages/pet-add/pet-add.component';
-import { PetEditComponent } from '../../../component-animal/pages/pet-edit/pet-edit.component';
 import { ApadrinamientoService } from 'src/app/client/services/apadrinamiento.service';
 import { ApadrinamientoEditComponent } from '../apadrinamiento-edit/apadrinamiento-edit.component';
+import { ApadrinamientoAddComponent } from '../apadrinamiento-add/apadrinamiento-add.component';
 
 
 @Component({
@@ -44,7 +43,6 @@ export class ApadrinamientoListComponent
 
   getAllApadriamiento(): void {
     this.ServiceApadrinamiento.getAllApadrinamiento().subscribe((res) => {
-      console.log("res.data", res.data);
       this.dataSource.data = res.data;
       this.dataSource.paginator = this.paginator;
     });
@@ -113,7 +111,7 @@ export class ApadrinamientoListComponent
   }
   // Agregar Animal
   addAnimal(): void {
-    const dialogRef: MatDialogRef<PetAddComponent> = this.dialog.open(PetAddComponent, {
+    const dialogRef: MatDialogRef<ApadrinamientoAddComponent> = this.dialog.open(ApadrinamientoAddComponent, {
       width: '800px',
       maxHeight: '700px',
     });
