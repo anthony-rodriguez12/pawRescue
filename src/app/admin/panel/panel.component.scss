@@ -42,3 +42,21 @@ $bg-black: #1e293b;
     0px 2px 2px 0px rgba(0, 0, 0, 0.14),
     0px 1px 5px 0px rgba(0, 0, 0, 0.12);
 }
+
+//webkit-scrollbar
+.max::-webkit-scrollbar {
+  width: 8px; /* Tamaño del scroll en vertical */
+  height: 8px; /* Tamaño del scroll en horizontal */
+}
+//webkit-scrollbar-thumb
+.max::-webkit-scrollbar-thumb {
+  background: #5a6368;
+  border-radius: 4px;
+}
+.max::-webkit-scrollbar-thumb:hover {
+  background: rgb(165, 164, 164);
+  box-shadow: 0 0 2px 1px rgba(235, 8, 8, 0.2);
+}
+.max::-webkit-scrollbar-thumb:active {
+  background-color: #999999;
+}

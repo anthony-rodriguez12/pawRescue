@@ -22,21 +22,21 @@ const routes: Routes = [
         component: HomeComponent,
       },
       {
-        path: 'PetModule',
+        path: 'pet-module',
         loadChildren: () =>
           import('./Components/component-animal/pet.module').then(
             (m) => m.PetModule,
           ),
       },
       {
-        path: 'Adopciones',
+        path: 'adoption',
         loadChildren: () =>
           import('./Components/componente-adopcion/adopcion.module').then(
             (m) => m.AdopcionModule,
           ),
       },
       {
-        path: 'Apadrinamiento',
+        path: 'programs/sponsors',
         loadChildren: () =>
           import(
             './Components/component-apadrinamiento/apadrinamiento.module'

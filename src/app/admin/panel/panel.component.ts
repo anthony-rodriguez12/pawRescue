@@ -5,6 +5,7 @@ import { Session } from 'src/app/shared/interfaces/session.interface';
 import { LoginService } from 'src/app/shared/services/login.service';
 import { SecureStorageService } from 'src/app/shared/services/secure-storage.service';
 import { RoutesNav } from 'src/app/shared/utils/routes';
+import { RoutesAdminI } from '../interfaces/home.interface';
 
 @Component({
   selector: 'app-panel',
@@ -35,6 +36,22 @@ export class PanelComponent implements OnInit {
       const filtered = this.filterRoutes(route);
       return filtered;
     });
+    this.routesFiltered(this.routesNav);
+  }
+
+  routesFiltered(routes: any) {
+    const filtered: Record<RoutesAdminI, string> = {
+      'pet-module': 'pet-module',
+      adopciones: 'adopciones',
+      apadrinamiento: 'apadrinamiento',
+    };
+
+    const pets: Partial<Nav> = {
+      label: 'Pets',
+      icon: 'fa-solid fa-paw',
+      link: 'pet-module',
+    };
+    routes.unshift(pets);
   }
 
   private filterRoutes(nav: Nav): boolean {
