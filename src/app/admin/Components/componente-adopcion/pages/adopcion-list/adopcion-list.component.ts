@@ -1,13 +1,11 @@
 import { AfterViewInit, Component, ViewChild } from '@angular/core';
-import { FormBuilder, FormControl } from '@angular/forms';
+import { FormControl } from '@angular/forms';
 import { MatDialog, MatDialogRef } from '@angular/material/dialog';
 import { MatPaginator, MatPaginatorIntl } from '@angular/material/paginator';
 import { MatTableDataSource } from '@angular/material/table';
 import { PetService } from 'src/app/client/services/pet.service';
 import { TooltipPosition } from '@angular/material/tooltip';
 import { SnackbarService } from 'src/app/shared/services/snackbar.service';
-import { PetEditComponent } from '../../../component-animal/pages/pet-edit/pet-edit.component';
-import { PetAddComponent } from '../../../component-animal/pages/pet-add/pet-add.component';
 import { AdopcionesService } from 'src/app/client/services/adopciones.service';
 import { AdopcionAddComponent } from '../adopcion-add/adopcion-add.component';
 import { AdopcionEditComponent } from '../adopcion-edit/adopcion-edit.component';
