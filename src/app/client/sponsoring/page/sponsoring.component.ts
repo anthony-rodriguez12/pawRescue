@@ -13,6 +13,7 @@ import { PetService } from '../../services/pet.service';
 export class SponsoringComponent implements OnInit {
   button = 'Apadrinar';
   statusHealthy = 0;
+  loadingPets = true;
   constructor(
     private petService: PetService,
     public dialog: MatDialog,
@@ -23,7 +24,9 @@ export class SponsoringComponent implements OnInit {
   pets: AnimalI[] = [];
 
   ngOnInit(): void {
-    this.getMascotas();
+    setTimeout(() => {
+      this.getMascotas();
+    }, 2000);
   }
 
   getMascotas() {
@@ -36,6 +39,7 @@ export class SponsoringComponent implements OnInit {
             errorImg: false,
           };
         });
+        this.loadingPets = false;
       },
     });
   }
