@@ -15,15 +15,15 @@ export class ApadrinamientoService {
     return this.http.get<any>(`${this.apiUrl}/apadrinamiento`);  }
 
 
-  AddApadrinamiento(adopcionData: any): Observable<any> {
-    return this.http.post<any>(`${this.apiUrl}/apadrinamiento`, adopcionData);
+  AddApadrinamiento(apadrinamiento: any): Observable<any> {    
+    return this.http.post<any>(`${this.apiUrl}/apadrinamiento`, apadrinamiento);
   }
 
-  updateApadrinamiento(adopcionData: any, idAdopcion: number): Observable<any> {
-    return this.http.put<any>(`${this.apiUrl}/apadrinamiento/${idAdopcion}`,adopcionData );
+  updateApadrinamiento(apadrinamiento: any, idApadrinamiento: number): Observable<any> {
+    return this.http.put<any>(`${this.apiUrl}/apadrinamiento/${idApadrinamiento}`,apadrinamiento );
   }
-  getApadrinamientoByID(idAdopcion: number): Observable<any> {
-    return this.http.get<any>(`${this.apiUrl}/apadrinamiento/${idAdopcion}`);
+  getApadrinamientoByID(idApadrinamiento: number): Observable<any> {
+    return this.http.get<any>(`${this.apiUrl}/apadrinamiento/${idApadrinamiento}`);
   }
 }
 
