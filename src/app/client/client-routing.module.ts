@@ -6,6 +6,7 @@ import { SponsoringComponent } from './sponsoring/page/sponsoring.component';
 import { AdoptionComponent } from './adoption/adoption.component';
 import { FormComponent } from './sponsoring/form/form.component';
 import { DonationsComponent } from './donations/donations.component';
+import { VolunteeringComponent } from './volunteering/volunteering.component';
 
 const routes: Routes = [
   {
@@ -39,6 +40,10 @@ const routes: Routes = [
       {
         path: 'sponsors',
         component: SponsoringComponent,
+      },
+      {
+        path: 'volunteering',
+        component: VolunteeringComponent,
       },
       {
         path: 'form',

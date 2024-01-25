@@ -9,7 +9,7 @@ import { AdoptionComponent } from './adoption/adoption.component';
 import { SharedModule } from '../shared/shared.module';
 import { FormComponent } from './sponsoring/form/form.component';
 import { DonationsComponent } from './donations/donations.component';
-
+import { VolunteeringComponent } from './volunteering/volunteering.component';
 
 @NgModule({
   declarations: [
@@ -19,11 +19,8 @@ import { DonationsComponent } from './donations/donations.component';
     AdoptionComponent,
     FormComponent,
     DonationsComponent,
+    VolunteeringComponent,
   ],
-  imports: [
-    CommonModule,
-    ClientRoutingModule,
-    SharedModule
-  ],
+  imports: [CommonModule, ClientRoutingModule, SharedModule],
 })
-export class ClientModule { }
+export class ClientModule {}
