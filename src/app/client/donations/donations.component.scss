@@ -1,0 +1,29 @@
+.container {
+  max-width: 1200px;
+}
+
+button {
+  cursor: pointer;
+}
+
+.custom-shape-divider-bottom-1706071695 {
+  position: absolute;
+  bottom: 0;
+  left: 0;
+  margin-bottom: -1px;
+  width: 100%;
+  overflow: hidden;
+  line-height: 0;
+  transform: rotate(180deg);
+}
+
+.custom-shape-divider-bottom-1706071695 svg {
+  position: relative;
+  display: block;
+  width: calc(100% + 1.3px);
+  height: 67px;
+}
+
+.custom-shape-divider-bottom-1706071695 .shape-fill {
+  fill: #ffffff;
+}

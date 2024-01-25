@@ -5,6 +5,7 @@ import { ContactUsComponent } from './contact-us/contact-us.component';
 import { SponsoringComponent } from './sponsoring/page/sponsoring.component';
 import { AdoptionComponent } from './adoption/adoption.component';
 import { FormComponent } from './sponsoring/form/form.component';
+import { DonationsComponent } from './donations/donations.component';
 
 const routes: Routes = [
   {
@@ -14,6 +15,23 @@ const routes: Routes = [
   {
     path: 'adoption',
     component: AdoptionComponent,
+  },
+  {
+    path: 'help-us',
+    children: [
+      {
+        path: 'donations',
+        component: DonationsComponent,
+      },
+      {
+        path: 'temporary-home',
+        component: FormComponent,
+      },
+      {
+        path: 'rescue',
+        component: FormComponent,
+      },
+    ],
   },
   {
     path: 'programs',
