@@ -36,6 +36,13 @@ const routes: Routes = [
           ),
       },
       {
+        path: 'programs/volunteering',
+        loadChildren: () =>
+          import('./Components/component-voluntariado/voluntariado.module').then(
+            (m) => m.VoluntariadoModule,
+          ),
+      },
+      {
         path: 'programs/sponsors',
         loadChildren: () =>
           import(
