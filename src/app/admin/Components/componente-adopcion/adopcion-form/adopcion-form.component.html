@@ -132,7 +132,7 @@
                             <label class="my-1" for="motivo"><b>Motivo</b></label>
                             <textarea type="text" class="form-control" id="motivo"
                                 [ngStyle]="{'background-color': edit ? 'lightgray' : ''}" formControlName="motivo"
-                                [readonly]="edit" placeholder="Ingresa la descripción de salud"
+                                [readonly]="edit" placeholder="Ingresa el motivo"
                                 [ngClass]="{ 'is-invalid': myForm.get('motivo')?.invalid && myForm.get('motivo')?.touched}">
                             </textarea>
                             <div class="invalid-feedback"
@@ -169,7 +169,7 @@
                             <div class="form-group mb-3 ">
                                 <label class="my-1" for="motivo"><b>Motivo</b></label>
                                 <textarea type="text" class="form-control" id="motivo"
-                                    formControlName="detallesSeguimiento" placeholder="Ingresa la descripción de salud"
+                                    formControlName="detallesSeguimiento" placeholder="Ingresa el motivo"
                                     [ngClass]="{ 'is-invalid': myForm.get('detallesSeguimiento')?.invalid && myForm.get('detallesSeguimiento')?.touched}">
                                 </textarea>
                                 <div class="invalid-feedback"

@@ -107,16 +107,14 @@ export class AdopcionFormComponent implements OnInit, OnChanges {
   validarInput(event: KeyboardEvent): void {
     const inputChar = String.fromCharCode(event.keyCode);
     const pattern = /^\d$/;
-
     if (!pattern.test(inputChar)) {
-      // Evitar la entrada si el carácter no es un dígito (\d)
       event.preventDefault();
     }
   }
 
   valdiateIcon(value: number): boolean {
     const FindEstudio = this.stateanimal.find(state => state.idEstado === value);
-    return FindEstudio?.estadoDesc === "Aprobado" ? true : false;
+    return FindEstudio?.estadoDesc === "Aprobado";
   }
 
   setRegiste(data: any) {
