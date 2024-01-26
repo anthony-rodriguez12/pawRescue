@@ -1,6 +1,7 @@
 $color-bg-primary: #250f17;
 $color-bg-secondary: #fcd857;
 $color-bg-thirdy: #e6dfb7;
+$bg-black: #1e293b;
 
 .login {
   border-radius: 10px;
@@ -18,10 +19,6 @@ $color-bg-thirdy: #e6dfb7;
   margin-right: 5px;
   background-color: $color-bg-secondary;
   cursor: pointer;
-}
-
-::ng-deep .mat-mdc-menu-content {
-  padding: 12px !important;
 }
 
 ::ng-deep .mat-mdc-menu-panel {
@@ -95,4 +92,53 @@ $color-bg-thirdy: #e6dfb7;
       max-height: 200px;
     }
   }
+}
+
+::ng-deep .mat-mdc-menu-content {
+  padding: 8px !important;
+}
+::ng-deep .mat-mdc-menu-item:hover {
+  border-radius: 10px;
+}
+::ng-deep .mat-mdc-menu-item-text {
+  display: flex;
+  & span {
+    padding-right: 5px;
+  }
+}
+::ng-deep .bg-black {
+  background-color: $color-bg-primary !important;
+}
+::ng-deep mat-expansion-panel-header.mat-expansion-panel-header {
+  padding-left: 0.75rem !important;
+}
+::ng-deep mat-expansion-panel-header.mat-expansion-panel-header:hover {
+  background-color: $color-bg-thirdy !important;
+}
+
+::ng-deep mat-expansion-panel-header.mat-expansion-panel-header.mat-expanded {
+  background-color: $color-bg-thirdy !important;
+}
+
+::ng-deep
+  mat-expansion-panel-header.mat-expansion-panel-header.mat-expanded
+  mat-panel-title {
+  & i {
+    color: $color-bg-primary !important;
+  }
+  & span {
+    color: $color-bg-primary !important;
+  }
+}
+
+::ng-deep mat-expansion-panel.mat-expansion-panel {
+  background-color: $color-bg-primary !important;
+}
+
+::ng-deep .mat-expansion-panel:not([class*="mat-elevation-z"]) {
+  box-shadow: none !important;
+}
+
+::ng-deep .mat-expansion-panel-body {
+  padding: 0 12px 19px !important;
 }

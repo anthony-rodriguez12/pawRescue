@@ -193,14 +193,17 @@
     id="mobile-menu"
   >
     <div class="space-y-1 px-1 pb-2 pt-1">
-      <form
+      <div
         *ngFor="let item of items"
         class="relative {{
           item.active ? activeLink : inactiveLink
-        }} px-3 py-2 rounded-md"
-        [formGroup]="formulario"
+        }} rounded-md p-0"
       >
-        <div *ngIf="!item.childs" (click)="formatearFormulario()">
+        <div
+          *ngIf="!item.childs"
+          (click)="formatearFormulario()"
+          class="px-3 py-2"
+        >
           <i class="{{ item.icon }} pr-1"></i>
           <a
             *ngIf="!item?.childs"
@@ -209,67 +212,50 @@
             >{{ item.label }}
             <span class="absolute inset-0"></span>
           </a>
-          <a *ngIf="item?.childs" class="text-sm font-medium cursor-pointer"
-            >{{ item.label }}
-            <span class="absolute inset-0"></span>
-          </a>
         </div>
-        <div
-          *ngIf="item.childs"
-          class="w-full"
-          [ngClass]="{ accordion: item.childs }"
-        >
-          <div class="group relative flex flex-col rounded-lg" tabindex="1">
-            <label for="{{ item.label }}" class="absolute inset-0"></label>
-            <input
-              id="{{ item.label }}"
-              type="radio"
-              name="{{ item.label }}"
-              [formControlName]="item.label"
-            />
-            <label>
-              <div class="flex cursor-pointer items-center justify-between">
-                <span class="text-sm font-medium">
-                  <i class="ms-1 {{ item.icon }}"></i>
-                  {{ item.label }}
-                </span>
+        <mat-accordion *ngIf="item?.childs" class="p-0">
+          <mat-expansion-panel [expanded]="item.active">
+            <mat-expansion-panel-header
+              class="group"
+              [ngClass]="{ hed: item.active }"
+            >
+              <mat-panel-title>
                 <i
-                  class="fa-solid text-base fa-caret-down transition-all duration-500 group-focus:-rotate-180"
+                  class="ps-0 transition-all duration-500 text-[#E6DFB7] group-hover:text-[#250F17]  {{
+                    item.icon
+                  }}"
+                ></i>
+                <span
+                  class="text-sm font-medium text-[#E6DFB7] group-hover:text-[#250F17]"
+                  >{{ item.label }}</span
+                >
+              </mat-panel-title>
+            </mat-expansion-panel-header>
+            <div
+              *ngFor="let options of item.childs"
+              class="group relative route transition-all duration-500 flex gap-x-3 items-center rounded-lg p-1 box-border hover:bg-white"
+            >
+              <div
+                class="mt-1 flex transition-all duration-500 h-11 w-11 flex-none items-center justify-center rounded-lg bg-[#E6DFB7] group-hover:bg-[#FCD857]"
+              >
+                <i
+                  class="{{
+                    options.icon
+                  }} text-base transition-all duration-500 text-[#E6DFB7] group-hover:text-[#250F17]"
                 ></i>
               </div>
-            </label>
-            <div class="h-auto items-center transition-all">
-              <div
-                class="flex-auto overflow-hidden rounded-3xl text-sm leading-6"
-              >
-                <div class="p-1">
-                  <div
-                    *ngFor="let options of item.childs"
-                    class="group relative transition-all duration-500 flex gap-x-3 items-center rounded-lg p-1 w-full hover:bg-white"
+              <div>
+                <a [routerLink]="options.link">
+                  <span
+                    class="font-semibold text-[#E6DFB7] group-hover:text-[#250F17]"
+                    >{{ options.label }}</span
                   >
-                    <div
-                      class="mt-1 transition-all duration-500 flex h-11 w-11 flex-none items-center justify-center rounded-lg bg-[#E6DFB7] group-hover:bg-white"
-                    >
-                      <i
-                        class="{{
-                          options.icon
-                        }} text-base transition-all duration-500 text-[#250F17]"
-                      ></i>
-                    </div>
-                    <div>
-                      <a
-                        [routerLink]="options.link"
-                        class="font-semibold text-[#E6DFB7] group-hover:text-[#250F17] cursor-pointer"
-                        >{{ options.label }}
-                      </a>
-                    </div>
-                  </div>
-                </div>
+                </a>
               </div>
             </div>
-          </div>
-        </div>
-      </form>
+          </mat-expansion-panel>
+        </mat-accordion>
+      </div>
     </div>
   </div>
 </nav>
