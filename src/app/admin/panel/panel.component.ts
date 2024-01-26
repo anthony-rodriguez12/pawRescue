@@ -55,7 +55,7 @@ export class PanelComponent implements OnInit {
   }
 
   private filterRoutes(nav: Nav): boolean {
-    const exclude = ['Contáctanos', 'Inicio'];
+    const exclude = ['Contáctanos', 'Inicio', 'Ayudanos a Rescatar'];
     if (!exclude.includes(nav.label)) {
       return true;
     }

@@ -25,16 +25,6 @@ export const RoutesNav: Nav[] = [
         link: './help-us/donations',
         icon: 'fa-solid fa-circle-dollar-to-slot',
       },
-      {
-        label: 'Hogar Temporal',
-        link: './help-us/temporary-home',
-        icon: 'fa-solid fa-house-circle-check',
-      },
-      {
-        label: 'Rescate',
-        link: './help-us/rescue',
-        icon: 'fa-solid fa-kit-medical',
-      },
     ],
     showMenu: false,
   },

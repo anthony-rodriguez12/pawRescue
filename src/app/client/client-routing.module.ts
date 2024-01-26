@@ -24,14 +24,6 @@ const routes: Routes = [
         path: 'donations',
         component: DonationsComponent,
       },
-      {
-        path: 'temporary-home',
-        component: FormComponent,
-      },
-      {
-        path: 'rescue',
-        component: FormComponent,
-      },
     ],
   },
   {
