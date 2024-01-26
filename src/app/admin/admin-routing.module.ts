@@ -18,10 +18,6 @@ const routes: Routes = [
     canActivate: [AuthGuard],
     children: [
       {
-        path: '',
-        component: HomeComponent,
-      },
-      {
         path: 'pet-module',
         loadChildren: () =>
           import('./Components/component-animal/pet.module').then(
@@ -38,9 +34,9 @@ const routes: Routes = [
       {
         path: 'programs/volunteering',
         loadChildren: () =>
-          import('./Components/component-voluntariado/voluntariado.module').then(
-            (m) => m.VoluntariadoModule,
-          ),
+          import(
+            './Components/component-voluntariado/voluntariado.module'
+          ).then((m) => m.VoluntariadoModule),
       },
       {
         path: 'programs/sponsors',
@@ -48,6 +44,10 @@ const routes: Routes = [
           import(
             './Components/component-apadrinamiento/apadrinamiento.module'
           ).then((m) => m.ApadrinamientoModule),
+      },
+      {
+        path: '**',
+        redirectTo: 'pet-module',
       },
     ],
   },
