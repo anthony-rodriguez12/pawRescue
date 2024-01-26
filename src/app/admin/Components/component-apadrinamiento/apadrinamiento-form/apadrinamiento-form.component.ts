@@ -26,6 +26,7 @@ export class ApadrinamientoFormComponent implements OnInit, OnChanges {
   @Input() IdData: any;
 
   @Output() editedDataEmitter = new EventEmitter<any>();
+  @Output() valueFormEmitter = new EventEmitter<boolean>(); // To emit edited data
   myForm!: FormGroup;
   animaldata: any[] = []
   edit: boolean = false
@@ -39,6 +40,10 @@ export class ApadrinamientoFormComponent implements OnInit, OnChanges {
     this.createform();
     this.myForm.valueChanges.subscribe(() => {
       this.editedDataEmitter.emit(this.myForm.value);
+      this.valueFormEmitter.emit(this.myForm.valid);
+      console.log("this.myForm.value", this.myForm.value);
+
+
     });
 
   }
@@ -54,18 +59,19 @@ export class ApadrinamientoFormComponent implements OnInit, OnChanges {
   }
 
   createform() {
+    const today = moment();
+
     this.myForm = this.fb.group({
       nombre: ['', Validators.required],
       apellido: ['', Validators.required],
       direccion: ['', Validators.required],
-      fechaCreacion: ['', Validators.required],
-      telefono: ['', Validators.required],
+      fechaCreacion: [today.format('YYYY-MM-DD'), Validators.required],
+      telefono: ['', [Validators.required, Validators.minLength(9)]],
       correo: ['', Validators.required],
-      idEstudios: ['', Validators.required],
       motivo: ['', Validators.required],
       idAnimal: ['', Validators.required],
       nameAnimal: ['', Validators.required],
-      idEstado: ['', Validators.required],
+      idEstado: [0, Validators.required],
       monto: ['', Validators.required],
       idPeriodicidad: ['', Validators.required]
     });

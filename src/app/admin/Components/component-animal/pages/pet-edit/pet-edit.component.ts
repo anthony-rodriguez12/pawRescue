@@ -1,8 +1,9 @@
 // pet-edit.component.ts
 import { Component, Inject, OnInit } from '@angular/core';
-import { MAT_DIALOG_DATA, MatDialog, MatDialogRef } from '@angular/material/dialog';
-import { ActivatedRoute, Router } from '@angular/router';
+import { MAT_DIALOG_DATA, MatDialogRef } from '@angular/material/dialog';
+import { ActivatedRoute } from '@angular/router';
 import { PetService } from 'src/app/client/services/pet.service';
+import { SnackbarService } from 'src/app/shared/services/snackbar.service';
 
 @Component({
   selector: 'app-pet-edit',
@@ -13,10 +14,13 @@ export class PetEditComponent implements OnInit {
   animalData!: any;
   editaDataanimal!: any;
   idAnimal!: number
+  validForm: boolean = true
 
   constructor(private route: ActivatedRoute,
     private animalService: PetService,
     private dialogRef: MatDialogRef<PetEditComponent>,
+    private _snackBar: SnackbarService,
+
     @Inject(MAT_DIALOG_DATA) public data: any,
   ) { }
 
@@ -32,6 +36,13 @@ export class PetEditComponent implements OnInit {
   }
 
   saveAnimal() {
+    if (this.validForm) {
+      this._snackBar.warning(
+        'Aviso',
+        'Debe completar todos los campos para continuar.',
+      );
+      return;
+    }
     const formData = new FormData();
     formData.append('Nombre', this.editaDataanimal.Nombre);
     formData.append('SaludDesc', this.editaDataanimal.SaludDesc);
@@ -42,11 +53,7 @@ export class PetEditComponent implements OnInit {
     formData.append('idEstadoSalud', this.editaDataanimal.IdEstadoSalud);
 
     this.animalService.updateAnimal(this.data, formData).subscribe((res) => {
-      if (res) {
-        this.CloseModal(res.statusCode);
-      } else {
-        this.CloseModal(res.statusCode);
-      }
+      this.CloseModal(res.statusCode);
     });
 
   }
@@ -56,5 +63,8 @@ export class PetEditComponent implements OnInit {
 
   getData(event: any) {
     this.editaDataanimal = event
+  }
+  getValidForm(event: boolean) {
+    this.validForm = !event
   }
 }

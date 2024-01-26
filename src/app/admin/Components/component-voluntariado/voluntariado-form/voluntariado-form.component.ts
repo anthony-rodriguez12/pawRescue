@@ -10,7 +10,7 @@ import { EditVoluntariado } from 'src/app/client/services/voluntariado.service';
 export class VoluntariadoFormComponent implements OnInit, OnChanges {
   @Input() formData: any;
   @Input() IdData: any;
-
+  @Output() valueFormEmitter = new EventEmitter<boolean>(); // To emit edited data
   @Output() editedDataEmitter = new EventEmitter<any>();
   myForm!: FormGroup;
   edit: boolean = false
@@ -22,6 +22,7 @@ export class VoluntariadoFormComponent implements OnInit, OnChanges {
     this.createform();
     this.myForm.valueChanges.subscribe(() => {
       this.editedDataEmitter.emit(this.myForm.value);
+      this.valueFormEmitter.emit(this.myForm.valid);
     });
 
   }

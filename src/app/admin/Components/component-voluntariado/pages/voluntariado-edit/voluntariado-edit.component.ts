@@ -2,6 +2,7 @@ import { Component, Inject, OnInit } from '@angular/core';
 import { MAT_DIALOG_DATA, MatDialogRef } from '@angular/material/dialog';
 import { finalize } from 'rxjs';
 import { EditVoluntariado, GetAllVoluntariado, VoluntariadoService } from 'src/app/client/services/voluntariado.service';
+import { SnackbarService } from 'src/app/shared/services/snackbar.service';
 
 @Component({
   selector: 'app-voluntariado-edit',
@@ -13,9 +14,13 @@ export class VoluntariadoEditComponent implements OnInit {
   editVoluntariado!: EditVoluntariado;
   state: any[] = []
   Voluntarioid!: any;
+  validForm: boolean = true
+
   constructor(
     private dialogRef: MatDialogRef<VoluntariadoEditComponent>,
     private ServiceVoluntariado: VoluntariadoService,
+    private _snackBar: SnackbarService,
+
     @Inject(MAT_DIALOG_DATA) public data: any,
   ) { }
 
@@ -28,8 +33,8 @@ export class VoluntariadoEditComponent implements OnInit {
     this.ServiceVoluntariado.getAllApadrinamiento().pipe(
       finalize(() => {
         this.Voluntarioid = this.VoluntariadoData.find((f: GetAllVoluntariado) => f.idVoluntario === Number(this.data))
-        console.log("Voluntarioid",this.Voluntarioid);
-        
+        console.log("Voluntarioid", this.Voluntarioid);
+
       })
     ).subscribe((res) => {
       this.VoluntariadoData = res.data;
@@ -38,6 +43,14 @@ export class VoluntariadoEditComponent implements OnInit {
 
 
   save() {
+    if (this.validForm) {
+      this._snackBar.warning(
+        'Aviso',
+        'Debe completar todos los campos para continuar.',
+      );
+      return;
+    }
+
     const data = {
       nombre: this.editVoluntariado.nombre,
       apellido: this.editVoluntariado.apellido,
@@ -50,8 +63,6 @@ export class VoluntariadoEditComponent implements OnInit {
       fechaNac: this.editVoluntariado.fechaNac,
       idEstado: 1,
     }
-    console.log("data",data);
-    
     this.ServiceVoluntariado.updateApadrinamiento(data, this.data).subscribe((res) => {
       this.CloseModal(res.statusCode);
     });
@@ -65,4 +76,9 @@ export class VoluntariadoEditComponent implements OnInit {
   getData(event: any) {
     this.editVoluntariado = event
   }
+
+  getValidForm(event: boolean) {
+    this.validForm = !event
+  }
+
 }

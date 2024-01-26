@@ -1,6 +1,6 @@
 <div class="container mt-4">
     <h1 style="color: black; ">
-        <b style="margin-top: 20mm;">{{edit? 'Editar' : 'Registrar' }} de Apadrinamiento</b>
+        <b style="margin-top: 20mm;">{{edit? 'Editar' : 'Registrar' }} Voluntariado</b>
     </h1>
     <div class="d-flex flex-wrap justify-content-between">
         <form [formGroup]="myForm">
@@ -10,40 +10,80 @@
                         <!--Nombre-->
                         <div class="form-group col-12 col-md-6 ">
                             <label class="my-1" for="nombre"><b>Nombre:</b></label>
-                            <input type="text" class="form-control" id="nombre" formControlName="nombre">
+                            <input type="text" class="form-control" id="nombre" formControlName="nombre"
+                                [ngClass]="{ 'is-invalid': myForm.get('nombre')?.invalid && myForm.get('nombre')?.touched}">
+                            <div class="invalid-feedback"
+                                *ngIf="myForm.get('nombre')?.hasError('required') && myForm.get('nombre')?.touched">
+                                ¡Campo obligatorio!.
+                            </div>
                         </div>
-                        <div class="form-group col-12 col-md-6 my-2">
+                        <div class="form-group col-12 col-md-6">
                             <label class="my-1" for="apellido"><b>Ciudad:</b></label>
-                            <input type="text" class="form-control" id="apellido" formControlName="ciudad">
+                            <input type="text" class="form-control" id="apellido" formControlName="ciudad"
+                                [ngClass]="{ 'is-invalid': myForm.get('ciudad')?.invalid && myForm.get('ciudad')?.touched}">
+                            <div class="invalid-feedback"
+                                *ngIf="myForm.get('ciudad')?.hasError('required') && myForm.get('ciudad')?.touched">
+                                ¡Campo obligatorio!.
+                            </div>
                         </div>
-                    
+
                         <div class="form-group col-12 col-md-6 my-2">
                             <label class="my-1" for="apellido"><b>Apellidos:</b></label>
-                            <input type="text" class="form-control" id="apellido" formControlName="apellido">
+                            <input type="text" class="form-control" id="apellido" formControlName="apellido"
+                                [ngClass]="{ 'is-invalid': myForm.get('apellido')?.invalid && myForm.get('apellido')?.touched}">
+                            <div class="invalid-feedback"
+                                *ngIf="myForm.get('apellido')?.hasError('required') && myForm.get('apellido')?.touched">
+                                ¡Campo obligatorio!.
+                            </div>
                         </div>
                         <div class="form-group col-12 col-md-6 my-2">
                             <label class="my-1" for="telefono"><b>Ocupación:</b></label>
-                            <input type="text" class="form-control" id="telefono" formControlName="ocupacion">
+                            <input type="text" class="form-control" id="telefono" formControlName="ocupacion"
+                                [ngClass]="{ 'is-invalid': myForm.get('ocupacion')?.invalid && myForm.get('ocupacion')?.touched}">
+                            <div class="invalid-feedback"
+                                *ngIf="myForm.get('ocupacion')?.hasError('required') && myForm.get('ocupacion')?.touched">
+                                ¡Campo obligatorio!.
+                            </div>
                         </div>
 
                         <div class="form-group col-12 col-md-6 my-2">
                             <label class="my-1" for="correo"><b>Fecha de nacimiento:</b></label>
-                            <input type="date" class="form-control" id="correo" formControlName="fechaNac">
+                            <input type="date" class="form-control" id="correo" formControlName="fechaNac"
+                                [ngClass]="{ 'is-invalid': myForm.get('fechaNac')?.invalid && myForm.get('fechaNac')?.touched}">
+                            <div class="invalid-feedback"
+                                *ngIf="myForm.get('fechaNac')?.hasError('required') && myForm.get('fechaNac')?.touched">
+                                ¡Campo obligatorio!.
+                            </div>
                         </div>
 
                         <div class="form-group col-12 col-md-6 my-2">
                             <label class="my-1" for="correo"><b>Correo:</b></label>
-                            <input type="text" class="form-control" id="correo" formControlName="correo">
+                            <input type="text" class="form-control" id="correo" formControlName="correo"
+                                [ngClass]="{ 'is-invalid': myForm.get('Sexo')?.invalid && myForm.get('Sexo')?.touched}">
+                            <div class="invalid-feedback"
+                                *ngIf="myForm.get('Sexo')?.hasError('required') && myForm.get('Sexo')?.touched">
+                                ¡Campo obligatorio!.
+                            </div>
                         </div>
 
                         <div class="form-group col-12 col-md-6 my-2">
                             <label class="my-1" for="correo"><b>Edad:</b></label>
-                            <input type="text" class="form-control" id="correo" formControlName="edad">
+                            <input type="text" class="form-control" id="correo" formControlName="edad"
+                                [ngClass]="{ 'is-invalid': myForm.get('edad')?.invalid && myForm.get('edad')?.touched}">
+                            <div class="invalid-feedback"
+                                *ngIf="myForm.get('edad')?.hasError('required') && myForm.get('edad')?.touched">
+                                ¡Campo obligatorio!.
+                            </div>
                         </div>
 
-                        <div class="form-group col-12 col-md-6">
+                        <div class="form-group col-12 col-md-6 my-2">
                             <label class="my-1" for="direccion"><b>Dirección:</b></label>
-                            <input type="text" class="form-control" id="direccion" formControlName="direccion">
+                            <input type="text" class="form-control" id="direccion" formControlName="direccion"
+                                [ngClass]="{ 'is-invalid': myForm.get('direccion')?.invalid && myForm.get('direccion')?.touched}">
+                            <div class="invalid-feedback"
+                                *ngIf="myForm.get('direccion')?.hasError('required') && myForm.get('direccion')?.touched">
+                                ¡Campo obligatorio!.
+                            </div>
                         </div>
 
                         <!-- Motivo -->
@@ -51,7 +91,13 @@
                             <label class="my-1" for="motivo"><b>Motivo</b></label>
                             <textarea type="text" class="form-control" id="motivo"
                                 [ngStyle]="{'background-color': edit ? 'lightgray' : ''}" formControlName="motivo"
-                                [readonly]="edit"></textarea>
+                                [readonly]="edit"
+                                [ngClass]="{ 'is-invalid': myForm.get('motivo')?.invalid && myForm.get('motivo')?.touched}">
+                            </textarea>
+                            <div class="invalid-feedback"
+                                *ngIf="myForm.get('motivo')?.hasError('required') && myForm.get('motivo')?.touched">
+                                ¡Campo obligatorio!.
+                            </div>
                         </div>
                     </div>
                 </form>

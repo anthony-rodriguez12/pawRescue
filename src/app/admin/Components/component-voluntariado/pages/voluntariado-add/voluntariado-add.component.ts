@@ -2,6 +2,7 @@ import { Component, Inject } from '@angular/core';
 import { PetAddComponent } from '../../../component-animal/pages/pet-add/pet-add.component';
 import { MAT_DIALOG_DATA, MatDialogRef } from '@angular/material/dialog';
 import { AddVoluntariado, VoluntariadoService } from 'src/app/client/services/voluntariado.service';
+import { SnackbarService } from 'src/app/shared/services/snackbar.service';
 
 @Component({
   selector: 'app-voluntariado-add',
@@ -10,15 +11,27 @@ import { AddVoluntariado, VoluntariadoService } from 'src/app/client/services/vo
 })
 export class VoluntariadoAddComponent {
   addVoluntariado!: AddVoluntariado;
+  validForm: boolean = true
+
   constructor(
     private ServiceVoluntariado: VoluntariadoService,
     private dialogRef: MatDialogRef<PetAddComponent>,
+    private _snackBar: SnackbarService,
     @Inject(MAT_DIALOG_DATA) public data: any,
   ) {
 
   }
 
   saveAnimal() {
+    if (this.validForm) {
+      this._snackBar.warning(
+        'Aviso',
+        'Debe completar todos los campos para continuar.',
+      );
+      return;
+    }
+
+
     const data = {
       nombre: this.addVoluntariado.nombre,
       apellido: this.addVoluntariado.apellido,
@@ -44,5 +57,10 @@ export class VoluntariadoAddComponent {
   CloseModal(mensaje?: string) {
     this.dialogRef.close(mensaje);
   }
+
+  getValidForm(event: boolean) {
+    this.validForm = !event
+  }
+
 
 }

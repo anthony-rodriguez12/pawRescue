@@ -26,7 +26,7 @@ export class AdopcionFormComponent implements OnInit, OnChanges {
   @Input() IdData: any;
 
   @Output() editedDataEmitter = new EventEmitter<any>(); // To emit edited data
-
+  @Output() valueFormEmitter = new EventEmitter<boolean>(); // To emit edited data
 
   myForm!: FormGroup;
   estudios: any[] = []
@@ -61,6 +61,12 @@ export class AdopcionFormComponent implements OnInit, OnChanges {
     this.getEstadosSalud();
     this.myForm.valueChanges.subscribe(() => {
       this.editedDataEmitter.emit(this.myForm.value);
+      this.valueFormEmitter.emit(this.myForm.valid);
+      console.log("this.myForm.valid", this.myForm.valid);
+      console.log(this.myForm.value);
+
+
+
     });
 
   }
@@ -82,25 +88,37 @@ export class AdopcionFormComponent implements OnInit, OnChanges {
       apellido: ['', Validators.required],
       direccion: ['', Validators.required],
       fechaNac: ['', Validators.required],
-      telefono: ['', Validators.required],
+      telefono: ['', [Validators.required, Validators.minLength(9)]],
       correo: ['', Validators.required],
       idEstudios: ['', Validators.required],
       motivo: ['', Validators.required],
       idAnimal: ['', Validators.required],
       nameAnimal: ['', Validators.required],
-      idEstado: ['', Validators.required],
+      idEstado: [0, Validators.required],
       sateseguimiento: this.fb.group({
-        fechaVisita: ['', Validators.required],
-        estadoSeguimiento: ['', Validators.required],
-        detallesSeguimiento: ['', Validators.required]
+        fechaVisita: [''],
+        estadoSeguimiento: [''],
+        detallesSeguimiento: ['']
       })
+
     });
   }
+
+  validarInput(event: KeyboardEvent): void {
+    const inputChar = String.fromCharCode(event.keyCode);
+    const pattern = /^\d$/;
+
+    if (!pattern.test(inputChar)) {
+      // Evitar la entrada si el carácter no es un dígito (\d)
+      event.preventDefault();
+    }
+  }
+
   valdiateIcon(value: number): boolean {
     const FindEstudio = this.stateanimal.find(state => state.idEstado === value);
     return FindEstudio?.estadoDesc === "Aprobado" ? true : false;
   }
-  
+
   setRegiste(data: any) {
     if (data) {
       const FindAnimal = this.animaldata.find(animal => animal.idAnimal === data.idAnimal);
@@ -111,7 +129,7 @@ export class AdopcionFormComponent implements OnInit, OnChanges {
 
   setdata(data: any) {
     if (data) {
-      this.showseguimiento = this.valdiateIcon(data.estadoAdopcion);     
+      this.showseguimiento = this.valdiateIcon(data.estadoAdopcion);
       this.edit = true;
       const FindAnimal = this.animaldata.find(animal => animal.idAnimal === data.idAnimal);
       const fechaSolo = data.fechaNac?.slice(0, 10);

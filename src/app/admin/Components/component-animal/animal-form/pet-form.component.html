@@ -10,52 +10,89 @@
                         <div class="row">
                             <!--Nombre-->
                             <div class="form-group col-12 col-md-12 my-2">
-                                <label class="my-1" for="nombre"><b>Nombre</b></label>
-                                <input type="text" class="form-control" id="nombre" formControlName="Nombre"
-                                    placeholder="Ingresa el nombre">
+                                <label class="my-1"><b>Nombre</b></label>
+                                <input type="text" class="form-control" formControlName="Nombre"
+                                    placeholder="Ingresa el nombre"
+                                    [ngClass]="{ 'is-invalid': myForm.get('Nombre')?.invalid && myForm.get('Nombre')?.touched}">
+                                <div class="invalid-feedback"
+                                    *ngIf="myForm.get('Nombre')?.hasError('required') && myForm.get('Nombre')?.touched">
+                                    ¡Campo obligatorio!.
+                                </div>
                             </div>
+
                             <!--Sexo  -->
                             <div class="form-group col-12 col-md-{{state ? '6' : '6'}} my-2">
                                 <label class="my-1" for="sexo"><b>Sexo</b></label>
-                                <select class="form-control select cursor-pointer" id="sexo" formControlName="Sexo">
+                                <select class="form-select cursor-pointer" formControlName="Sexo"
+                                    [ngClass]="{ 'is-invalid': myForm.get('Sexo')?.invalid && myForm.get('Sexo')?.touched}">
+                                    <option value="">Seleccione...</option>
                                     <option value="Masculino">Masculino</option>
                                     <option value="Femenino">Femenino</option>
                                 </select>
+                                <div class="invalid-feedback"
+                                    *ngIf="myForm.get('Sexo')?.hasError('required') && myForm.get('Sexo')?.touched">
+                                    ¡Campo obligatorio!.
+                                </div>
                             </div>
-                            <!--Tipo -->
+
                             <div class="form-group col-12 col-md-{{state ? '6' : '6'}} my-2">
-                                <label class="my-1" for="sexo"><b>Tipo</b></label>
-                                <select class="form-control select cursor-pointer" id="sexo" formControlName="idTipo">
+                                <label class="my-1"><b>Tipo</b></label>
+                                <select class="form-select cursor-pointer" formControlName="idTipo"
+                                    [ngClass]="{ 'is-invalid': myForm.get('idTipo')?.invalid && myForm.get('idTipo')?.touched}">
+                                    <option value=null>Seleccione...</option>
                                     <option *ngFor="let opcion of typeanimal" [value]="opcion.idTipo">{{
                                         opcion.descripcion }}
                                     </option>
                                 </select>
+                                <div class="invalid-feedback"
+                                    *ngIf="myForm.get('idTipo')?.hasError('required') && myForm.get('idTipo')?.touched">
+                                    ¡Campo obligatorio!.
+                                </div>
                             </div>
+
                             <!--Estado -->
                             <div *ngIf="state" class="form-group col-12 col-md-6 my-2">
-                                <label class="my-1" for="sexo"><b>Estado</b></label>
-                                <select class="form-control select cursor-pointer" id="sexo" formControlName="IdEstado">
+                                <label class="my-1"><b>Estado de salud</b></label>
+                                <select class="form-select cursor-pointer" formControlName="IdEstado"
+                                    [ngClass]="{ 'is-invalid': myForm.get('IdEstado')?.invalid && myForm.get('IdEstado')?.touched}">
+                                    <option value=null>Seleccione...</option>
                                     <option *ngFor="let opcion of stateanimal" [value]="opcion.idEstado">{{
                                         opcion.estadoDesc }}
                                     </option>
                                 </select>
+                                <div class="invalid-feedback"
+                                    *ngIf="myForm.get('IdEstado')?.hasError('required') && myForm.get('IdEstado')?.touched">
+                                    ¡Campo obligatorio!.
+                                </div>
                             </div>
+
                             <!--Estado Salud-->
-                            <div  class="form-group col-12 col-md-{{state ? '6' : '12'}} my-2">
-                                <label class="my-1" for="sexo"><b>Estado</b></label>
-                                <select class="form-control select cursor-pointer" id="sexo"
-                                    formControlName="IdEstadoSalud">
+                            <div class="form-group col-12 col-md-{{state ? '6' : '12'}} my-2">
+                                <label class="my-1"><b>Estado</b></label>
+                                <select class="form-select cursor-pointer" formControlName="IdEstadoSalud"
+                                    [ngClass]="{ 'is-invalid': myForm.get('IdEstadoSalud')?.invalid && myForm.get('IdEstadoSalud')?.touched}">
+                                    <option value="">Seleccione...</option>
                                     <option *ngFor="let opcion of StateSalud" [value]="opcion.idEstadoSalud">{{
                                         opcion.descripcion }}
                                     </option>
                                 </select>
+                                <div class="invalid-feedback"
+                                    *ngIf="myForm.get('IdEstadoSalud')?.hasError('required') && myForm.get('IdEstadoSalud')?.touched">
+                                    ¡Campo obligatorio!.
+                                </div>
                             </div>
 
                             <!-- Descripción -->
                             <div class="form-group my-2">
-                                <label class="my-1" for="saludDesc"><b>Descripción</b></label>
-                                <textarea type="text" class="form-control" id="saludDesc" formControlName="SaludDesc"
-                                    placeholder="Ingresa la descripción de salud"></textarea>
+                                <label class="my-1"><b>Descripción</b></label>
+                                <textarea type="text" class="form-control" formControlName="SaludDesc"
+                                    placeholder="Ingresa la descripción de salud"
+                                    [ngClass]="{ 'is-invalid': myForm.get('SaludDesc')?.invalid && myForm.get('SaludDesc')?.touched}">
+                                </textarea>
+                                <div class="invalid-feedback"
+                                    *ngIf="myForm.get('SaludDesc')?.hasError('required') && myForm.get('SaludDesc')?.touched">
+                                    ¡Campo obligatorio!.
+                                </div>
                             </div>
 
                             <!-- Foto -->
@@ -63,8 +100,13 @@
                                 <label class="my-1" for="foto"><b>Foto</b></label>
                                 <div class="col-md-12">
                                     <input type="file" class="form-control" id="foto" (change)="handleFileInput($event)"
-                                        accept=".jpg, .jpeg, .png">
+                                        accept=".jpg, .jpeg, .png"
+                                        [ngClass]="{ 'is-invalid': myForm.get('Foto')?.invalid && myForm.get('Foto')?.touched}">
                                     <small class="form-text text-muted">Selecciona un archivo jpg, jpeg o png.</small>
+                                </div>
+                                <div class="invalid-feedback"
+                                    *ngIf="myForm.get('Foto')?.hasError('required') && myForm.get('Foto')?.touched">
+                                    ¡Campo obligatorio!.
                                 </div>
 
                             </div>

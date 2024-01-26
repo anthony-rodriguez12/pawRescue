@@ -3,6 +3,7 @@ import { PetAddComponent } from '../../../component-animal/pages/pet-add/pet-add
 import { MAT_DIALOG_DATA, MatDialogRef } from '@angular/material/dialog';
 import { ApadrinamientoService, GedApadrinamiento } from 'src/app/client/services/apadrinamiento.service';
 import * as moment from 'moment';
+import { SnackbarService } from 'src/app/shared/services/snackbar.service';
 
 @Component({
   selector: 'app-apadrinamiento-add',
@@ -11,15 +12,27 @@ import * as moment from 'moment';
 })
 export class ApadrinamientoAddComponent {
   addApadrinamiento!: GedApadrinamiento;
+  validForm: boolean = true
+
   constructor(
     private ServiceApadrinamiento: ApadrinamientoService,
     private dialogRef: MatDialogRef<PetAddComponent>,
+    private _snackBar: SnackbarService,
+
     @Inject(MAT_DIALOG_DATA) public data: any,
   ) {
 
   }
 
   saveAnimal() {
+    if (this.validForm) {
+      this._snackBar.warning(
+        'Aviso',
+        'Debe completar todos los campos para continuar.',
+      );
+      return;
+    }
+
     const today = moment();
     const data = {
       nombre: this.addApadrinamiento.nombre,
@@ -48,6 +61,10 @@ export class ApadrinamientoAddComponent {
 
   CloseModal(mensaje?: string) {
     this.dialogRef.close(mensaje);
+  }
+
+  getValidForm(event: boolean) {
+    this.validForm = !event
   }
 
 }

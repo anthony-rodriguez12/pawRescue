@@ -3,6 +3,7 @@ import { MAT_DIALOG_DATA, MatDialogRef } from '@angular/material/dialog';
 import { ActivatedRoute } from '@angular/router';
 import { AdopcionEditComponent } from '../../../componente-adopcion/pages/adopcion-edit/adopcion-edit.component';
 import { ApadrinamientoService, EditApadrinamiento, GedApadrinamiento } from 'src/app/client/services/apadrinamiento.service';
+import { SnackbarService } from 'src/app/shared/services/snackbar.service';
 
 
 @Component({
@@ -16,10 +17,14 @@ export class ApadrinamientoEditComponent implements OnInit {
   state: any[] = []
   aceptarseguimiento: boolean = true
   idAnimal!: number
+  validForm: boolean = true
+
 
   constructor(private route: ActivatedRoute,
     private dialogRef: MatDialogRef<AdopcionEditComponent>,
     private serviceApadrinamiento: ApadrinamientoService,
+    private _snackBar: SnackbarService,
+
     @Inject(MAT_DIALOG_DATA) public data: any,
   ) { }
 
@@ -36,6 +41,15 @@ export class ApadrinamientoEditComponent implements OnInit {
   }
 
   save() {
+    if (this.validForm) {
+      this._snackBar.warning(
+        'Aviso',
+        'Debe completar todos los campos para continuar.',
+      );
+      return;
+    }
+
+
     const data = {
       nombre: this.editApadrinamient.nombre,
       apellido: this.editApadrinamient.apellido,
@@ -64,4 +78,9 @@ export class ApadrinamientoEditComponent implements OnInit {
   getData(event: any) {
     this.editApadrinamient = event
   }
+
+  getValidForm(event: boolean) {
+    this.validForm = !event
+  }
+
 }

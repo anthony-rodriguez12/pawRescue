@@ -22,6 +22,7 @@ export interface State {
 export class PetFormComponent implements OnInit, OnChanges {
   @Input() formData: any;
   @Output() editedDataEmitter = new EventEmitter<any>(); // To emit edited data
+  @Output() valueFormEmitter = new EventEmitter<boolean>(); // To emit edited data
 
 
   myForm!: FormGroup;
@@ -45,6 +46,7 @@ export class PetFormComponent implements OnInit, OnChanges {
     this.getEstadosSalud();
     this.myForm.valueChanges.subscribe(() => {
       this.editedDataEmitter.emit(this.myForm.value);
+      this.valueFormEmitter.emit(this.myForm.valid);
     });
 
   }
@@ -65,20 +67,17 @@ export class PetFormComponent implements OnInit, OnChanges {
       Sexo: ['', Validators.required],
       Foto: [null, Validators.required],
       idTipo: [null, Validators.required],
-      IdEstado: ['', Validators.required],
+      IdEstado: ['1', Validators.required],
       IdEstadoSalud: ['', Validators.required]
-
     });
   }
 
-  setdata(data: any) {
-    
+  setdata(data: any) {    
     if (data) {
-      const estadoEncontrado = this.StateSalud.find(estado => estado.status === data.estadoSalud);
       this.myForm.get('Nombre')?.setValue(data.nombre);
       this.myForm.get('SaludDesc')?.setValue(data.saludDesc);
       this.myForm.get('Sexo')?.setValue(data.sexo);
-      this.showimage = data.foto ? true : false
+      this.showimage = !!data.foto
       this.showImg = data.foto;
       this.myForm.get('Foto')?.setValue(data.foto);
       this.myForm.get('idTipo')?.setValue(data.idTipo);
@@ -119,7 +118,7 @@ export class PetFormComponent implements OnInit, OnChanges {
         const base64String = await this.animalService.convertImageToBase64(file);
         this.base64String = base64String;
         this.showImg = this.base64String
-        this.showimage = this.base64String ? true : false
+        this.showimage = !!this.base64String
       } catch (error) {
         console.error(error);
       }
